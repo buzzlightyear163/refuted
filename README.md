@@ -28,12 +28,12 @@ Live: https://refuted.vercel.app
 
 | Fil | Vad |
 |---|---|
-| `index.html` | Hela sajten i en fil. `CONFIG` högst upp i scriptet. Tema (färger, typsnitt) högst upp i CSS:en. |
+| `index.html` | Hela sajten i en fil (mörk lab-konsol). `CONFIG` högst upp i scriptet. Tema (färger, typsnitt) högst upp i CSS:en. Heron ritar varje papperstrade som en linje (canvas). |
 | `api/lab.js` | Liten Vercel-funktion: hämtar labbets data från GitHub och cachar 30 s. |
 | `engine/strategies.js` | Strategierna: de 12 första (SEED), kön (POOL) och varianter (FAMILIES). |
 | `engine/core.js` | Labbets logik: features, matchning, papperstrades, checkpoints, domregeln. |
 | `engine/run.js` | En körning: tittar på pump.fun i ~4 min, sparar sen. |
-| `.github/workflows/lab.yml` | Startar en körning var 5:e minut och publicerar datan på grenen `lab-data`. |
+| `.github/workflows/lab.yml` | En körning tittar på pump.fun i ~4 min, publicerar datan på grenen `lab-data` och köar sen nästa körning själv (schemat var 5:e minut är reserv). |
 | `snapshot.json` | Reserv om datan inte går att nå (lampan visar då "Snapshot"). |
 | `grafik/` | pfp, banner, launch-bild, og, fav + `x-kit.md`. Källfilerna ligger i `grafik/src/`. |
 
@@ -46,6 +46,7 @@ Datan (`lab-data`-grenen): `lab.json` (det sajten visar), `s/<id>.json` (alla tr
 - `site`: domänen (används i delningslänkar).
 - `dexscreener`: valfritt, annars byggs länken från CA:n.
 - `fees`: avgiftsfördelningen (just nu 60% buyback / 40% labbet).
+- När refuted.fun är kopplad: byt `refuted.vercel.app` till `refuted.fun` i `og:image`, `og:url` och `twitter:image` högst upp i `index.html`.
 
 ## Data (gratis, inga nycklar)
 
