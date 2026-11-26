@@ -478,7 +478,8 @@ h1.d3 em{font-style:normal;color:var(--down)}
 .wallp.wide .n .pg{width:44px;height:3px;border-radius:2px;background:#22252b;overflow:hidden}
 .wallp.wide .n .pg i{display:block;height:100%;background:var(--ink-2)}
 @media (max-width:1100px){.h2top{grid-template-columns:1fr}.wallp.wide .wr{--wl:150px;grid-template-columns:var(--wl) minmax(0,1fr) 70px}.wallp.wide .n .pg{display:none}}
-@media (max-width:640px){.wallp.wide .wr{--wl:92px;height:26px}.wallp.wide .cells i{height:14px}.minis b{font-size:17px}}
+@media (max-width:1100px){.wallp.wide .cells{grid-template-columns:repeat(30,minmax(0,1fr));gap:4px}.wallp.wide .cells i{width:auto;aspect-ratio:1;height:auto}}
+@media (max-width:640px){.wallp.wide .wr{--wl:92px;height:28px;grid-template-columns:var(--wl) minmax(0,1fr) 54px}.wallp.wide .n .at{display:none}.minis b{font-size:17px}}
 
 
 /* ================= HERO v4: the fan (every paper trade as a line of light) ================= */
@@ -556,6 +557,45 @@ h1.d3 em{font-style:normal;color:var(--down)}
 .prose h2{font-weight:600;letter-spacing:-.04em}
 .feed .k.propose{background:var(--ink);color:#0A0B0D}
 @media (max-width:860px){.law p{font-size:24px}}
+
+
+/* ================= v5: compact hero, living lines, clean wall + board ================= */
+.hero4{min-height:0;padding:clamp(26px,3vw,40px) 0 0}
+.hero4 .kicker{margin-bottom:14px}
+.hero4 h1{font-size:clamp(42px,5.6vw,86px);margin-bottom:12px}
+.hero4 .lede{font-size:clamp(15px,1.15vw,17px);margin-bottom:20px;max-width:620px}
+.fan{flex:none;height:clamp(280px,34vh,350px);min-height:0;margin-top:clamp(14px,2vw,26px)}
+.fan .tag{padding:7px 11px}.fan .tag .v{font-size:18px}
+.fan .legend{top:0}
+/* evidence wall, cleaner */
+.wallp.wide{background:linear-gradient(180deg,#0F1114,#0C0D10);box-shadow:0 0 0 1px var(--rule);padding:16px 20px 12px}
+.wallp.wide::before,.wallp.wide::after{display:none}
+.wallp.wide .wr{grid-template-columns:var(--wl) minmax(0,1fr) 130px;height:32px;border-bottom:0}
+.wallp.wide .wr+.wr{border-top:1px solid #16181c}
+.wallp.wide .cells{gap:8px;align-items:center;grid-template-columns:repeat(30,19px);justify-content:start}
+.wallp.wide .cells i{width:19px;height:19px;border-radius:5px;background:rgba(255,255,255,.045);box-shadow:none}
+.wallp.wide .cells i.o{background:rgba(255,255,255,.12);box-shadow:none;animation:blink 1.8s infinite}
+.wallp.wide .cells i.e{box-shadow:none}
+.wallp.wide .cells i.new{animation:pop 1.8s var(--ease) infinite}
+@keyframes pop{0%,100%{box-shadow:0 0 0 0 rgba(255,255,255,.35)}60%{box-shadow:0 0 0 5px rgba(255,255,255,0)}}
+.wallp.wide .n{gap:10px;font:500 12.5px/1 var(--sans)}
+.wallp.wide .n .md{font-weight:600}
+.wallp.wide .n .at{font:400 10px/1 var(--mono);color:var(--ink-4);letter-spacing:.04em}
+.wallp.wide .wr .nm i{width:6px;height:6px;border-radius:50%;flex:none;align-self:center}
+/* board v3: one clean line per strategy */
+.board th{padding:12px 10px}
+.board td{padding:13px 10px}
+.board .c-name{max-width:420px}
+.board .sname{font-size:15px}
+.board .srule{font-size:12.5px;color:var(--ink-3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:400px}
+.board .spread{display:block}
+.board .vd{display:flex;align-items:center;justify-content:flex-end;gap:10px}
+.board .vd .bar{width:56px;height:3px;border-radius:2px;background:#202328;overflow:hidden;margin:0}
+.board .vd .bar i{display:block;height:100%;background:var(--ink-2)}
+.board .vd .nn{font:500 12px/1 var(--sans);color:var(--ink-2);min-width:36px;text-align:right}
+.board td.m{font:600 14px/1 var(--sans);letter-spacing:-.01em}
+.board-foot .key i.sw{width:18px;height:6px;border-radius:3px}
+@media (max-width:860px){.board tr.row{grid-template-columns:repeat(3,minmax(0,1fr))}.board td.c-sp{grid-column:1/-1;order:-1}.board .srule{white-space:normal}}
 
 /* ---------- responsive ---------- */
 @media (max-width:1100px){
@@ -690,12 +730,12 @@ h1.d3 em{font-style:normal;color:var(--down)}
       </div>
       <table class="board" id="boardT">
         <thead><tr>
-          <th class="l" data-sort="id">#</th><th class="l" data-sort="name">Strategy</th><th data-sort="done">Every trade · entry → 60m</th><th data-sort="hit">Hit</th><th data-sort="med5">5m</th><th data-sort="med15">15m</th><th data-sort="med60">60m</th><th data-sort="status">Status</th>
+          <th class="l" data-sort="id">#</th><th class="l" data-sort="name">Strategy</th><th class="l" data-sort="med15">Where its trades landed</th><th data-sort="med5">+5m</th><th data-sort="med15">+15m</th><th data-sort="med60">+60m</th><th data-sort="hit">Won</th><th data-sort="done">Verdict</th><th data-sort="status">Status</th>
         </tr></thead>
         <tbody id="boardB"><tr><td colspan="8" class="board-empty">Loading the lab…</td></tr></tbody>
       </table>
       <div class="board-foot">
-        <div class="key"><span><i style="background:var(--up);height:2px"></i>above entry</span><span><i style="background:var(--down);height:2px"></i>below entry</span><span><i style="background:#fff;height:2px"></i>median trade</span><span>verdict at 30 finished trades</span></div>
+        <div class="key"><span><i class="sw" style="background:linear-gradient(90deg,rgba(255,90,78,.55),rgba(255,90,78,.25))"></i>middle half of trades, below entry</span><span><i class="sw" style="background:rgba(61,220,132,.45)"></i>above entry</span><span><i style="width:8px;height:8px;border-radius:50%;background:#fff"></i>median</span><span>latest checkpoint, 60m when it exists</span></div>
         <span id="boardMeta">Medians after the 2% haircut.</span>
       </div>
     </div>
@@ -1058,6 +1098,15 @@ function curve(ctx, pts) {
     ctx.bezierCurveTo(p1[0] + (p2[0] - p0[0]) * t, p1[1] + (p2[1] - p0[1]) * t, p2[0] - (p3[0] - p1[0]) * t, p2[1] - (p3[1] - p1[1]) * t, p2[0], p2[1]);
   }
 }
+function sampleCurve(pts) {
+  const out = [pts[0]];
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2, t = 0.18;
+    const c1 = [p1[0] + (p2[0] - p0[0]) * t, p1[1] + (p2[1] - p0[1]) * t], c2 = [p2[0] - (p3[0] - p1[0]) * t, p2[1] - (p3[1] - p1[1]) * t];
+    for (let j = 1; j <= 18; j++) { const u = j / 18, v = 1 - u; out.push([v * v * v * p1[0] + 3 * v * v * u * c1[0] + 3 * v * u * u * c2[0] + u * u * u * p2[0], v * v * v * p1[1] + 3 * v * v * u * c1[1] + 3 * v * u * u * c2[1] + u * u * u * p2[1]]); }
+  }
+  return out;
+}
 const medOf = (paths, i) => { const v = paths.map(p => p[i]).filter(x => x !== null && x !== undefined).sort((a, b) => a - b); if (!v.length) return null; const m = v.length >> 1; return { med: v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2, n: v.length, down: 100 * v.filter(x => x <= 0).length / v.length }; };
 // draws one fan into box (needs a <canvas> and a .lbls inside). paths = [[s, r5, r15, r60], ...]
 function drawFan(box, paths, opt = {}) {
@@ -1074,7 +1123,7 @@ function drawFan(box, paths, opt = {}) {
   c.lineWidth = 1;
   for (const k of [0, 5, 15, 60]) { c.strokeStyle = k ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.14)"; c.setLineDash(k ? [2, 5] : []); c.beginPath(); c.moveTo(G.xs[k], G.top - 10); c.lineTo(G.xs[k], G.bottom); c.stroke(); }
   c.setLineDash([]); c.strokeStyle = "rgba(255,90,78,0.22)"; c.beginPath(); c.moveTo(0, G.y(-100)); c.lineTo(w, G.y(-100)); c.stroke();
-  const heads = [], few = paths.length < 60;
+  const heads = [], polys = [], few = paths.length < 60;
   const pass = (blur, alpha, lw) => {
     c.save(); c.globalCompositeOperation = "lighter"; if (blur) c.filter = `blur(${blur}px)`; c.lineWidth = lw;
     for (const p of paths) {
@@ -1082,11 +1131,11 @@ function drawFan(box, paths, opt = {}) {
       K.forEach((k, i) => { const r = p[i + 1]; if (r !== null && r !== undefined && pts.length === i + 1) { pts.push([G.xs[k], G.y(r)]); last = r; } });
       c.strokeStyle = last > 0 ? `rgba(61,220,132,${alpha})` : `rgba(255,90,78,${alpha})`;
       c.beginPath(); curve(c, pts); c.stroke();
-      if (!blur && pts.length < 4) heads.push([pts[pts.length - 1][0], pts[pts.length - 1][1], last > 0]);
+      if (!blur) { polys.push({ pts: sampleCurve(pts), up: last > 0 }); if (pts.length < 4) heads.push([pts[pts.length - 1][0], pts[pts.length - 1][1], last > 0]); }
     }
     c.restore();
   };
-  pass(7, few ? .1 : .05, 3); pass(0, few ? .5 : .22, few ? 1.4 : 1.1);
+  pass(6, few ? .08 : .035, 2.5); pass(0, few ? .42 : .16, few ? 1.2 : .9);
   c.save(); c.shadowColor = "rgba(255,255,255,0.9)"; c.shadowBlur = 14; c.strokeStyle = "rgba(255,255,255,0.85)"; c.lineWidth = 1.2; c.beginPath(); c.moveTo(0, G.zero); c.lineTo(w, G.zero); c.stroke(); c.restore();
   const med = [[G.xs[0], G.zero]];
   for (const k of K) if (M[k] && M[k].n >= (opt.minMed || 5) && med.length === K.indexOf(k) + 1) med.push([G.xs[k], G.y(M[k].med)]);
@@ -1099,7 +1148,7 @@ function drawFan(box, paths, opt = {}) {
   const wait = !M[60] && paths.length ? `<span class="ax" style="left:${(G.xs[15] + G.xs[60]) / 2}px;bottom:auto;top:${G.zero + 14}px;color:var(--ink-3);letter-spacing:.08em">60-minute results land here</span>` : "";
   if (lbls) lbls.innerHTML = ax + yl + tag + wait;
   const st = FANS.get(box) || { t0: performance.now() };
-  Object.assign(st, { cv, off, heads: heads.slice(0, 260), w, h, dpr, paths, opt });
+  Object.assign(st, { cv, off, heads: heads.slice(0, 260), polys, sparks: st.sparks || [], w, h, dpr, paths, opt });
   FANS.set(box, st);
   if (!FAN_RAF) FAN_RAF = requestAnimationFrame(fanLoop);
   return M;
@@ -1113,13 +1162,41 @@ function fanLoop() {
     c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, st.cv.width, st.cv.height);
     c.save(); c.beginPath(); c.rect(0, 0, st.cv.width * e, st.cv.height); c.clip(); c.drawImage(st.off, 0, 0); c.restore();
     c.setTransform(st.dpr, 0, 0, st.dpr, 0, 0); c.globalCompositeOperation = "lighter";
-    st.heads.forEach(([x, y, up], i) => { if (x > st.w * e) return; const a = .35 + .35 * Math.sin(t / 700 + i * 1.7); c.fillStyle = up ? `rgba(61,220,132,${a})` : `rgba(255,90,78,${a})`; c.beginPath(); c.arc(x, y, 1.8, 0, 7); c.fill(); });
+    st.heads.forEach(([x, y, up], i) => { if (x > st.w * e) return; const a = .35 + .35 * Math.sin(t / 700 + i * 1.7); c.fillStyle = up ? `rgba(61,220,132,${a})` : `rgba(255,90,78,${a})`; c.beginPath(); c.arc(x, y, 1.6, 0, 7); c.fill(); });
+    // pulses of light running along the trades, entry -> latest checkpoint, all the time
+    if (e >= 1 && st.polys.length) {
+      const dt = Math.min(64, t - (st.lt || t)); st.lt = t;
+      st.acc = (st.acc || 0) + dt; const every = st.opt.compact ? 260 : 110;
+      while (st.acc > every) { st.acc -= every; const p = st.polys[(Math.random() * st.polys.length) | 0]; st.sparks.push({ p, u: 0, v: (0.00028 + Math.random() * 0.00022) * (40 / Math.max(20, p.pts.length)) }); }
+      if (st.sparks.length > 70) st.sparks.splice(0, st.sparks.length - 70);
+      st.sparks = st.sparks.filter(sp => {
+        sp.u += sp.v * dt * 40; const n = sp.p.pts.length - 1; if (sp.u >= 1) return false;
+        const f = sp.u * n, i0 = Math.floor(f), col = sp.p.up ? "61,220,132" : "255,90,78";
+        for (let k = 0; k < 9; k++) { const j = i0 - k; if (j < 0) break; const q = sp.p.pts[j], a = (1 - k / 9) * .8 * (1 - Math.pow(sp.u, 6)); c.fillStyle = `rgba(${col},${a})`; c.beginPath(); c.arc(q[0], q[1], k ? 1.3 : 2.1, 0, 7); c.fill(); }
+        return true;
+      });
+    }
     c.globalCompositeOperation = "source-over"; again = true;
   }
   if (again && !matchMedia("(prefers-reduced-motion: reduce)").matches) FAN_RAF = requestAnimationFrame(fanLoop);
 }
 function renderFan() { drawFan($("#fan"), LAB.paths || []); }
 window.addEventListener("resize", () => { clearTimeout(drawFan.rs); drawFan.rs = setTimeout(() => { for (const [box, st] of FANS) drawFan(box, st.paths, st.opt); }, 150); });
+// spread bar for the board: every trade as a tick on a -100%..+100% track, the middle half as a band, the median as a dot
+function spreadBar(idx) {
+  const P = (LAB.paths || []).filter(p => p[0] === idx);
+  const k = [3, 2, 1].find(i => P.filter(p => p[i] !== null && p[i] !== undefined).length >= 3) || 1;
+  const v = P.map(p => p[k]).filter(x => x !== null && x !== undefined).sort((a, b) => a - b);
+  const W = 220, H = 26, X = r => 6 + (Math.max(-100, Math.min(100, r)) + 100) / 200 * (W - 12), z = X(0);
+  let g = `<line x1="6" x2="${W - 6}" y1="13" y2="13" stroke="rgba(255,255,255,.10)" stroke-width="1"/><line x1="${z}" x2="${z}" y1="4" y2="22" stroke="rgba(255,255,255,.55)" stroke-width="1"/>`;
+  if (!v.length) return `<svg class="spread" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}">${g}<text x="${z + 8}" y="17" font-family="DM Mono" font-size="9.5" fill="rgba(255,255,255,.3)">NO TRADES YET</text></svg>`;
+  const q = f => { const p = (v.length - 1) * f, lo = Math.floor(p), hi = Math.ceil(p); return v[lo] + (v[hi] - v[lo]) * (p - lo); };
+  const q1 = q(.25), q3 = q(.75), md = q(.5);
+  for (const r of v.slice(-80)) g += `<line x1="${X(r).toFixed(1)}" x2="${X(r).toFixed(1)}" y1="9" y2="17" stroke="${r > 0 ? "rgba(61,220,132,.5)" : "rgba(255,90,78,.5)"}" stroke-width="1"/>`;
+  g += `<rect x="${X(q1).toFixed(1)}" y="10" width="${Math.max(2, X(q3) - X(q1)).toFixed(1)}" height="6" rx="3" fill="${md > 0 ? "rgba(61,220,132,.45)" : "rgba(255,90,78,.45)"}"/>`;
+  g += `<circle cx="${X(md).toFixed(1)}" cy="13" r="4.2" fill="#fff"/>`;
+  return `<svg class="spread" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-label="median ${pct(md)}">${g}</svg>`;
+}
 // tiny fan for the board: one svg per strategy
 function sparkFan(idx) {
   const P = (LAB.paths || []).filter(p => p[0] === idx && p[1] !== null).slice(0, 50), W = 150, H = 44, z = 17;
@@ -1135,7 +1212,7 @@ function sparkFan(idx) {
 /* evidence wall: 30 latest trades per strategy, finished (60m) solid, early reads (5/15m) faint, open = outline */
 function cellStyle(r, k) {
   if (r === null || r === undefined) return k ? "" : null;
-  const a = k === 60 ? Math.max(.6, Math.min(1, .6 + Math.abs(r) / 120)) : .38;
+  const a = k === 60 ? Math.max(.7, Math.min(1, .7 + Math.abs(r) / 150)) : .32;
   return `background:${r > 0 ? `rgba(61,220,132,${a})` : `rgba(255,90,78,${a})`}`;
 }
 function renderWall() {
@@ -1150,10 +1227,13 @@ function renderWall() {
       if (!t) { c += "<i></i>"; continue; }
       const [r, k, y] = t, st = cellStyle(r, k);
       const tip = `$${y || "?"} · ${k ? (k === 60 ? "60m " : `+${k}m (early) `) + pct(r, 0) : "open, no reading yet"}`;
-      c += st === null ? `<i class="o" title="${esc(tip)}"></i>` : `<i class="${k && k < 60 ? "e" : ""}" style="${st}" title="${esc(tip)}"></i>`;
+      const isNew = i === w.length - 1 && LAB.updatedAt - 0 > 0 && s.status !== "refuted";
+      c += st === null ? `<i class="o${isNew ? " new" : ""}" title="${esc(tip)}"></i>` : `<i class="${k && k < 60 ? "e" : ""}${isNew ? " new" : ""}" style="${st}" title="${esc(tip)}"></i>`;
     }
-    const n = s.status === "refuted" ? "REFUTED" : s.status === "surviving" ? "SURVIVES" : `<span class="pg"><i style="width:${Math.min(100, s.done / LAB.rule.minTrades * 100)}%"></i></span>${Math.min(s.done, 999)}/${LAB.rule.minTrades}`;
-    return `<div class="wr ${s.status === "refuted" ? "dead" : s.status === "surviving" ? "surv" : ""}" data-sid="${s.id}"><div class="nm"><em>${s.id}</em><span>${esc(s.name)}</span></div><div class="cells">${c}</div><span class="n">${n}</span></div>`;
+    const lk = s.med60 !== null ? 60 : s.med15 !== null ? 15 : s.med5 !== null ? 5 : 0, lv = lk ? s["med" + lk] : null;
+    const n = s.status === "refuted" ? `<span class="md down">REFUTED</span>` : s.status === "surviving" ? `<span class="md up">SURVIVES</span>` : lk ? `<span class="md ${cls(lv)}">${pct(lv, 0)}</span><span class="at">MED +${lk}M</span>` : `<span class="at">NO READS YET</span>`;
+    const dot = s.status === "refuted" ? "var(--down)" : s.status === "surviving" ? "var(--up)" : "var(--test)";
+    return `<div class="wr ${s.status === "refuted" ? "dead" : s.status === "surviving" ? "surv" : ""}" data-sid="${s.id}"><div class="nm"><i style="background:${dot}"></i><span>${esc(s.name)}</span></div><div class="cells">${c}</div><span class="n">${n}</span></div>`;
   }).join("");
   $("#wUpd").textContent = `last 30 trades per strategy · ${ago(LAB.updatedAt)}`;
 }
@@ -1228,15 +1308,16 @@ function renderBoard() {
     const x = a[k] ?? -1e9, y = b[k] ?? -1e9; return (y - x) * d;
   });
   $$("#boardT th").forEach(th => th.classList.toggle("sorted", th.dataset.sort === k));
-  if (!list.length) { $("#boardB").innerHTML = `<tr><td colspan="8" class="board-empty">Nothing here yet.</td></tr>`; return; }
+  if (!list.length) { $("#boardB").innerHTML = `<tr><td colspan="9" class="board-empty">Nothing here yet.</td></tr>`; return; }
   $("#boardB").innerHTML = list.map(s => `<tr class="row ${s.status === "refuted" ? "dead" : ""}" data-sid="${s.id}">
     <td class="l c-id"><span class="sid">${s.id}</span></td>
-    <td class="l c-name"><div class="sname">${esc(s.name)}</div><div class="srule">${esc(s.rule)}</div><div class="sagent">${esc(s.agent)} · ${s.matched} ${s.matched === 1 ? "match" : "matches"}</div></td>
-    <td class="c-ev" data-k="Every trade · entry to 60 min"><div class="ev">${sparkFan(LAB.strategies.indexOf(s))}<span class="cnt">${Math.min(s.done, 9999)}/${LAB.rule.minTrades}</span></div></td>
-    <td data-k="Hit" class="${s.hit === null ? "flat" : s.hit >= LAB.rule.hit ? "up" : "down"}">${s.hit === null ? "–" : s.hit.toFixed(0) + "%"}</td>
-    <td data-k="5m" class="${cls(s.med5)}">${pct(s.med5)}</td>
-    <td data-k="15m" class="${cls(s.med15)}">${pct(s.med15)}</td>
-    <td data-k="60m" class="${cls(s.med60)}"><b style="font-weight:500">${pct(s.med60)}</b></td>
+    <td class="l c-name"><div class="sname">${esc(s.name)}</div><div class="srule">${esc(s.rule)}</div></td>
+    <td class="l c-sp" data-k="Where its trades landed">${spreadBar(LAB.strategies.indexOf(s))}</td>
+    <td data-k="+5m" class="m ${cls(s.med5)}">${pct(s.med5)}</td>
+    <td data-k="+15m" class="m ${cls(s.med15)}">${pct(s.med15)}</td>
+    <td data-k="+60m" class="m ${cls(s.med60)}">${pct(s.med60)}</td>
+    <td data-k="Won" class="m ${s.hit === null ? "flat" : s.hit >= LAB.rule.hit ? "up" : "down"}">${s.hit === null ? "–" : s.hit.toFixed(0) + "%"}</td>
+    <td data-k="Verdict"><div class="vd"><span class="bar"><i style="width:${Math.min(100, s.done / LAB.rule.minTrades * 100)}%"></i></span><span class="nn">${Math.min(s.done, 9999)}/${LAB.rule.minTrades}</span></div></td>
     <td class="keep c-st" data-k="">${chip(s.status)}</td></tr>`).join("");
   $("#boardMeta").textContent = `Medians after the 2% haircut · ${fmtN(LAB.totals.done)} finished trades · ${fmtN(LAB.totals.open)} open`;
 }
