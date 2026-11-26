@@ -1,0 +1,34 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="/_fonts.css">
+<style>*{margin:0;box-sizing:border-box}body{background:#000}
+#art{width:1200px;height:630px;position:relative;overflow:hidden;background:radial-gradient(900px 400px at 70% -10%,rgba(124,147,255,.08),transparent 60%),#0A0B0D;color:#ECEDEF;font-family:"Inter Tight",sans-serif}
+.top{position:absolute;left:60px;right:60px;top:46px;display:flex;justify-content:space-between;align-items:center;font:500 15px "DM Mono";letter-spacing:.12em;color:#A2A5AD}
+.brand{display:flex;gap:12px;align-items:center;color:#ECEDEF;font:700 18px "Inter Tight";letter-spacing:.18em}
+.live{display:flex;gap:10px;align-items:center}.live i{width:9px;height:9px;border-radius:50%;background:#3DDC84;box-shadow:0 0 0 5px rgba(61,220,132,.16)}
+h1{position:absolute;left:56px;top:104px;font:600 92px/.95 "Inter Tight";letter-spacing:-.055em}
+h1 em{font-style:normal;color:#FF5A4E}
+p{position:absolute;left:60px;top:214px;width:760px;font:400 22px/1.4 "Inter Tight";color:#A2A5AD}
+p b{color:#ECEDEF;font-weight:500}
+canvas{position:absolute;left:0;top:290px;width:1200px;height:270px}
+.stat{position:absolute;right:60px;top:300px;text-align:right}
+.stat b{display:block;font:600 64px/1 "Inter Tight";letter-spacing:-.05em;color:#FF5A4E}
+.stat span{font:500 13px "DM Mono";letter-spacing:.1em;color:#6D7079}
+.foot{position:absolute;left:60px;right:60px;bottom:34px;display:flex;justify-content:space-between;font:500 15px "DM Mono";letter-spacing:.12em;color:#6D7079}
+.foot b{color:#ECEDEF;font-weight:500}
+</style></head><body>
+<div id="art">
+<div class="top"><div class="brand"><svg width="30" height="30" viewBox="0 0 512 512"><g fill="none" stroke="#FF5A4E"><circle cx="256" cy="256" r="220" stroke-width="30"/><circle cx="256" cy="256" r="172" stroke-width="12"/></g><rect x="230" y="146" width="52" height="170" fill="#FF5A4E"/><rect x="166" y="316" width="180" height="50" fill="#FF5A4E"/></svg>REFUTED</div><div class="live"><i></i>LIVE ON PUMP.FUN</div></div>
+<h1>Most edges <em>die</em> here.</h1>
+<p>Trench entry rules, tested live on every new pump.fun launch. <b>Every line is one paper trade, followed for an hour.</b></p>
+<canvas id="c" width="2400" height="540"></canvas>
+<div class="stat"><b id="down">–</b><span id="downL">BELOW ENTRY AFTER 60 MIN</span></div>
+<div class="foot"><b>REFUTED.FUN</b><span>OPEN LAB · PAPER TRADES · $REFUTED</span></div>
+</div>
+<script src="fan.js"></script>
+<script>
+fetch("/api/lab?f=lab.json").then(r => r.json()).then(l => {
+  fanDraw(document.getElementById("c"), (l.paths || []).filter(p => p[3] !== null && p[3] !== undefined), { s: 2, left: 120, right: 1700, top: 30, bottom: 40, zeroAt: .36 });
+  const m = l.pulse && (l.pulse.m60 && l.pulse.m60.n ? l.pulse.m60 : l.pulse.m15);
+  if (m) document.getElementById("down").textContent = Math.round(m.down) + "%";
+  document.title = "ready";
+});
+</script></body></html>
