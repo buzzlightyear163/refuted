@@ -1,0 +1,84 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Martian Mono";font-weight:400;src:url(/fonts/martian-400.woff2)}
+@font-face{font-family:"Martian Mono";font-weight:800;src:url(/fonts/martian-800.woff2)}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;src:url(/fonts/plex-400.woff2)}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;src:url(/fonts/plex-500.woff2)}
+@font-face{font-family:"IBM Plex Mono";font-weight:600;src:url(/fonts/plex-600.woff2)}
+@font-face{font-family:"Silkscreen";src:url(/fonts/silkscreen-400.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#777;display:flex;flex-direction:column;gap:40px;padding:40px;align-items:flex-start;font-family:"IBM Plex Mono",monospace}
+.f{position:relative;overflow:hidden;background:#e1dfd9;color:#171614;flex:none}
+.f.grid{background-image:linear-gradient(rgba(40,36,30,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(40,36,30,.055) 1px,transparent 1px)}
+.f>*:not(canvas){position:relative}
+.mut{color:#75716a} .red{color:#d63a26} .up{color:#23854c}
+.cur{display:inline-block;width:.55em;height:1em;background:#d63a26;vertical-align:-.12em;margin-left:.12em}
+.disp{font-family:"Martian Mono";letter-spacing:-.06em}
+.disp b{font-weight:800}
+.st{font-family:Silkscreen;letter-spacing:.08em;background:#d63a26;color:#fff;padding:.3em .6em .2em}
+.live{font-family:Silkscreen;letter-spacing:.08em;background:#23854c;color:#fff;padding:.3em .6em .2em}
+.box{border:2px solid #2b2926;background:#ebe9e3;box-shadow:.5em .5em 0 #c4c1b8}
+#pfp{width:1000px;height:1000px}
+#banner{width:1500px;height:500px;background-size:24px 24px}
+#launch{width:1600px;height:900px;font-size:16px;background-size:32px 32px}
+#og{width:1200px;height:630px;font-size:12px;background-size:24px 24px}
+.launch .txt{position:absolute;left:46%;right:5%;top:0;bottom:0;display:flex;flex-direction:column;justify-content:center}
+.launch .p0{font-size:1.25em}
+.launch .big{font-size:5.4em;line-height:1;margin-top:.35em} .launch .big .cur{width:.3em;height:.74em;vertical-align:0}
+.launch .sub{font-size:1.4em;margin-top:.9em;max-width:30em;line-height:1.5;color:#75716a}
+.launch .term{margin-top:2.2em;font-size:1.15em;max-width:34em}
+.launch .term .bar{display:flex;align-items:center;gap:.5em;padding:.55em .9em;border-bottom:2px solid #2b2926;font-size:.85em;color:#75716a}
+.launch .term .bar i{width:.75em;height:.75em;border:2px solid #2b2926;border-radius:50%;display:inline-block}
+.launch .term .bar span{margin-left:auto}
+.launch .term .body{padding:.9em 1.1em;line-height:1.9}
+</style></head>
+<body>
+<div id="pfp" class="f"></div>
+<div id="banner" class="f grid"></div>
+<div id="launch" class="f grid launch"></div>
+<div id="og" class="f grid launch"></div>
+<div id="fav" class="f" style="width:180px;height:180px"></div>
+<script src="termkit.js"></script>
+<script>
+const C = window.CFG || {}, T = TK.THEMES.stone;
+const prompt = `<span class="mut">anon@refuted-lab ~ %</span>`;
+function canvasFor(el) { return TK.canvasFor(el); }
+function flask(ctx, cell, cx, cy, opts = {}) { const g = TK.OBJECTS.flask({ fill: .55 }); return TK.draw(ctx, g, Object.assign({ theme: T, cell, x: Math.round(cx - g.w * cell / 2), y: Math.round(cy - g.h * cell / 2), shadowLen: 3000 }, opts)); }
+
+// PFP: the flask, long shadow, nothing else
+{ const ctx = canvasFor(pfp); const g = TK.OBJECTS.flask(); const cell = Math.floor(600 / g.h); flask(ctx, cell, 500, 490); }
+
+// BANNER: text top-left, a wall of real trades on the right. bottom-left stays empty for the profile picture. no flask.
+{ const f = banner, ctx = canvasFor(f), R = (C.wall || []).slice(0, 26 * 13);
+  const cols = 26, rows = 13, sz = 17, gap = 4, wx = 1500 - 70 - cols * (sz + gap) + gap, wy = 64;
+  // long shadow behind the wall block
+  ctx.fillStyle = T.shadow; for (let i = 1; i < 700; i++) ctx.fillRect(wx + i, wy + i, cols * (sz + gap) - gap, rows * (sz + gap) - gap);
+  ctx.fillStyle = "#ebe9e3"; ctx.fillRect(wx - 14, wy - 14, cols * (sz + gap) - gap + 28, rows * (sz + gap) - gap + 28);
+  ctx.strokeStyle = T.line; ctx.lineWidth = 2; ctx.strokeRect(wx - 14, wy - 14, cols * (sz + gap) - gap + 28, rows * (sz + gap) - gap + 28);
+  R.forEach((r, i) => { ctx.fillStyle = r > 0 ? T.up : T.red; ctx.fillRect(wx + (i % cols) * (sz + gap), wy + Math.floor(i / cols) * (sz + gap), sz, sz); });
+  const won = R.filter(r => r > 0).length;
+  f.insertAdjacentHTML("beforeend", `
+    <div style="position:absolute;left:78px;top:40px;font-size:17px">${prompt} examiner --judge --live<span class="cur"></span></div>
+    <div class="disp" style="position:absolute;left:74px;top:84px;font-size:76px;line-height:1">most edges<br>die <b>here.</b></div>
+    <div style="position:absolute;left:78px;top:262px;font-size:17px;color:#75716a;max-width:560px;line-height:1.55">an open lab on pump.fun. memecoin entry rules,<br>paper-tested live on every new launch.</div>
+    <div style="position:absolute;left:${wx - 14}px;top:${wy + rows * (sz + gap) + 28}px;font-size:14.5px;display:flex;gap:12px;align-items:center"><span class="st" style="font-size:12px">refuted</span><span>if median 60m &lt; 0% or hit rate &lt; 40%</span><span class="mut">· after 30 trades</span></div>
+    <div style="position:absolute;left:${wx - 14}px;top:${wy + rows * (sz + gap) + 64}px;font-size:13.5px" class="mut">each square is a real paper trade at +60m · ${R.length} shown · <span class="up">${won} won</span> · <span class="red">${R.length - won} lost</span></div>`);
+}
+
+// LAUNCH + OG
+for (const f of [launch, og]) { const s = f.id === "og" ? .75 : 1, W = 1600 * s, H = 900 * s, ctx = canvasFor(f);
+  const g = TK.OBJECTS.flask(); flask(ctx, Math.floor(520 * s / g.h), W * .235, H * .47);
+  f.insertAdjacentHTML("beforeend", `<div class="txt"><div class="p0">${prompt} examiner --judge --live</div><div class="big disp">most edges<br>die <b>here.</b><span class="cur"></span></div>
+    <div class="sub">an open lab on pump.fun. memecoin entry rules, paper-tested live on every new launch. after 30 trades the examiner rules.</div>
+    <div class="term box"><div class="bar"><i></i><i></i><i></i><span>refuted-lab — zsh</span></div>
+    <div class="body"><div>${prompt} refuted --live</div>
+      <div><span class="red">✓</span> every new pump.fun launch, read live</div>
+      <div><span class="red">✓</span> paper trades checked at 5, 15 and 60 min</div>
+      <div><span class="red">✓</span> verdict after 30 trades. losers get a stone</div>
+      <div><span class="mut">status</span>&nbsp; <span class="live">live</span></div></div></div></div>`);
+}
+// FAVICON
+{ const ctx = canvasFor(fav), g = TK.OBJECTS.flask(), cell = Math.floor(160 / g.h); TK.draw(ctx, g, { theme: T, cell, x: Math.round((180 - g.w * cell) / 2), y: Math.round((180 - g.h * cell) / 2), shadow: false }); }
+document.fonts.ready.then(() => document.body.dataset.ready = 1);
+</script></body></html>

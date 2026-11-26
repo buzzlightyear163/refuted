@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="en" data-theme="stone">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>REFUTED — most edges die here.</title>
+<meta name="description" content="An open lab on pump.fun. Agents paper-test memecoin entry rules on every new launch. After 30 trades the Examiner judges. Most edges die here.">
+<meta name="theme-color" content="#e1dfd9">
+<meta property="og:title" content="REFUTED — most edges die here."><meta property="og:description" content="An open lab on pump.fun. Memecoin entry rules, paper-tested live on every new launch. Most of them die.">
+<meta property="og:type" content="website"><meta property="og:image" content="https://refuted.vercel.app/og.png">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://refuted.vercel.app/og.png">
+<link rel="icon" href="/fav.png"><link rel="apple-touch-icon" href="/fav.png">
+<link rel="preload" href="/fonts/martian-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="top" id="top"><div class="wrap">
+  <a class="brand" href="#hero"><canvas id="logo"></canvas>refuted</a>
+  <nav class="nav"><a href="#board">board</a><a href="#feed">feed</a><a href="#graveyard">graveyard</a><a href="#survivors">survivors</a><a href="#fleet">fleet</a><a href="#method">method</a><a href="#token">token</a></nav>
+  <span class="live"><i class="dot" id="topDot"></i><span id="topLive">connecting…</span></span>
+  <a class="btn" id="buyTop" href="#token">buy $refuted</a>
+</div></header>
+
+<section class="hero" id="hero">
+  <canvas class="bg" id="heroBg"></canvas>
+  <div class="wrap">
+    <div>
+      <div class="prompt"><span>anon@refuted-lab ~ %</span> <span class="cmd" id="typed"></span><span class="cur"></span></div>
+      <h1>most edges<br>die <b>here.</b></h1>
+      <p class="lede">An open lab on pump.fun. Agents run memecoin entry rules on every new launch as paper trades, measured at 5, 15 and 60 minutes. After 30 trades the Examiner gives a verdict.</p>
+      <div class="rule"><span class="st">refuted</span><span>if</span><b>median 60m &lt; 0%</b><span class="or">or</span><b>hit rate &lt; 40%</b><span class="mut">· after 30 trades</span></div>
+      <div class="ctas"><a class="btn pri" href="#board">open the board →</a><a class="btn" href="#graveyard">visit the graveyard</a></div>
+      <div class="liveline"><i class="dot" id="lineDot"></i><span id="liveline">reading the lab…</span></div>
+    </div>
+    <div class="vis" id="heroVis"><canvas id="bubbles" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0"></canvas>
+      <div class="plaque" id="plaque" hidden>
+        <div class="hd"><span>latest verdict</span><span id="plDied"></span></div>
+        <div class="bd">
+          <div class="nm" id="plName"></div>
+          <div class="my" id="plMyth"></div>
+          <div class="ln"><span class="mut">median 60m</span><b class="red" id="plMed"></b></div>
+          <div class="ln"><span class="mut">winners</span><b id="plHit"></b></div>
+          <div class="ln"><span class="mut">cause of death</span><span id="plCause"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="statusrow"><div class="wrap">
+    <span><i class="dot on"></i>lab: live</span><span><i class="dot on"></i>verdicts: live</span><span><i class="dot"></i>agent fleet: beta</span><span><i class="dot"></i>plug-in agents: next</span>
+    <span class="ca">ca <code id="ca">posted here and on X at launch</code> <button class="chip" id="copy" hidden>copy</button></span>
+  </div></div>
+</section>
+
+<div class="strip" id="strip"><div class="lbl"><i class="dot"></i>live lab</div><div class="rail"><div class="run" id="run"></div></div></div>
+
+<main id="home">
+<section class="sess" id="board"><div class="wrap">
+  <div class="rail">
+    <div class="n">01</div>
+    <div class="cmd">anon@refuted-lab ~ % <b>examiner board</b></div>
+    <h2>every edge on trial.</h2>
+    <p>Each row is one rule, paper-traded on every new launch that matches it. The squares fill as trades finish. At 30 the Examiner rules.</p>
+    <div class="ctl">
+      <div class="k">show</div>
+      <div class="toggles" id="bFilter"><button class="chip on" data-f="all">all</button><button class="chip" data-f="testing">testing</button><button class="chip" data-f="refuted">refuted</button><button class="chip" data-f="surviving">surviving</button></div>
+      <div class="k">sort</div>
+      <div class="toggles" id="bSort"><button class="chip on" data-s="progress">verdict next</button><button class="chip" data-s="med">median 60m</button><button class="chip" data-s="new">newest</button></div>
+    </div>
+  </div>
+  <div class="out">
+    <div class="bigstats">
+      <div><div class="k">median at +5m</div><div class="v red" id="p5">–</div><div class="s" id="p5s"></div></div>
+      <div><div class="k">median at +15m</div><div class="v red" id="p15">–</div><div class="s" id="p15s"></div></div>
+      <div><div class="k">median at +60m</div><div class="v red" id="p60">–</div><div class="s" id="p60s"></div></div>
+      <div><div class="k">below entry at 60m</div><div class="v" id="pDown">–</div><div class="s">of every finished trade</div></div>
+    </div>
+    <div class="brd">
+      <div class="hd"><span>id</span><span>rule</span><span>verdict progress</span><span class="num c5">+5m</span><span class="num c15">+15m</span><span class="num c60">+60m</span><span class="num hit">won</span><span class="num">status</span></div>
+      <div id="bRows"><div class="empty">reading the lab…</div></div>
+    </div>
+    <div class="more"><button class="btn" id="bMore" hidden>show all strategies</button></div>
+  </div>
+</div></section>
+
+<section class="sess" id="feed"><div class="wrap">
+  <div class="rail">
+    <div class="n">02</div>
+    <div class="cmd">anon@refuted-lab ~ % <b>tail -f lab.log</b></div>
+    <h2>the lab, as it happens.</h2>
+    <p>Matches, checkpoints and verdicts, newest first. New launches and open trades update live in your browser.</p>
+    <div class="ctl"><div class="k">record</div><div style="font-size:12.5px" id="syncLine">–</div></div>
+  </div>
+  <div class="out">
+    <div class="loglist" id="log"></div>
+    <div class="twin">
+      <div class="mini"><h4>launches coming in <span id="intakeT">–</span></h4><ul id="intake"></ul></div>
+      <div class="mini"><h4>open paper trades <span id="benchT">–</span></h4><ul id="bench"></ul></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sess" id="graveyard"><div class="wrap">
+  <div class="rail">
+    <div class="n">03</div>
+    <div class="cmd">anon@refuted-lab ~ % <b>ls /graveyard</b></div>
+    <h2>here lie the edges.</h2>
+    <p>Every refuted rule keeps its stone: the myth it was built on, how it died, and the last 30 trades it took. Green is a winner. Red is not.</p>
+    <div class="ctl"><div class="k">buried</div><div style="font:500 30px var(--disp);letter-spacing:-.06em" id="yardN">–</div></div>
+  </div>
+  <div class="out"><div class="yard" id="yard"></div><div class="more"><button class="btn" id="yardMore" hidden>show all</button></div><div class="yardnote" id="yardNote"></div></div>
+</div></section>
+
+<section class="sess" id="survivors"><div class="wrap">
+  <div class="rail">
+    <div class="n">04</div>
+    <div class="cmd">anon@refuted-lab ~ % <b>examiner --survivors</b></div>
+    <h2 id="survH">nothing has survived. yet.</h2>
+    <p>A survivor is a rule that kept a median above 0% and won at least 40% of its trades after 30 of them. It is judged again after every new trade.</p>
+  </div>
+  <div class="out" id="surv"></div>
+</div></section>
+
+<section class="sess" id="fleet"><div class="wrap">
+  <div class="rail">
+    <div class="n">05 <span class="beta">beta</span></div>
+    <div class="cmd">anon@refuted-lab ~ % <b>agents --list</b></div>
+    <h2>six agents. one examiner.</h2>
+    <p>The agents propose rules from trench folklore. When one dies, its agent puts up a replacement, so the board stays full. None of them can overrule the Examiner.</p>
+  </div>
+  <div class="out">
+    <div id="agents"></div>
+    <div class="arow off"><div class="an">your agent</div><div class="st">plug-in</div><div class="mo">bring your own agent and let it propose rules to the board.</div><div class="ct"><span class="stt testing">next</span></div></div>
+    <div class="callout"><p><span class="lbl">the examiner</span>The Examiner is not an AI. It is one rule, applied the same way to every strategy: <b>after 30 finished trades, a median below 0% at 60 minutes or fewer than 40% winners means refuted.</b> <span>No exceptions, no second chances under the same rule.</span></p><a class="btn" href="#method">read the method</a></div>
+  </div>
+</div></section>
+
+<section class="sess" id="submit"><div class="wrap">
+  <div class="rail">
+    <div class="n">06 <span class="beta">beta</span></div>
+    <div class="cmd">anon@refuted-lab ~ % <b>examiner submit</b></div>
+    <h2>think you have an edge?</h2>
+    <p>Write it as one rule. Post it. If it's accepted it goes on trial under your name, with the same 30 trades and the same verdict as everything else.</p>
+  </div>
+  <div class="out">
+    <div class="builder">
+      <span class="k">your rule</span>
+      <p class="sentence" id="sentence">buy when
+        <select id="bMetric" aria-label="metric"><option value="bc">bonding</option><option value="holders">holders</option><option value="top10">the top 10 share</option><option value="dev">the dev's share</option><option value="buys">5-min buys</option><option value="mcap">market cap ($K)</option></select>
+        is <select id="bOp" aria-label="operator"><option value="≥">at least</option><option value="≤">at most</option></select>
+        <input id="bVal" value="50" inputmode="decimal" aria-label="value"><span id="bUnit">%</span>
+        <select id="bWin" aria-label="window"><option value="5">within 5 minutes</option><option value="15">within 15 minutes</option><option value="60">within an hour</option><option value="0">at any age</option></select>.
+      </p>
+      <div class="fields">
+        <label>name your edge<input id="bName" placeholder="the speedrun" maxlength="40"></label>
+        <label>your x handle<input id="bX" placeholder="@you" maxlength="20"></label>
+      </div>
+      <pre class="preview" id="bPrev"></pre>
+      <div class="ctas" style="margin-top:18px"><a class="btn red" id="bPost" target="_blank" rel="noopener">post it to @RefutedLab</a><button class="btn" id="bCopy" type="button">copy</button></div>
+    </div>
+    <ol class="steps4">
+      <li><span class="i">01</span><div><b>post it</b><span>The button writes the post for you. It's public, so everyone sees whose idea it was.</span></div></li>
+      <li><span class="i">02</span><div><b>reviewed by hand</b><span>In beta, every submission is checked manually. It has to be one rule the lab can measure.</span></div></li>
+      <li><span class="i">03</span><div><b>it goes on trial</b><span>Accepted edges enter the board with your handle and take 30 paper trades.</span></div></li>
+      <li><span class="i">04</span><div><b>it survives, or it's buried</b><span>Either way it stays public. A refuted edge gets a stone with your name on it.</span></div></li>
+    </ol>
+  </div>
+</div></section>
+
+<section class="sess" id="method"><div class="wrap">
+  <div class="rail">
+    <div class="n">07</div>
+    <div class="cmd">anon@refuted-lab ~ % <b>man examiner</b></div>
+    <h2>how a trade is measured.</h2>
+    <p>The method in plain words: what gets tested, how a paper trade is scored, how the verdict works and what is still beta.</p>
+  </div>
+  <div class="out prose">
+    <h3>the loop</h3>
+    <ol class="flow">
+      <li><div><b>A strategy is one rule.</b> "Buy coins that hit 50% bonding in under 5 minutes." The lab opened with 12 of the trenches' favorite rules.</div></li>
+      <li><div><b>The lab watches every new pump.fun launch,</b> around the clock, even when nobody has this page open. Young coins are re-read about every 15 seconds.</div></li>
+      <li><div><b>A match is a paper buy.</b> The first time a coin meets a rule, the lab buys at that moment's price. One trade per coin per strategy.</div></li>
+      <li><div><b>Three checkpoints.</b> The price is read again 5, 15 and 60 minutes after entry.</div></li>
+      <li><div><b>The verdict.</b> After 30 finished trades the Examiner rules. The dead go to the graveyard and their agent proposes a replacement.</div></li>
+    </ol>
+    <h3>a paper trade</h3>
+    <p><b>Entry</b> is the price the moment the lab sees the coin meet the rule. For threshold rules the lab must have watched the coin cross the line, so no entry is ever back-dated.</p>
+    <p><b>Result</b> = exit price ÷ entry price, minus a flat 2% for fees and slippage. A trade wins if it is above 0% at the 60-minute checkpoint.</p>
+    <p><b>Checkpoints</b> are read <span class="src live">live</span> within 60 seconds of their due time. If one lands between two lab runs, the price for that exact minute comes from the coin's <span class="src">candle</span> history, or it is read <span class="src">late</span> (within 10 minutes). Otherwise it is a <span class="src miss">miss</span> and the trade is left out of the stats.</p>
+    <p>Paper trades have no price impact and never get rugged mid-fill. Real fills are worse. Treat every number here as a best case.</p>
+    <h3>the verdict</h3>
+    <table class="tbl"><thead><tr><th>when</th><th>test</th><th>result</th></tr></thead><tbody>
+      <tr><td>under 30 finished trades</td><td>none yet</td><td><span class="stt testing">testing</span></td></tr>
+      <tr><td>30+ finished trades</td><td>median at 60m below 0%, or under 40% winners</td><td><span class="stt refuted">refuted</span></td></tr>
+      <tr><td>30+ finished trades</td><td>median at 60m 0% or more, and 40%+ winners</td><td><span class="stt surviving">surviving</span></td></tr>
+      <tr><td>24 hours, under 5 trades</td><td>the setup barely exists</td><td><span class="stt refuted">starved</span></td></tr>
+    </tbody></table>
+    <h3>live vs. beta</h3>
+    <table class="tbl"><thead><tr><th>part</th><th>status</th><th>what that means</th></tr></thead><tbody>
+      <tr><td>paper test, checkpoints, verdicts</td><td><span class="stt surviving">live</span></td><td>Runs for real on real launches, around the clock.</td></tr>
+      <tr><td>board, feed, graveyard, survivors</td><td><span class="stt surviving">live</span></td><td>Built straight from the lab's public record.</td></tr>
+      <tr><td>the agent fleet</td><td><span class="stt testing">beta</span></td><td>The names and styles are a frame. Proposals come from a fixed queue of trench folklore and parameter variants.</td></tr>
+      <tr><td>the examiner</td><td><span class="stt testing">beta</span></td><td>In practice it is the verdict rule above, applied automatically.</td></tr>
+      <tr><td>holder submissions</td><td><span class="stt testing">beta</span></td><td>A form in v1. Reviewed by hand before anything goes on trial.</td></tr>
+      <tr><td>plug in your own agent</td><td><span class="stt testing">next</span></td><td>Shown, not switched on yet.</td></tr>
+    </tbody></table>
+    <h3>where the data comes from</h3>
+    <p><b>Jupiter</b> (free, no key): new pump.fun launches, bonding curve, price, market cap, holders, top 10 share, dev share, snipers, insiders and 5-minute flow. <b>GeckoTerminal</b> minute candles only fill a checkpoint that fell between two runs. The lab runs every five minutes and publishes its <a id="rawLink" href="#">full record</a>.</p>
+  </div>
+</div></section>
+
+<section class="sess" id="token"><div class="wrap">
+  <div class="rail">
+    <div class="n">08</div>
+    <div class="cmd">anon@refuted-lab ~ % <b>examiner token</b></div>
+    <h2>fees keep the lab open.</h2>
+    <p>The lab is the product. Creator fees pay for it and buy back $REFUTED. The lab never trades with the fees: every trade is on paper.</p>
+    <div class="ctl"><div class="ctas" style="margin-top:0"><a class="btn pri" id="buy" href="#">buy on pump.fun</a><a class="btn" id="xlink" href="#" target="_blank" rel="noopener">follow on X</a></div></div>
+  </div>
+  <div class="out">
+    <div class="split" id="feeBar"></div>
+    <div class="rows" id="feeRows"></div>
+    <div class="facts">
+      <div><div class="k">ticker</div><div class="v">$REFUTED</div></div><div><div class="k">chain</div><div class="v">solana · pump.fun</div></div>
+      <div><div class="k">supply</div><div class="v">1,000,000,000</div></div><div><div class="k">x</div><div class="v">@RefutedLab</div></div>
+    </div>
+    <div class="cabox"><span class="k">ca</span><code id="ca2">posted here and on X at launch</code><button class="chip" id="copy2" hidden>copy</button></div>
+    <div class="callout"><p><span class="lbl">next</span>Plug-in agents: bring your own agent and let it propose rules to the board. <span>Same 30 trades, same verdict, same graveyard.</span></p><a class="btn" href="#fleet">see the fleet</a></div>
+  </div>
+</div></section>
+
+<section class="sess" id="faq"><div class="wrap">
+  <div class="rail">
+    <div class="n">09</div>
+    <div class="cmd">anon@refuted-lab ~ % <b>man refuted</b></div>
+    <h2>the fine print.</h2>
+    <p>What's real, what's beta, and what it will never ask you for.</p>
+  </div>
+  <div class="out"><div class="man">
+    <details open><summary>is this financial advice?</summary><p>No. The lab shows how rules did on paper. A surviving rule only means it didn't lose over its trades so far. It is not a promise about the next one. Memecoins are extremely risky and most go to zero.</p></details>
+    <details><summary>does the lab trade real money?</summary><p>No. Every trade is on paper. The lab never holds or moves funds.</p></details>
+    <details><summary>why 60 minutes?</summary><p>Most pump.fun coins are decided in their first hour. 5 and 15 minutes show the path, 60 minutes is the verdict.</p></details>
+    <details><summary>why the median and not the average?</summary><p>One 50x can carry a terrible strategy on average. The median is what a typical trade actually did.</p></details>
+    <details><summary>can a refuted strategy come back?</summary><p>Not under the same rule. An agent can propose a variant with different numbers, and that variant gets its own 30 trades.</p></details>
+    <details><summary>will refuted DM me?</summary><p>Never. Nobody from the lab will DM you, ask for your wallet or your seed phrase. Anyone who does is not us.</p></details>
+  </div></div>
+</div></section>
+</main>
+
+<main id="page" class="page" hidden><div class="wrap">
+  <div class="sp-top"><a class="sp-back" href="#board">← back to the board</a></div>
+  <div id="sp"><div class="empty">loading the strategy…</div></div>
+</div></main>
+
+<footer class="f2"><div class="wrap">
+  <div class="big">most edges<br>die <b>here.</b><span class="cur"></span></div>
+  <div class="ctas" style="margin-top:40px"><a class="btn pri" href="#board">open the board</a><a class="btn" href="#submit">submit an edge</a></div>
+  <div class="fine"><span>$REFUTED · solana</span><span>paper trades only · not financial advice</span><a id="rawFoot" href="#">raw lab data</a><a id="xFoot" href="#" target="_blank" rel="noopener">x · @RefutedLab</a><span id="footSync"></span><span id="cafoot"></span></div>
+</div></footer>
+
+<script src="termkit.js"></script>
+<script>
+const CONFIG = {
+  name: "REFUTED", ticker: "$REFUTED",
+  ca: "",                                   // contract address. Empty = "posted here and on X at launch"
+  x: "https://x.com/RefutedLab", xHandle: "RefutedLab", site: "https://refuted.fun", dexscreener: "",
+  repo: "buzzlightyear163/refuted", dataBranch: "lab-data", api: "/api/lab",
+  fees: [{ label: "buy back $REFUTED", pct: 60, c: "var(--red)" }, { label: "keep the lab and the fleet running", pct: 40, c: "var(--ink)" }],
+  poll: 60, object: "flask", theme: document.documentElement.dataset.theme,
+};
+const T = TK.THEMES[CONFIG.theme], reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const MINUS = "−";
+const pct = (v, d = 1) => v === null || v === undefined || isNaN(v) ? "–" : (v > 0 ? "+" : v < 0 ? MINUS : "") + Math.abs(v).toFixed(d) + "%";
+const cl = v => v === null || v === undefined || isNaN(v) ? "mut" : v >= 0 ? "up" : "red";
+const fmtN = n => n === null || n === undefined ? "–" : Number(n).toLocaleString("en-US");
+const ago = t => { const s = Math.max(0, Math.round((Date.now() - t) / 1000)); return s < 60 ? s + "s ago" : s < 3600 ? Math.floor(s / 60) + "m ago" : s < 86400 ? Math.floor(s / 3600) + "h ago" : Math.floor(s / 86400) + "d ago"; };
+const hms = t => new Date(t).toISOString().slice(11, 19);
+const day = t => new Date(t).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+const coinUrl = m => "https://pump.fun/coin/" + m;
+const buyUrl = ca => !ca ? "" : /pump$/.test(ca) ? "https://pump.fun/coin/" + ca : "https://raydium.io/launchpad/token/?mint=" + ca;
+const sym = y => String(y || "?").replace(/^\$+/, "").slice(0, 14);
+function countTo(el, v, fmt = fmtN) {
+  if (!el) return; const n = +v || 0, from = +(el.dataset.v || 0); el.dataset.v = n;
+  if (from === n || reduce) { el.textContent = fmt(n); return; }
+  const t0 = performance.now(), d = 900;
+  (function f(t) { const k = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(from + (n - from) * e); if (k < 1) requestAnimationFrame(f); })(t0);
+}
+function copyText(t, btn) { navigator.clipboard && navigator.clipboard.writeText(t).then(() => { if (btn) { const o = btn.textContent; btn.textContent = "copied"; setTimeout(() => btn.textContent = o, 1400); } }, () => {}); }
+
+// ---------- config wiring ----------
+(function wire() {
+  const ca = CONFIG.ca.trim();
+  if (ca) {
+    [["#ca", "#copy"], ["#ca2", "#copy2"]].forEach(([c, b]) => { $(c).textContent = ca; $(b).hidden = false; $(b).onclick = () => copyText(ca, $(b)); });
+    $("#cafoot").textContent = "ca " + ca; ["#buyTop", "#buy"].forEach(s => $(s).href = buyUrl(ca)); $("#buy").target = "_blank";
+  } else { $("#buy").removeAttribute("href"); $("#buy").textContent = "live at launch"; $("#buy").style.opacity = .6; }
+  ["#xlink", "#xFoot"].forEach(s => $(s).href = CONFIG.x);
+  const raw = `https://github.com/${CONFIG.repo}/tree/${CONFIG.dataBranch}`; ["#rawLink", "#rawFoot"].forEach(s => { $(s).href = raw; $(s).target = "_blank"; });
+  $("#feeBar").innerHTML = CONFIG.fees.map(f => `<div style="flex:${f.pct};background:${f.c}">${f.pct}%</div>`).join("");
+  $("#feeRows").innerHTML = CONFIG.fees.map(f => `<div><b style="color:${f.c}">${f.pct}%</b>${esc(f.label)}</div>`).join("") + `<div><b class="mut">0%</b>traded by the lab. every trade is on paper.</div>`;
+})();
+
+// ---------- the flask: logo + hero. Bubbles rise through the red while the lab is live ----------
+const FILL = .55;
+function drawLogo() { const g = TK.OBJECTS.flask({ fill: FILL }), c = $("#logo"), k = 2;
+  c.width = g.w * k; c.height = g.h * k; TK.draw(c.getContext("2d"), g, { theme: T, cell: k, x: 0, y: 0, shadow: false });
+  c.style.width = Math.round(28 * g.w / g.h) + "px"; }
+let FL = null;
+function drawHero() {
+  const hero = $("#hero"); if (hero.offsetParent === null && getComputedStyle(hero).display === "none") return;
+  const c = $("#heroBg"), d = devicePixelRatio || 1, r = hero.getBoundingClientRect(), a = $("#heroVis").getBoundingClientRect();
+  if (!r.width || !a.width) return;
+  c.width = r.width * d; c.height = r.height * d; const x = c.getContext("2d"); x.scale(d, d); x.imageSmoothingEnabled = false;
+  const g = TK.OBJECTS.flask({ fill: FILL, bubbles: false }), mob = innerWidth <= 860;
+  const cell = Math.max(3, Math.floor(Math.min(a.width * .8 / g.w, a.height * (mob ? .92 : .8) / g.h)));
+  const ox = a.left - r.left + (a.width - g.w * cell) * (mob ? .5 : .22), oy = a.top - r.top + (a.height - g.h * cell) * (mob ? .5 : .22);
+  TK.draw(x, g, { theme: T, cell, x: ox, y: oy, shadowLen: 2400 });
+  const red = []; for (let yy = 0; yy < g.h; yy++) for (let xx = 0; xx < g.w; xx++) if (g.get(xx, yy) === "red") red.push([xx, yy]);
+  const bc = $("#bubbles"); bc.width = a.width * d; bc.height = a.height * d;
+  FL = { g, cell, ox: ox - (a.left - r.left), oy: oy - (a.top - r.top), red, ctx: bc.getContext("2d"), d, list: FL ? FL.list : [] };
+}
+function bubbleTick() {
+  if (!FL || document.hidden || $("#hero").hidden) return; const { g, cell, ox, oy, red, ctx, d } = FL;
+  if (FL.list.length < 7 && Math.random() < .5) { const bottom = red.filter(([, y]) => y >= 39); const [bx, by] = bottom[Math.floor(Math.random() * bottom.length)] || [];
+    if (bx !== undefined) FL.list.push({ x: bx, y: by }); }
+  FL.list.forEach(b => { b.y -= 1; if (Math.random() < .2) b.x += Math.random() < .5 ? -1 : 1; });
+  FL.list = FL.list.filter(b => g.get(b.x, b.y) === "red");
+  ctx.setTransform(d, 0, 0, d, 0, 0); ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); ctx.fillStyle = T.hi;
+  FL.list.forEach(b => ctx.fillRect(Math.round(ox + b.x * cell), Math.round(oy + b.y * cell), cell, cell));
+}
+drawLogo(); drawHero(); addEventListener("resize", () => { drawHero(); if (SP) drawPlot(); }); document.fonts.ready.then(drawHero);
+if (!reduce) setInterval(bubbleTick, 140);
+{ const cmd = "examiner --judge --live", el = $("#typed"); if (reduce) el.textContent = cmd;
+  else { let i = 0; const t = setInterval(() => { el.textContent = cmd.slice(0, ++i); if (i >= cmd.length) clearInterval(t); }, 65); } }
+
+// ---------- data: the lab record (cached proxy → raw GitHub → snapshot) ----------
+const RAW = `https://raw.githubusercontent.com/${CONFIG.repo}/${CONFIG.dataBranch}/`;
+let LAB = null, SOURCE = "";
+async function getFile(path) {
+  const tries = [() => fetch(`${CONFIG.api}?f=${encodeURIComponent(path)}`, { cache: "no-store" }),
+                 () => fetch(RAW + path + "?t=" + Math.floor(Date.now() / 60000), { cache: "no-store" })];
+  for (const t of tries) { try { const r = await t(); if (r.ok) { const j = await r.json(); if (j && j.v) return j; } } catch (e) {} }
+  return null;
+}
+async function loadLab() {
+  let j = await getFile("lab.json"), src = "live";
+  if (!j) { try { const r = await fetch("/snapshot.json", { cache: "no-store" }); if (r.ok) { j = await r.json(); src = "snapshot"; } } catch (e) {} }
+  if (!j) { $("#topLive").textContent = "offline"; return; }
+  const fresh = !LAB || j.updatedAt !== LAB.updatedAt; LAB = j; SOURCE = src; lamp(); if (fresh) render();
+}
+function lamp() {
+  if (!LAB) return; const live = SOURCE === "live" && Date.now() - LAB.updatedAt < 12 * 60e3;
+  ["#topDot", "#lineDot"].forEach(s => $(s).classList.toggle("on", live));
+  $("#topLive").textContent = SOURCE === "snapshot" ? "snapshot" : live ? "lab live · synced " + ago(LAB.updatedAt) : "delayed · " + ago(LAB.updatedAt);
+  const sl = `${SOURCE === "snapshot" ? "snapshot from" : "synced"} ${ago(LAB.updatedAt)} · run ${fmtN(LAB.sync && LAB.sync.runs)} · every ${Math.round(((LAB.sync && LAB.sync.every) || 300) / 60)} min`;
+  $("#syncLine").textContent = sl; $("#footSync").textContent = "lab record " + sl;
+}
+function render() {
+  renderHero(); renderStrip(); renderPulse(); renderBoard(); renderFeed(); renderBench(); renderYard(); renderSurv(); renderFleet();
+  if (!INTAKE_LIVE) renderIntake(null);
+}
+
+// ---------- hero + strip ----------
+function renderHero() {
+  const t = LAB.totals, S = LAB.strategies;
+  $("#liveline").innerHTML = `${SOURCE === "snapshot" ? "snapshot" : "live"} · <b>${fmtN(t.trades)}</b> paper trades · <b>${fmtN(t.refuted)}</b> refuted · <b>${fmtN(t.surviving)}</b> surviving · <b>${fmtN(t.testing)}</b> on trial`;
+  const dead = S.filter(s => s.status === "refuted").sort((a, b) => b.diedAt - a.diedAt)[0];
+  if (dead) {
+    $("#plaque").hidden = false; $("#plName").textContent = dead.id + " " + dead.name.toLowerCase();
+    $("#plMyth").textContent = "“" + dead.myth + "”"; $("#plMed").textContent = pct(dead.med60);
+    $("#plHit").textContent = (dead.hit ?? 0).toFixed(1) + "%"; $("#plCause").textContent = (dead.causeShort || "").toLowerCase();
+    $("#plDied").textContent = "refuted " + ago(dead.diedAt); $("#plaque").onclick = () => location.hash = "#/s/" + dead.id; $("#plaque").style.cursor = "pointer";
+  }
+}
+function renderStrip() {
+  const items = (LAB.feed || []).slice(0, 40).map(f => {
+    if (f.k === "check") return `<span><b>${esc(f.s)}</b> <span class="mut">$${esc(sym(f.y))} +${f.c}m</span> <b class="${cl(f.r)}">${pct(f.r)}</b></span>`;
+    if (f.k === "match") return `<span><b>${esc(f.s)}</b> <span class="mut">matched</span> $${esc(sym(f.y))}</span>`;
+    if (f.k === "death") return `<span><b class="red">${esc(f.s)} refuted</b> <span class="mut">median 60m</span> ${pct(f.r)}</span>`;
+    if (f.k === "propose") return `<span><b>${esc(f.s)}</b> <span class="mut">proposed by ${esc(f.a)}</span></span>`;
+    return "";
+  }).filter(Boolean);
+  if (items.length) $("#run").innerHTML = items.join("") + items.join("");
+}
+
+// ---------- board ----------
+let BF = "all", BS = "progress", BALL = false;
+function cells(s) {
+  const m = LAB.rule.minTrades, d = Math.min(m, s.done || 0), o = Math.min(m - d, s.open || 0);
+  return `<div class="cells30 ${s.status === "refuted" ? "dead" : s.status === "surviving" ? "alive" : ""}">${Array.from({ length: m }, (_, i) => `<i class="${i < d ? "d" : i < d + o ? "o" : ""}"></i>`).join("")}</div>`;
+}
+function renderPulse() {
+  const P = LAB.pulse || {}, f = v => pct(v, 1);
+  [["5", "m5"], ["15", "m15"], ["60", "m60"]].forEach(([k, key]) => { const p = P[key]; if (!p) return;
+    countTo($("#p" + k), p.med, f); $("#p" + k).className = "v " + cl(p.med); $("#p" + k + "s").textContent = `${fmtN(p.n)} reads · ${Math.round(p.down)}% below entry`; });
+  if (P.m60) countTo($("#pDown"), P.m60.down, v => v.toFixed(1) + "%");
+}
+function renderBoard() {
+  let S = LAB.strategies.slice();
+  if (BF !== "all") S = S.filter(s => s.status === BF);
+  const rank = { testing: 0, surviving: 1, refuted: 2 };
+  if (BS === "progress") S.sort((a, b) => rank[a.status] - rank[b.status] || (rank[a.status] === 2 ? b.diedAt - a.diedAt : b.done - a.done || b.open - a.open));
+  if (BS === "med") S.sort((a, b) => (b.med60 ?? -1e9) - (a.med60 ?? -1e9));
+  if (BS === "new") S.sort((a, b) => b.born - a.born || b.id.localeCompare(a.id));
+  const lim = BALL ? S.length : 12;
+  $("#bRows").innerHTML = S.slice(0, lim).map(s => `<a class="brow" href="#/s/${s.id}">
+    <span class="id">${s.id}</span>
+    <div style="min-width:0"><div class="nm">${esc(s.name.toLowerCase())} <span class="mut" style="font-weight:400;font-size:11.5px">· ${esc(s.agent)}</span></div><div class="rl">${esc(s.rule)}</div></div>
+    <div class="pg">${cells(s)}<div class="k2">${s.done}/${LAB.rule.minTrades} done${s.open ? ` · ${s.open} open` : ""}</div></div>
+    <span class="num c5 ${cl(s.med5)}">${pct(s.med5)}</span><span class="num c15 ${cl(s.med15)}">${pct(s.med15)}</span><span class="num c60 ${cl(s.med60)}">${pct(s.med60)}</span>
+    <span class="num hit">${s.done ? Math.round(s.hit) + "%" : "–"}</span><span class="stt ${s.status}">${s.status}</span></a>`).join("") || `<div class="empty">nothing here yet.</div>`;
+  $("#bMore").hidden = S.length <= 12; $("#bMore").textContent = BALL ? "show fewer" : `show all ${S.length} strategies`;
+}
+$("#bFilter").onclick = e => { const b = e.target.closest("[data-f]"); if (!b) return; BF = b.dataset.f; $$("#bFilter .chip").forEach(c => c.classList.toggle("on", c === b)); if (LAB) renderBoard(); };
+$("#bSort").onclick = e => { const b = e.target.closest("[data-s]"); if (!b) return; BS = b.dataset.s; $$("#bSort .chip").forEach(c => c.classList.toggle("on", c === b)); if (LAB) renderBoard(); };
+$("#bMore").onclick = () => { BALL = !BALL; renderBoard(); };
+
+// ---------- feed ----------
+const KL = { check: "check", match: "match", death: "verdict", propose: "new", boot: "boot" };
+function feedText(f) {
+  const s = f.s ? `<a href="#/s/${f.s}"><b>${esc(f.s)}</b></a>` : "";
+  if (f.k === "check") return `${s} · <a href="${coinUrl(f.m)}" target="_blank" rel="noopener">$${esc(sym(f.y))}</a> at +${f.c}m <b class="${cl(f.r)}">${pct(f.r)}</b>`;
+  if (f.k === "match") return `${s} matched <a href="${coinUrl(f.m)}" target="_blank" rel="noopener">$${esc(sym(f.y))}</a> <span class="mut">· ${esc((f.tx.split("·").slice(1).join("·") || "").trim())}</span>`;
+  if (f.k === "death") return `<span class="red">the examiner refuted</span> ${s} · median 60m ${pct(f.r)}`;
+  return esc(f.tx).replace(/(S-\d+)/, `<a href="#/s/$1"><b>$1</b></a>`);
+}
+function renderFeed() {
+  const L = (LAB.feed || []).slice(0, 18);
+  $("#log").innerHTML = L.map(f => `<div><span class="t">${hms(f.t)}</span><span class="kind ${f.k}">${KL[f.k] || f.k}</span><span class="tx">${feedText(f)}</span></div>`).join("") || `<div><span class="t"></span><span></span><span class="tx mut">waiting for the first events…</span></div>`;
+}
+let livePx = {}, intakeSeen = new Set(), INTAKE_LIVE = false;
+function renderBench() {
+  const b = (LAB.bench || []).slice(0, 6);
+  $("#benchT").textContent = `${fmtN(LAB.totals.open)} open`;
+  $("#bench").innerHTML = b.map(t => {
+    const next = LAB.rule.checkpoints.find(k => !t.ck[k]); const due = next ? Math.max(0, t.at + next * 60e3 - Date.now()) : 0;
+    const now = livePx[t.m], r = now ? ((now / t.px) * (1 - LAB.rule.cost / 100) - 1) * 100 : (t.ck[15] ? t.ck[15].r : t.ck[5] ? t.ck[5].r : null);
+    return `<li><div><a href="${coinUrl(t.m)}" target="_blank" rel="noopener"><b>$${esc(sym(t.y))}</b></a> <a class="mut" href="#/s/${t.s}">${t.s}</a><div class="sb">in ${ago(t.at).replace(" ago", "")} ago · +${next || 60}m in ${Math.ceil(due / 60000)}m</div></div><div class="num"><b class="${cl(r)}">${pct(r)}</b><div class="sb">${now ? "live" : r === null ? "waiting" : "last check"}</div></div></li>`;
+  }).join("") || `<li><span class="mut">no open trades right now.</span></li>`;
+}
+async function liveBench() {
+  if (!LAB || !(LAB.bench || []).length) return;
+  const ids = [...new Set(LAB.bench.slice(0, 30).map(t => t.m))];
+  try { const r = await fetch("https://lite-api.jup.ag/price/v3?ids=" + ids.join(",")); if (r.ok) { const j = await r.json(); for (const [m, v] of Object.entries(j)) if (v && v.usdPrice) livePx[m] = v.usdPrice; renderBench(); } } catch (e) {}
+}
+function renderIntake(rows) {
+  if (!rows) { if (!LAB) return; rows = (LAB.intake || []).slice(0, 6); $("#intakeT").textContent = "last lab sync"; }
+  $("#intake").innerHTML = rows.map(t => { const n = !intakeSeen.has(t.m); intakeSeen.add(t.m);
+    return `<li class="${n && intakeSeen.size > 6 ? "new" : ""}"><div><a href="${coinUrl(t.m)}" target="_blank" rel="noopener"><b>$${esc(sym(t.y))}</b></a><div class="sb">${ago(t.c)} · ${fmtN(t.h)} holders</div></div><div class="num"><span class="bar"><i style="width:${Math.min(100, t.bc || 0)}%"></i></span>${(t.bc || 0).toFixed(1)}%</div></li>`; }).join("");
+}
+async function liveIntake() {
+  try {
+    const r = await fetch("https://datapi.jup.ag/v1/pools/gems", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ recent: { timeframe: "24h", launchpads: ["pump.fun"] } }) });
+    if (!r.ok) return; const pools = ((await r.json()).recent || {}).pools || [];
+    if (!pools.length) return; INTAKE_LIVE = true; $("#intakeT").textContent = "live from pump.fun";
+    renderIntake(pools.slice(0, 6).map(p => ({ m: p.baseAsset.id, y: p.baseAsset.symbol, c: Date.parse(p.baseAsset.createdAt), bc: p.bondingCurve || 0, h: p.baseAsset.holderCount || 0 })));
+  } catch (e) {}
+}
+
+// ---------- graveyard ----------
+let YALL = false;
+$("#yardMore").onclick = () => { YALL = !YALL; renderYard(); if (!YALL) $("#graveyard").scrollIntoView(); };
+function wall(s) {
+  const w = (s.wall || []).slice(-30);
+  return `<div class="wall30">${Array.from({ length: 30 }, (_, i) => { const t = w[i]; return `<i class="${!t ? "e" : t[0] > 0 ? "w" : ""}" title="${t ? "$" + esc(sym(t[2])) + " " + pct(t[0]) : ""}"></i>`; }).join("")}</div>`;
+}
+function renderYard() {
+  const D = LAB.strategies.filter(s => s.status === "refuted").sort((a, b) => b.diedAt - a.diedAt);
+  $("#yardN").textContent = fmtN(D.length);
+  const g = s => `<a class="grave" href="#/s/${s.id}"><div class="gtop"><span>${s.id} · ${esc(s.agent)}</span><span class="stt refuted">${/starv/i.test(s.causeShort || "") ? "starved" : "refuted"}</span></div>
+    <h3>${esc(s.name.toLowerCase())}</h3><div class="my">“${esc(s.myth)}”</div>${wall(s)}
+    <div class="ln"><span class="mut">died ${day(s.diedAt).toLowerCase()}</span><span><b class="${cl(s.med60)}">${pct(s.med60)}</b> · ${Math.round(s.hit ?? 0)}% won</span></div>
+    <div class="cause">${esc((s.causeShort || "refuted").toLowerCase())}</div><div class="go">read the autopsy →</div></a>`;
+  const shown = YALL ? D : D.slice(0, 9), pad = shown.length ? (3 - shown.length % 3) % 3 : 3;
+  $("#yardMore").hidden = D.length <= 9; $("#yardMore").textContent = YALL ? "show fewer" : `show all ${D.length} stones`;
+  $("#yard").innerHTML = shown.map(g).join("") + Array.from({ length: pad }, (_, i) => `<div class="grave vacant">${D.length ? "plot reserved." : ["no edge has died yet.", "give it a few hours.", "plot reserved."][i]}</div>`).join("");
+  const next = LAB.strategies.filter(s => s.status === "testing").sort((a, b) => b.done - a.done)[0];
+  $("#yardNote").innerHTML = next ? `next up: <a href="#/s/${next.id}"><b>${next.id} ${esc(next.name.toLowerCase())}</b></a> · ${next.done}/${LAB.rule.minTrades} trades · median so far <b class="${cl(next.med60)}">${pct(next.med60)}</b>` : "";
+}
+
+// ---------- survivors ----------
+function onTrack(s) { if (!s.done) return ["no data", "mut"]; return (s.med60 ?? -1) >= LAB.rule.med && (s.hit ?? 0) >= LAB.rule.hit ? ["on track to survive", "up"] : ["on track to die", "red"]; }
+function renderSurv() {
+  const S = LAB.strategies.filter(s => s.status === "surviving").sort((a, b) => (b.med60 ?? -1e9) - (a.med60 ?? -1e9));
+  const judged = LAB.strategies.filter(s => s.status !== "testing").length;
+  const next = LAB.strategies.filter(s => s.status === "testing").sort((a, b) => b.done - a.done).slice(0, 4);
+  const nrow = s => { const [tx, c] = onTrack(s); return `<a class="nrow" href="#/s/${s.id}"><span class="id"><b>${s.id}</b></span><div style="min-width:0"><div class="nm" style="font-weight:600">${esc(s.name.toLowerCase())}</div><div class="mut" style="font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.rule)}</div></div><div class="pg">${cells(s)}</div><span class="num c60 ${cl(s.med60)}">${pct(s.med60)}</span><div class="track ${c}"><b>${tx}</b>${s.done}/${LAB.rule.minTrades} · ${Math.round(s.hit ?? 0)}% won</div></a>`; };
+  $("#survH").textContent = S.length ? `${S.length} still standing.` : "nothing has survived. yet.";
+  const head = S.length
+    ? `<div class="zero"><div class="zn">${S.length}<span>/${judged}</span></div><p><b>${S.length} ${S.length === 1 ? "rule has" : "rules have"} survived the Examiner.</b> They are judged again after every new trade, and one bad stretch can still kill them.</p></div><div class="nxt"><h4>standing</h4>${S.map(nrow).join("")}</div>`
+    : `<div class="zero"><div class="zn">0<span>/${judged}</span></div><p><b>Nothing has survived its verdict.</b> ${judged ? `${judged} ${judged === 1 ? "strategy has" : "strategies have"} been judged so far, and every one of them was refuted.` : "The first verdicts land once strategies reach 30 finished trades."}</p></div>`;
+  $("#surv").innerHTML = head + `<div class="nxt"><h4>closest to a verdict</h4>${next.map(nrow).join("")}</div>`;
+}
+
+// ---------- fleet ----------
+function renderFleet() {
+  $("#agents").innerHTML = (LAB.agents || []).map(a => `<div class="arow"><div class="an">${esc(a.id)}</div><div class="st">${esc(a.style.toLowerCase())}</div><div class="mo">“${esc(a.motto)}”</div>
+    <div><div class="tally">${Array.from({ length: a.alive }, () => "<i></i>").join("")}${Array.from({ length: a.dead }, () => '<i class="d"></i>').join("")}</div><div class="ct">${a.proposed} proposed · ${a.alive} alive · <span class="red">${a.dead} dead</span></div></div></div>`).join("");
+}
+
+// ---------- submit builder (beta: posts to X, reviewed by hand) ----------
+const METRIC = { bc: ["bonding", "%"], holders: ["holders", ""], top10: ["the top 10 share", "%"], dev: ["the dev's share", "%"], buys: ["5-minute buys", ""], mcap: ["market cap", "K"] };
+function fitSelects() { const c = fitSelects.c || (fitSelects.c = document.createElement("canvas").getContext("2d"));
+  for (const el of $$("#sentence select")) { const cs = getComputedStyle(el); c.font = `${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`; el.style.width = Math.ceil(c.measureText(el.options[el.selectedIndex].text).width * 1.02 + 8) + "px"; } }
+function buildRule() {
+  fitSelects();
+  const m = $("#bMetric").value, op = $("#bOp").value, v = ($("#bVal").value || "").replace(/[^\d.]/g, "").slice(0, 6) || "0", w = +$("#bWin").value;
+  $("#bUnit").textContent = METRIC[m][1];
+  const val = m === "mcap" ? "$" + v + "K" : v + METRIC[m][1];
+  const rule = `Buy when ${METRIC[m][0]} is ${op === "≥" ? "at least" : "at most"} ${val}${w ? ` within ${w === 60 ? "an hour" : w + " minutes"} of launch` : ""}.`;
+  const name = ($("#bName").value || "").trim() || "Unnamed edge", x = ($("#bX").value || "").trim().replace(/^@?/, "@");
+  const post = `@${CONFIG.xHandle} test this edge\n\n"${name}"\n${rule}${x.length > 1 ? `\n\nsubmitted by ${x}` : ""}\n\n${CONFIG.ticker}`;
+  $("#bPrev").textContent = post; $("#bPost").href = "https://x.com/intent/post?text=" + encodeURIComponent(post); return post;
+}
+["#bMetric", "#bOp", "#bVal", "#bWin", "#bName", "#bX"].forEach(s => $(s).addEventListener("input", buildRule));
+$("#bCopy").onclick = () => copyText(buildRule(), $("#bCopy"));
+buildRule(); document.fonts.ready.then(fitSelects);
+
+// ---------- strategy page (#/s/S-xx) ----------
+let SP = null;
+const srcTag = c => !c ? `<span class="src">wait</span>` : `<span class="src ${c.src}">${c.src}</span>`;
+async function openStrategy(id) {
+  $("#home").hidden = true; $("#hero").hidden = true; $("#strip").hidden = true; $("#page").hidden = false; scrollTo(0, 0);
+  $("#sp").innerHTML = `<div class="empty">loading ${esc(id)}…</div>`; SP = null;
+  const j = await getFile(`s/${id}.json`);
+  if (!j) { $("#sp").innerHTML = `<div class="empty">couldn't load ${esc(id)}. <a href="#board">back to the board</a></div>`; return; }
+  SP = j; renderStrategy(); document.title = `${j.strategy.id} ${j.strategy.name} — REFUTED`;
+}
+function closeStrategy() { $("#home").hidden = false; $("#hero").hidden = false; $("#strip").hidden = false; $("#page").hidden = true; SP = null; document.title = "REFUTED — most edges die here."; drawHero(); }
+function renderStrategy() {
+  const s = SP.strategy, R = LAB ? LAB.rule : { minTrades: 30, med: 0, hit: 40 }, done = SP.trades.filter(t => t.closed && t.ck[60]);
+  const share = s.status === "refuted"
+    ? `${s.id} ${s.name} was refuted after ${s.done} paper trades on pump.fun.\n\nThe myth: "${s.myth}"\nMedian at 60 min: ${pct(s.med60)}. Winners: ${Math.round(s.hit ?? 0)}%.\n\nMost edges die here. @${CONFIG.xHandle}`
+    : `${s.id} ${s.name} is on trial at @${CONFIG.xHandle}: ${s.done}/${R.minTrades} paper trades, median at 60 min ${pct(s.med60)}.\n\n"${s.myth}"\n\nMost edges die here.`;
+  const url = (CONFIG.site || location.origin) + "/#/s/" + s.id;
+  $("#sp").innerHTML = `
+  <div class="sp-head"><div>
+    <div class="prompt"><span>anon@refuted-lab ~ %</span> <span class="cmd">examiner show ${esc(s.id)}</span></div>
+    <h1>${esc(s.name.toLowerCase())}</h1><div class="myth">“${esc(s.myth)}”</div>
+    <div class="rulebox"><span class="mut">rule ·</span> ${esc(s.rule)}</div></div>
+    <div style="text-align:right"><span class="stamp ${s.status}">${s.status === "testing" ? "on trial" : s.status}</span></div></div>
+  <div class="sp-body">
+    <div class="rail">
+      <div class="kv">
+        <div><span>id</span><b>${esc(s.id)}</b></div><div><span>proposed by</span><b>${esc(s.agent)}</b></div>
+        <div><span>on trial since</span><b>${day(s.born)}</b></div>${s.diedAt ? `<div><span>refuted</span><b>${day(s.diedAt)} · ${ago(s.diedAt)}</b></div>` : ""}
+        <div><span>coins matched</span><b>${fmtN(s.matched)}</b></div><div><span>best trade</span><b class="${cl(s.best)}">${pct(s.best)}</b></div><div><span>worst trade</span><b class="${cl(s.worst)}">${pct(s.worst)}</b></div>
+      </div>
+      <div class="ctas"><a class="btn pri" target="_blank" rel="noopener" href="https://x.com/intent/post?text=${encodeURIComponent(share)}&url=${encodeURIComponent(url)}">share on X</a><button class="btn" id="spCopy">copy link</button></div>
+    </div>
+    <div class="out">
+      <div class="bigstats">
+        <div><div class="k">trades</div><div class="v">${s.done}<span class="mut" style="font-size:.5em">/${R.minTrades}</span></div><div class="s">${s.open ? s.open + " still open" : "all finished"}</div></div>
+        <div><div class="k">median +5m</div><div class="v ${cl(s.med5)}">${pct(s.med5)}</div><div class="s">${fmtN(s.n5)} reads</div></div>
+        <div><div class="k">median +60m</div><div class="v ${cl(s.med60)}">${pct(s.med60)}</div><div class="s">the verdict number · needs ≥ ${R.med}%</div></div>
+        <div><div class="k">winners</div><div class="v ${(s.hit ?? 0) >= R.hit ? "up" : "red"}">${s.done ? Math.round(s.hit) + "%" : "–"}</div><div class="s">needs ≥ ${R.hit}%</div></div>
+      </div>
+      ${s.status === "refuted" ? `<div class="autopsy"><span class="lbl">autopsy</span>${esc(s.cause)}</div>` : ""}
+      <div class="plot"><div class="hd"><span>every finished trade at +60m, in order</span><span><span class="up">■</span> winner &nbsp; <span class="red">■</span> loser &nbsp; - - median</span></div><canvas id="spPlot"></canvas></div>
+      <div class="trades"><table class="tbl"><thead><tr><th>entry (utc)</th><th>coin</th><th>at entry</th><th class="num">+5m</th><th class="num">+15m</th><th class="num">+60m</th></tr></thead><tbody>
+      ${SP.trades.slice(0, 120).map(t => `<tr><td class="sb">${day(t.at)} ${hms(t.at).slice(0, 5)}</td><td><a href="${coinUrl(t.m)}" target="_blank" rel="noopener"><b>$${esc(sym(t.y))}</b></a></td><td class="sb">${esc(t.note || "")}</td>
+        ${[5, 15, 60].map(k => `<td class="num">${t.ck[k] && t.ck[k].r !== undefined && t.ck[k].src !== "miss" ? `<b class="${cl(t.ck[k].r)}">${pct(t.ck[k].r)}</b> ${srcTag(t.ck[k])}` : t.ck[k] ? srcTag(t.ck[k]) : '<span class="mut">…</span>'}</td>`).join("")}</tr>`).join("")}
+      </tbody></table>${SP.trades.length > 120 ? `<div class="empty">showing the latest 120 of ${fmtN(SP.trades.length)} trades.</div>` : ""}</div>
+    </div>
+  </div>`;
+  $("#spCopy").onclick = () => copyText(url, $("#spCopy"));
+  drawPlot();
+}
+function drawPlot() {
+  const c = $("#spPlot"); if (!c || !SP) return;
+  const d = devicePixelRatio || 1, W = c.clientWidth, H = c.clientHeight; c.width = W * d; c.height = H * d;
+  const x = c.getContext("2d"); x.scale(d, d);
+  const rs = SP.trades.filter(t => t.closed && t.ck[60] && t.ck[60].src !== "miss").sort((a, b) => a.at - b.at).map(t => t.ck[60].r);
+  const yv = r => { const v = Math.max(-100, Math.min(300, r)); return v <= 0 ? .62 + (-v / 100) * .36 : .62 - (Math.log10(1 + v / 10) / Math.log10(31)) * .6; };
+  x.fillStyle = T.muted; x.font = "10px IBM Plex Mono, monospace";
+  [[300, "+300%"], [0, "0%"], [-50, "−50%"], [-100, "−100%"]].forEach(([v, l]) => { const yy = Math.round(yv(v) * H); x.globalAlpha = v === 0 ? .9 : .35; x.fillRect(38, yy, W - 38, 1); x.globalAlpha = 1; x.fillText(l, 0, yy + 3); });
+  if (!rs.length) { x.fillText("no finished trades yet.", 44, H / 2 - 10); return; }
+  const step = (W - 46) / Math.max(rs.length, 30), sz = Math.max(3, Math.min(10, Math.floor(step * .7)));
+  rs.forEach((r, i) => { x.fillStyle = r > 0 ? T.up : T.red; x.fillRect(Math.round(44 + i * step), Math.round(yv(r) * H - sz / 2), sz, sz); });
+  const sorted = rs.slice().sort((a, b) => a - b), med = sorted[Math.floor(sorted.length / 2)], my = Math.round(yv(med) * H);
+  x.fillStyle = T.ink; for (let xx = 44; xx < W; xx += 8) x.fillRect(xx, my, 4, 1.5);
+}
+
+// ---------- routing ----------
+function route() {
+  const h = location.hash;
+  const m = h.match(/^#\/s\/(S-\d{2,4})$/);
+  if (m) { openStrategy(m[1]); return; }
+  if (!$("#page").hidden) closeStrategy();
+  const map = { "#/docs": "#method", "#/token": "#token" };
+  if (map[h]) setTimeout(() => $(map[h]).scrollIntoView(), 30);
+}
+addEventListener("hashchange", route);
+
+loadLab().then(() => { liveIntake(); liveBench(); route(); });
+setInterval(loadLab, CONFIG.poll * 1000); setInterval(lamp, 15000);
+setInterval(() => { if (!document.hidden) liveIntake(); }, 20000); setInterval(() => { if (!document.hidden) liveBench(); }, 30000);
+setInterval(() => { if (LAB && !document.hidden) renderBench(); }, 15000);
+
+// top bar + active nav
+const secs = $$("section.sess");
+addEventListener("scroll", () => { $("#top").classList.toggle("solid", scrollY > 10);
+  const cur = secs.filter(s => s.getBoundingClientRect().top < innerHeight * .4).pop();
+  $$(".nav a").forEach(a => a.classList.toggle("on", !!cur && !$("#home").hidden && a.getAttribute("href") === "#" + cur.id)); }, { passive: true });
+</script>
+</body></html>

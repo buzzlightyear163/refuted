@@ -2,6 +2,7 @@ Kategori: Labb (testar regler live) · närmast Köpmotorer
 Tagline: Most edges die here.
 Plattform: pump.fun
 CA: (fylls i vid launch)   Domän: refuted.fun (ledig)   X: @RefutedLab
+Stil: termkit, egen variant: tema "stone" (askgrå sten + stämpelröd, grönt bara för live/survivors), Martian Mono + IBM Plex Mono, labb-rutnät, pixelkolven som logga, session-layout
 
 # REFUTED — Most edges die here.
 
@@ -28,18 +29,20 @@ Live: https://refuted.vercel.app
 
 | Fil | Vad |
 |---|---|
-| `index.html` | Hela sajten i en fil (mörk lab-konsol). `CONFIG` högst upp i scriptet. Tema (färger, typsnitt) högst upp i CSS:en. Heron ritar varje papperstrade som en linje (canvas). |
+| `index.html` | Hela sajten i en fil (byggd från `src/`). `CONFIG` högst upp i scriptet. Heron ritar pixelkolven med lång skugga, och bubblorna i vätskan rör sig medan labbet är live. |
+| `src/` | Källan: `index.src.html`, `site.css`, `termkit.js` (pixelobjekt, tema). `python3 src/build.py src index.html` bakar ihop dem till `index.html`. |
+| `fonts/` | Typsnitten ligger i repot (Martian Mono, IBM Plex Mono, Silkscreen), inget Google Fonts. |
 | `api/lab.js` | Liten Vercel-funktion: hämtar labbets data från GitHub och cachar 30 s. |
 | `engine/strategies.js` | Strategierna: de 12 första (SEED), kön (POOL) och varianter (FAMILIES). |
 | `engine/core.js` | Labbets logik: features, matchning, papperstrades, checkpoints, domregeln. |
 | `engine/run.js` | En körning: tittar på pump.fun i ~4 min, sparar sen. |
 | `.github/workflows/lab.yml` | En körning tittar på pump.fun i ~4 min, publicerar datan på grenen `lab-data` och köar sen nästa körning själv (schemat var 5:e minut är reserv). |
 | `snapshot.json` | Reserv om datan inte går att nå (lampan visar då "Snapshot"). |
-| `grafik/` | pfp, banner, launch-bild, og, fav + `x-kit.md`. Källfilerna ligger i `grafik/src/`. |
+| `grafik/` | pfp (kolven), banner (riktiga trades som rutor, ingen kolv, tomt nere till vänster), launch-bild (status Live), og, fav + `x-kit.md`. Källan: `grafik/src/gfx.html` + `render.js`. |
 
 Datan (`lab-data`-grenen): `lab.json` (det sajten visar), `s/<id>.json` (alla trades per strategi), `engine.json` (labbets minne).
 
-## Fyll i vid launch (`CONFIG` i `index.html`)
+## Fyll i vid launch (`CONFIG` i `index.html`, och samma i `src/index.src.html`)
 
 - `ca`: kontraktsadressen. Slutar den på `pump` går köpknapparna till pump.fun, annars Raydium LaunchLab. Tom = "CA posted here and on X at launch".
 - `x` / `xHandle`: X-kontot.
@@ -56,9 +59,10 @@ Datan (`lab-data`-grenen): `lab.json` (det sajten visar), `s/<id>.json` (alla tr
 
 ## Kolla efter deploy
 
-- Typsnitten laddar (Instrument Serif, Inter Tight, DM Mono).
+- Typsnitten laddar (Martian Mono i rubrikerna, IBM Plex Mono i texten).
 - og-bilden syns när länken klistras in i ett X-utkast.
-- Lampan uppe till höger säger **Live** (grön). "Delayed" = labbet har inte publicerat på en stund.
+- Lampan uppe till höger säger **lab live** (grön ruta). "delayed" = labbet har inte publicerat på en stund.
+- Kolven syns i heron och bubblorna stiger. En strategisida (t.ex. `/#/s/S-03`) laddar med trades och prickdiagram.
 - `/api/lab` svarar med JSON.
 - Actions-fliken på GitHub visar en lyckad "lab"-körning var 5:e minut.
 
