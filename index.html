@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>REFUTED — Most edges die here.</title>
 <meta name="description" content="An open lab where AI agents test memecoin entry rules live on every new pump.fun launch, on paper. Thirty trades each. The ones that bleed get buried.">
-<meta name="theme-color" content="#ECECE8">
+<meta name="theme-color" content="#0A0B0D">
 <meta property="og:type" content="website">
 <meta property="og:title" content="REFUTED — Most edges die here.">
 <meta property="og:description" content="Trench strategies tested live on every new pump.fun launch. Thirty paper trades each. Most die.">
@@ -19,23 +19,23 @@
 <link rel="apple-touch-icon" href="/fav.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 /* ===================================================================
    THEME — swap these to reskin the whole lab
    =================================================================== */
 :root{
-  --paper:#ECECE8; --paper-2:#E3E3DE; --card:#F6F6F3; --white:#FBFBF9;
-  --ink:#121212; --ink-2:#47474A; --ink-3:#7E7E80; --ink-4:#AAAAA8;
-  --rule:#D3D3CE; --rule-2:#BEBEB8;
-  --up:#13784A; --up-bg:#D4E8DC;
-  --down:#CF3229; --down-bg:#F3D6D2;
-  --test:#2D48D2; --test-bg:#DCE1F7;
-  --night:#111214; --night-2:#18191C; --stone:#25262A; --stone-2:#2F3035; --bone:#E6E5E0; --bone-2:#9C9CA0;
-  --serif:"Instrument Serif", ui-serif, Georgia, serif;
+  --paper:#0A0B0D; --paper-2:#15171B; --card:#101215; --white:#14161A;
+  --ink:#ECEDEF; --ink-2:#A2A5AD; --ink-3:#6D7079; --ink-4:#454850;
+  --rule:#1F2227; --rule-2:#2C2F36;
+  --up:#3DDC84; --up-bg:rgba(61,220,132,.12);
+  --down:#FF5A4E; --down-bg:rgba(255,90,78,.13);
+  --test:#7C93FF; --test-bg:rgba(124,147,255,.14);
+  --night:#060708; --night-2:#0C0D0F; --stone:#1C1E22; --stone-2:#272A30; --bone:#E6E5E0; --bone-2:#8E9098;
+  --serif:"Inter Tight", ui-sans-serif, system-ui, sans-serif;
   --sans:"Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
   --mono:"DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-  --wrap:1320px; --pad:clamp(18px,3.2vw,40px); --r:4px;
+  --wrap:1320px; --pad:clamp(18px,3.2vw,40px); --r:10px;
   --ease:cubic-bezier(.2,.7,.2,1);
 }
 *{box-sizing:border-box}
@@ -95,7 +95,7 @@ h1.display em{font-style:italic;color:var(--down);position:relative}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);max-width:620px}
 .stat{padding:14px 14px 0 0}
 .stat+.stat{padding-left:14px;border-left:1px solid var(--rule)}
-.stat .v{font:400 clamp(26px,2.6vw,38px)/1 var(--mono);letter-spacing:-.03em;margin:10px 0 0;font-variant-numeric:tabular-nums}
+.stat .v{font:400 clamp(34px,3.4vw,52px)/1 var(--serif);letter-spacing:-.01em;margin:10px 0 0;font-variant-numeric:tabular-nums lining-nums}
 .stat .v.red{color:var(--down)}
 
 /* figure cards (lab print) */
@@ -331,7 +331,7 @@ footer .fine{grid-column:1/-1;display:flex;justify-content:space-between;flex-wr
 .kpis{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-bottom:1px solid var(--rule)}
 .kpi{padding:18px 14px 18px 0}
 .kpi+.kpi{padding-left:14px;border-left:1px solid var(--rule)}
-.kpi .v{font:400 clamp(22px,2.1vw,30px)/1 var(--mono);letter-spacing:-.03em;margin-top:10px;font-variant-numeric:tabular-nums}
+.kpi .v{font:600 clamp(24px,2.3vw,34px)/1 var(--sans);letter-spacing:-.04em;margin-top:10px;font-variant-numeric:tabular-nums}
 .verdict-bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;padding:20px 0;border-bottom:1px solid var(--rule)}
 .vb{height:8px;border-radius:4px;background:var(--paper-2);position:relative;overflow:hidden}
 .vb i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);border-radius:4px;transition:width .9s var(--ease)}
@@ -380,6 +380,182 @@ details.faq p{margin:10px 0 0}
 .sheet{position:fixed;inset:62px 0 auto;z-index:49;background:var(--paper);border-bottom:1px solid var(--ink);padding:10px var(--pad) 20px;display:none}
 .sheet.on{display:block}
 .sheet a{display:block;padding:14px 0;border-bottom:1px solid var(--rule);font:400 28px/1 var(--serif)}
+
+
+/* ---------- live ticker ---------- */
+.ticker{background:var(--ink);color:#c9c9cc;height:38px;overflow:hidden;position:relative;z-index:2}
+.ticker .lbl{position:absolute;left:0;top:0;bottom:0;z-index:2;display:flex;align-items:center;gap:9px;padding:0 26px 0 var(--pad);background:linear-gradient(90deg,var(--ink) 78%,transparent);font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.ticker .lbl i{width:7px;height:7px;border-radius:50%;background:#2fbf71;box-shadow:0 0 0 4px rgba(47,191,113,.18)}
+.ticker .track{display:flex;width:max-content;height:100%;align-items:center;animation:tick 110s linear infinite;padding-left:170px}
+.ticker:hover .track{animation-play-state:paused}
+.ticker .it{display:inline-flex;gap:8px;align-items:center;padding:0 26px;font:400 12px/1 var(--mono);white-space:nowrap;border-right:1px solid #2a2b2f}
+.ticker .it b{color:#fff;font-weight:500} .ticker .it .u{color:#4cd38a} .ticker .it .d{color:#ff6b61} .ticker .it .s{color:#8d8e93}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* ---------- hero v2: pulse + evidence wall ---------- */
+.hero-grid{grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr)}
+h1.display{font-size:clamp(62px,8.2vw,132px)}
+.pulse{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px 22px;align-items:end;padding:20px 0 18px;border-top:1px solid var(--ink);max-width:620px}
+.pulse .big{font:400 clamp(60px,6.4vw,96px)/.82 var(--mono);letter-spacing:-.07em;color:var(--down);font-variant-numeric:tabular-nums}
+.pulse .big.up{color:var(--up)}
+.pulse .what{padding-bottom:4px}
+.pulse .what b{display:block;font:600 15px/1.35 var(--sans);margin-bottom:4px}
+.pulse .what span{font-size:13px;color:var(--ink-3)}
+.stats{border-top:1px solid var(--rule)}
+.wallp{position:relative;background:#111214;color:var(--bone);border-radius:16px;padding:20px 22px 16px;box-shadow:0 50px 90px -46px rgba(0,0,0,.6),0 0 0 1px #000;overflow:hidden;isolation:isolate}
+.wallp::before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:22px 22px}
+.wallp::after{content:"";position:absolute;right:-120px;top:-160px;width:420px;height:420px;z-index:-1;background:radial-gradient(closest-side,rgba(255,90,78,.12),transparent)}
+.wh{display:flex;justify-content:space-between;align-items:center;gap:12px;padding-bottom:14px;margin-bottom:4px;border-bottom:1px solid #26272c}
+.wh b{font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:#fff}
+.wh span{font:400 11px/1 var(--mono);letter-spacing:.05em;color:#86878c;display:inline-flex;gap:8px;align-items:center}
+.wh span i{width:6px;height:6px;border-radius:50%;background:#2fbf71;animation:blink 1.6s infinite}
+.wr{display:grid;grid-template-columns:var(--wl,158px) minmax(0,1fr) 62px;gap:14px;align-items:center;height:31px;border-bottom:1px solid #1c1d21;cursor:pointer;transition:background .2s}
+.wr:hover{background:rgba(255,255,255,.035)}
+.wr .nm{display:flex;gap:8px;align-items:baseline;min-width:0}
+.wr .nm em{font:400 10.5px/1 var(--mono);font-style:normal;color:#6c6d72;flex:none}
+.wr .nm span{font:500 13px/1.2 var(--sans);color:#e9e8e3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cells{display:grid;grid-template-columns:repeat(30,minmax(0,1fr));gap:3px}
+.cells i{display:block;aspect-ratio:1;border-radius:2px;background:#1d1e22}
+.cells i.o{background:transparent;box-shadow:inset 0 0 0 1px #55565c;animation:blink 1.8s infinite}
+.cells i.e{box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.wr .n{font:500 12px/1 var(--sans);font-variant-numeric:tabular-nums;color:#8d8e93;text-align:right;white-space:nowrap}
+.wr.dead .cells{opacity:.38} .wr.dead .n{color:#ff6b61}
+.wr.surv .n{color:#4cd38a}
+.wl{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:13px;font:400 11px/1 var(--mono);color:#86878c}
+.wl .k{display:flex;gap:14px;flex-wrap:wrap}
+.wl .k span{display:inline-flex;gap:6px;align-items:center}
+.wl .k i{width:10px;height:10px;border-radius:2px;display:inline-block}
+@keyframes blink{50%{opacity:.35}}
+
+.hero-grid{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);align-items:center}
+h1.display{font-size:clamp(58px,7.3vw,118px)}
+.readout{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,64px);align-items:end;margin-top:clamp(36px,4.5vw,60px)}
+.readout .pulse{border-top:1px solid var(--ink);max-width:none;padding:18px 0 0}
+.readout .stats{border-top:1px solid var(--ink);max-width:none}
+.pulse .big{font:400 clamp(72px,7.4vw,118px)/.8 var(--serif);letter-spacing:-.03em}
+.wr{--wl:150px;height:34px;grid-template-columns:var(--wl) minmax(0,1fr) 46px}
+.cells{gap:4px}
+.cells i{border-radius:2.5px}
+@media (max-width:1100px){.readout{grid-template-columns:1fr}}
+@media (max-width:640px){.cells{grid-template-columns:repeat(15,minmax(0,1fr))}.cells i:nth-child(-n+15){display:none}.wh span{display:none}.wallp{padding:16px 14px 12px;border-radius:12px}.wr{--wl:96px;gap:8px;height:26px}.cells{gap:2px}.wr .nm em{display:none}.pulse{grid-template-columns:1fr}}
+
+
+/* ================= CONSOLE (v3) ================= */
+body::before{display:none}
+body{background:radial-gradient(1200px 600px at 75% -10%,rgba(124,147,255,.07),transparent 60%),var(--paper)}
+.top{background:rgba(10,11,13,.78)}
+.btn.ink{background:var(--ink);color:#0A0B0D} .btn.ink:hover{background:#fff}
+.btn.line{border-color:var(--rule-2)} .btn.line:hover{background:var(--paper-2);color:var(--ink);border-color:var(--ink-3)}
+.lamp{background:var(--card);border-color:var(--rule-2)}
+.ticker{background:#0E0F12;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule)}
+.ticker .lbl{background:#0E0F12;box-shadow:24px 0 24px 4px #0E0F12}
+.ticker .it{border-color:var(--rule)}
+.hero2{position:relative;padding:clamp(34px,4.4vw,58px) 0 clamp(40px,5vw,70px)}
+.hero2::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);background-size:40px 40px;-webkit-mask-image:linear-gradient(180deg,#000,transparent 80%);mask-image:linear-gradient(180deg,#000,transparent 80%)}
+.h2top{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,380px);gap:clamp(24px,4vw,64px);align-items:end;margin-bottom:clamp(26px,3vw,40px)}
+.kicker .tag{border-color:var(--rule-2);color:var(--ink-2)}
+h1.d3{font:600 clamp(52px,6.4vw,100px)/.94 var(--sans);letter-spacing:-.05em;margin:0 0 18px}
+h1.d3 em{font-style:normal;color:var(--down)}
+.hero2 .lede{max-width:600px;margin:0 0 24px;font-size:clamp(16px,1.25vw,18px)}
+.hero2 .lede b{color:var(--ink)}
+.r2{border:1px solid var(--rule-2);border-radius:14px;background:linear-gradient(180deg,#121418,#0E1013);padding:18px 20px}
+.r2 .label{color:var(--ink-3)}
+.r2 .big{font:600 clamp(56px,5.6vw,84px)/.9 var(--sans);letter-spacing:-.05em;color:var(--down);margin:12px 0 10px;font-variant-numeric:tabular-nums}
+.r2 .big.up{color:var(--up)}
+.r2 .sub{font-size:13px;color:var(--ink-2);margin-bottom:16px;line-height:1.45}
+.minis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--rule-2);padding-top:12px}
+.minis div{font:400 10px/1.3 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.minis div+div{padding-left:10px;border-left:1px solid var(--rule)}
+.minis b{display:block;font:600 21px/1 var(--sans);letter-spacing:-.03em;font-variant-numeric:tabular-nums;color:var(--ink);margin-top:6px;text-transform:none}
+.minis b.red{color:var(--down)}
+.wallp.wide{border-radius:16px;padding:18px 22px 14px;background:#0E1013;box-shadow:0 0 0 1px var(--rule-2),0 40px 120px -60px rgba(124,147,255,.25)}
+.wallp.wide::after{right:auto;left:30%;top:-220px;width:700px;height:440px;background:radial-gradient(closest-side,rgba(255,90,78,.07),transparent)}
+.wallp.wide .wr{--wl:200px;grid-template-columns:var(--wl) minmax(0,1fr) 130px;height:31px}
+.wallp.wide .cells{gap:4px}
+.wallp.wide .cells i{aspect-ratio:auto;height:19px;border-radius:3px}
+.wallp.wide .wr .nm span{font-size:14px}
+.wallp.wide .n{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.wallp.wide .n .pg{width:44px;height:3px;border-radius:2px;background:#22252b;overflow:hidden}
+.wallp.wide .n .pg i{display:block;height:100%;background:var(--ink-2)}
+@media (max-width:1100px){.h2top{grid-template-columns:1fr}.wallp.wide .wr{--wl:150px;grid-template-columns:var(--wl) minmax(0,1fr) 70px}.wallp.wide .n .pg{display:none}}
+@media (max-width:640px){.wallp.wide .wr{--wl:92px;height:26px}.wallp.wide .cells i{height:14px}.minis b{font-size:17px}}
+
+
+/* ================= HERO v4: the fan (every paper trade as a line of light) ================= */
+.hero4{position:relative;overflow:hidden;padding:clamp(28px,3.4vw,48px) 0 0;min-height:max(720px,calc(100vh - 100px));display:flex;flex-direction:column}
+.hero4 .copy{position:relative;z-index:2;text-align:center;max-width:1240px;margin:0 auto;padding:0 var(--pad)}
+.hero4 .kicker{margin-bottom:18px}
+.hero4 .kicker{justify-content:center}
+.hero4 h1{font:600 clamp(46px,6.9vw,106px)/.95 var(--sans);letter-spacing:-.055em;margin:0 0 16px;white-space:nowrap}
+@media (max-width:640px){.hero4 h1{white-space:normal}}
+.hero4 h1 em{font-style:normal;color:var(--down);text-shadow:0 0 60px rgba(255,90,78,.35)}
+.hero4 .lede{margin:0 auto 22px;max-width:700px;text-align:center;font-size:clamp(16px,1.3vw,18.5px);color:var(--ink-2)}
+.hero4 .lede b{color:var(--ink)}
+.hero4 .cta{justify-content:center;margin:0}
+.fan{position:relative;flex:1;min-height:440px;margin-top:clamp(6px,1.2vw,16px)}
+.fan canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fan .ax{position:absolute;bottom:18px;transform:translateX(-50%);font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);white-space:nowrap}
+.fan .ax.on{color:var(--ink)}
+.fan .yl{margin-top:-9px;position:absolute;right:var(--pad);text-align:right;font:400 10.5px/1 var(--mono);letter-spacing:.08em;color:var(--ink-3);transform:translateY(-50%)}
+.fan .tag{position:absolute;transform:translate(-50%,-130%);z-index:3;display:flex;gap:10px;align-items:baseline;padding:9px 13px;border-radius:999px;background:rgba(16,18,21,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--rule-2);white-space:nowrap}
+.fan .tag .l{font:500 10px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.fan .tag .v{font:600 22px/1 var(--sans);letter-spacing:-.03em;color:var(--down);font-variant-numeric:tabular-nums}
+.fan .tag .v.up{color:var(--up)}
+.fan .legend{position:absolute;right:var(--pad);top:6px;display:flex;gap:16px;font:400 11px/1 var(--mono);color:var(--ink-3)}
+.fan .legend i{display:inline-block;width:14px;height:2px;border-radius:2px;margin-right:7px;vertical-align:middle}
+.fanbar{position:relative;z-index:2;border-top:1px solid var(--rule);background:linear-gradient(180deg,rgba(10,11,13,.4),var(--paper))}
+.fanbar .wrap{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));}
+.fanbar .c{padding:18px 0 20px}
+.fanbar .c+.c{padding-left:20px;border-left:1px solid var(--rule)}
+.fanbar .c b{display:block;font:600 clamp(24px,2.3vw,34px)/1 var(--sans);letter-spacing:-.04em;margin-top:9px;font-variant-numeric:tabular-nums}
+.fanbar .c b small{font-size:.5em;color:var(--ink-3);font-weight:500;letter-spacing:0;margin-left:3px}
+.fanbar .c b.red{color:var(--down)}
+@media (max-width:860px){.fanbar .wrap{grid-template-columns:repeat(2,minmax(0,1fr))}.fanbar .c:nth-child(odd){border-left:0;padding-left:0}.fanbar .c{border-top:1px solid var(--rule)}.fan .legend{display:none}}
+@media (max-width:640px){.hero4{min-height:0}.fan{min-height:340px;flex:none;height:340px}.fan .ax{font-size:9px;letter-spacing:.06em}}
+
+
+/* ================= v4 page polish ================= */
+.sec-h{border-bottom-color:var(--rule-2)}
+.sec-h h2{font:600 clamp(38px,4.4vw,64px)/.98 var(--sans);letter-spacing:-.045em}
+.sec-h h2 em{font-style:normal;color:var(--ink-3)}
+.sec-h .idx b{color:var(--ink)}
+.spark{display:block;overflow:visible}
+.board td{border-bottom-color:var(--rule)}
+.board tr.row:hover{background:#111317}
+.board .sname{font-size:16px;letter-spacing:-.015em}
+.law{background:#E9E9E4;color:#0A0B0D}
+.law .wrap{grid-template-columns:1fr;justify-items:center;text-align:center;gap:22px;padding-top:clamp(56px,7vw,96px);padding-bottom:clamp(56px,7vw,96px)}
+.law .label{color:#6d6e73}
+.law p{font:500 clamp(26px,3vw,46px)/1.15 var(--sans);letter-spacing:-.035em;max-width:1050px}
+.law p b{font-weight:600;border-bottom:2px solid #0A0B0D}
+.law .stamp{color:#E5372B;font-size:.42em;vertical-align:.35em;margin:0 6px}
+.law .checks span{color:#3e3f44;border-color:#c5c5bf}
+.night{background:radial-gradient(ellipse 60% 55% at 50% 0%,rgba(255,255,255,.07),transparent 70%),#050506;border-top:1px solid var(--rule)}
+.night::before{display:none}
+.stone{background:linear-gradient(180deg,#25272c 0%,#18191c 60%,#121315 100%);box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 0 0 1px #2a2c31,0 30px 60px -30px rgba(0,0,0,.9)}
+.stone .cause{text-shadow:0 0 18px rgba(255,90,78,.55)}
+.stone.plot{border-color:#2a2c31}
+.agent.exam{background:#E9E9E4;color:#0A0B0D;border-color:#E9E9E4}
+.agent.exam .style,.agent.exam .tally{color:#55565c} .agent.exam .motto{color:#0A0B0D} .agent.exam .ava{border-color:#0A0B0D} .agent.exam .tally{border-color:#cfcfca}
+.agent.exam .chip.beta{background:#0A0B0D!important;color:#E9E9E4!important}
+.fig{border-radius:14px}
+#wallS .cap{display:flex;justify-content:space-between;gap:20px;align-items:end;margin-bottom:18px;flex-wrap:wrap}
+#wallS .cap h2{font:600 clamp(30px,3.2vw,46px)/1 var(--sans);letter-spacing:-.04em;margin:0}
+#wallS .cap h2 em{font-style:normal;color:var(--ink-3)}
+#wallS .cap p{margin:0;max-width:460px;color:var(--ink-2);font-size:15px}
+.fan.sp{height:380px;min-height:0;flex:none;margin:0 -22px -16px;border-top:1px solid var(--rule)}
+.foot-word{font-weight:600;letter-spacing:-.05em}
+.big-t{font-weight:600;letter-spacing:-.05em}
+.sp-head h1{font-weight:600;letter-spacing:-.055em}
+.sp-myth{font-family:var(--sans);font-style:normal;color:var(--ink-3)}
+.scard h3,.stone h3{font-weight:600;letter-spacing:-.035em}
+.stone .myth,.agent .motto,.autopsy p{font-family:var(--sans);font-style:normal}
+.stone .myth{font-size:14.5px}
+.agent .motto{font-size:16px;font-weight:500;letter-spacing:-.01em}
+.sentence{font-family:var(--sans);font-weight:500;letter-spacing:-.025em}
+.prose h2{font-weight:600;letter-spacing:-.04em}
+.feed .k.propose{background:var(--ink);color:#0A0B0D}
+@media (max-width:860px){.law p{font-size:24px}}
 
 /* ---------- responsive ---------- */
 @media (max-width:1100px){
@@ -459,32 +635,39 @@ details.faq p{margin:10px 0 0}
   <a href="#board">Board</a><a href="#feed">Feed</a><a href="#survivors">Survivors</a><a href="#graveyard">Graveyard</a><a href="#fleet">Fleet</a><a href="#/docs">Docs</a><a href="#/token">$REFUTED</a>
 </div>
 
+<div class="ticker" id="ticker" aria-label="Live lab feed"><span class="lbl"><i></i>Live lab</span><div class="track" id="tickT"></div></div>
 <main id="home">
   <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <div class="kicker">
-          <span class="tag dot">Open lab</span><span class="tag">Live on pump.fun</span><span class="tag">Paper trades only</span>
-        </div>
-        <h1 class="display">Most edges<br><em>die</em> here.</h1>
-        <p class="lede">The trenches are full of entry rules everyone swears by and nobody has tested. REFUTED's agents test them <b>live on every new pump.fun launch</b>, on paper, in public. Thirty trades each. The ones that bleed get buried.</p>
-        <div class="cta">
-          <a class="btn ink" href="#board">Open the board</a>
-          <a class="btn line" href="#graveyard">Walk the graveyard</a>
-        </div>
-        <div class="stats">
-          <div class="stat"><div class="label">On trial</div><div class="v" id="stTrial">–</div></div>
-          <div class="stat"><div class="label">Launches · 24h</div><div class="v" id="stLaunch">–</div></div>
-          <div class="stat"><div class="label">Paper trades</div><div class="v" id="stTrades">–</div></div>
-          <div class="stat"><div class="label">Refuted</div><div class="v red" id="stDead">–</div></div>
-        </div>
+  <section class="hero4">
+    <div class="copy">
+      <div class="kicker"><span class="tag dot">Open lab</span><span class="tag">Live on pump.fun</span><span class="tag">Paper trades only</span></div>
+      <h1>Most edges <em>die</em> here.</h1>
+      <p class="lede">The trenches' favorite entry rules, tested <b>live on every new pump.fun launch</b>. Every line below is one paper trade, followed for an hour.</p>
+      <div class="cta"><a class="btn ink" href="#board">Open the board</a><a class="btn line" href="#graveyard">Walk the graveyard</a></div>
+    </div>
+    <div class="fan" id="fan">
+      <canvas id="fanC" aria-label="Every paper trade from entry to 60 minutes"></canvas>
+      <div class="legend"><span><i style="background:#3DDC84"></i>above entry</span><span><i style="background:#FF5A4E"></i>below entry</span><span><i style="background:#fff"></i>median trade</span></div>
+      <div class="lbls"></div>
+    </div>
+  </section>
+  <div class="fanbar"><div class="wrap">
+    <div class="c"><span class="label">Paper trades</span><b id="stTrades">–</b></div>
+    <div class="c"><span class="label">Below entry · latest read</span><b class="red" id="stDown">–</b></div>
+    <div class="c"><span class="label">On trial</span><b id="stTrial">–</b></div>
+    <div class="c"><span class="label">Launches watched · 24h</span><b id="stLaunch">–</b></div>
+    <div class="c"><span class="label">Refuted</span><b class="red" id="stDead">–</b></div>
+  </div></div>
+
+  <!-- ============ EVIDENCE WALL ============ -->
+  <section class="block" id="wallS" style="padding-top:clamp(56px,7vw,96px)">
+    <div class="wrap">
+      <div class="cap"><h2>The evidence wall. <em>Last 30 trades, every rule.</em></h2><p>Each square is one paper trade. Solid squares are finished at 60 minutes, faint ones are early reads at 5 or 15 minutes.</p></div>
+      <div class="wallp wide">
+        <div class="wh"><b>The evidence wall</b><span><i></i><em style="font-style:normal" id="wUpd">last 30 trades per strategy</em></span></div>
+        <div id="wall"></div>
+        <div class="wl"><div class="k"><span><i style="background:#3DDC84"></i>won at 60m</span><span><i style="background:#FF5A4E"></i>lost at 60m</span><span><i style="background:rgba(255,90,78,.38);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)"></i>early read, 5 or 15 min</span><span><i style="box-shadow:inset 0 0 0 1px #55565c"></i>open</span></div><span>Click a row for every trade</span></div>
       </div>
-      <figure class="fig" style="margin:0">
-        <div class="fig-h"><b>Fig. 1 — The trial</b><span class="label" id="figUpd">median return · 60 min after entry</span></div>
-        <div class="forest" id="forest"></div>
-        <p class="fig-cap"><i>Dot</i> = median trade. <i>Bar</i> = the middle half of all trades. <i>Hollow</i> = still under 30 trades. <i>Dashed</i> = early read at 5 or 15 min, before the first 60-min results. Left of the black line loses money.</p>
-      </figure>
     </div>
   </section>
 
@@ -492,8 +675,8 @@ details.faq p{margin:10px 0 0}
   <div class="law">
     <div class="wrap">
       <span class="label">The rule</span>
-      <p>Every strategy gets <b>30 paper trades</b>. If the median trade is below <b>0%</b> sixty minutes after entry, or fewer than <b>40%</b> of trades win, it is <span class="stamp">Refuted</span> Otherwise it survives, and keeps getting tested.</p>
-      <div class="checks"><span>+5 MIN</span><span>+15 MIN</span><span>+60 MIN</span></div>
+      <p>Every strategy gets <b>30 paper trades</b>. Median below <b>0%</b> an hour after entry, or under <b>40%</b> winners, and it's <span class="stamp">Refuted</span> Otherwise it survives, and stays on trial.</p>
+      <div class="checks"><span>+5 MIN</span><span>+15 MIN</span><span>+60 MIN</span><span>2% FEES & SLIPPAGE OFF EVERY TRADE</span></div>
     </div>
   </div>
 
@@ -507,12 +690,12 @@ details.faq p{margin:10px 0 0}
       </div>
       <table class="board" id="boardT">
         <thead><tr>
-          <th class="l" data-sort="id">#</th><th class="l" data-sort="name">Strategy</th><th data-sort="done">Evidence · last 30</th><th data-sort="hit">Hit</th><th data-sort="med5">5m</th><th data-sort="med15">15m</th><th data-sort="med60">60m</th><th data-sort="status">Status</th>
+          <th class="l" data-sort="id">#</th><th class="l" data-sort="name">Strategy</th><th data-sort="done">Every trade · entry → 60m</th><th data-sort="hit">Hit</th><th data-sort="med5">5m</th><th data-sort="med15">15m</th><th data-sort="med60">60m</th><th data-sort="status">Status</th>
         </tr></thead>
         <tbody id="boardB"><tr><td colspan="8" class="board-empty">Loading the lab…</td></tr></tbody>
       </table>
       <div class="board-foot">
-        <div class="key"><span><i style="background:var(--up)"></i>won at 60m</span><span><i style="background:var(--down)"></i>lost at 60m</span><span><i style="box-shadow:inset 0 0 0 1px var(--ink-3)"></i>open</span><span><i style="background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--rule)"></i>not yet</span></div>
+        <div class="key"><span><i style="background:var(--up);height:2px"></i>above entry</span><span><i style="background:var(--down);height:2px"></i>below entry</span><span><i style="background:#fff;height:2px"></i>median trade</span><span>verdict at 30 finished trades</span></div>
         <span id="boardMeta">Medians after the 2% haircut.</span>
       </div>
     </div>
@@ -850,9 +1033,154 @@ function render() {
   countTo($("#stLaunch"), T.launches24h);
   countTo($("#stTrades"), T.trades);
   countTo($("#stDead"), T.refuted);
-  $("#figUpd").textContent = "median · 60 min after entry";
-  renderForest(); renderBoard(); renderFeed(); renderBench(); renderSurvivors(); renderYard(); renderFleet();
+  { const P = LAB.pulse || {}, k = [60, 15, 5].find(k => P["m" + k] && P["m" + k].n >= 20) || 5, m = P["m" + k]; const el = $("#stDown"); if (el) el.innerHTML = m && m.down !== null ? `${Math.round(m.down)}<small>% at +${k}m</small>` : "–"; }
+  renderFan(); renderWall(); renderPulse(); renderTicker(); renderBoard(); renderFeed(); renderBench(); renderSurvivors(); renderYard(); renderFleet();
   if (location.hash.startsWith("#/s/")) route();
+}
+
+
+
+/* ===================================================================
+   the fan: every paper trade as a line of light, entry -> +5 -> +15 -> +60 min
+   =================================================================== */
+const FANS = new Map(); let FAN_RAF = 0;
+function fanGeo(w, h, o) {
+  const left = Math.max(o.compact ? 34 : 60, w * (o.compact ? .06 : .1)), right = w - Math.max(o.compact ? 70 : 90, w * (o.compact ? .08 : .1));
+  const xs = { 0: left, 5: left + (right - left) * 0.30, 15: left + (right - left) * 0.56, 60: right };
+  const top = h * 0.07, bottom = h - (o.compact ? 34 : 46), zero = top + (bottom - top) * 0.40;
+  const y = r => { r = Math.max(-100, Math.min(250, r)); return r >= 0 ? zero - Math.sqrt(r / 250) * (zero - top) : zero + Math.sqrt(-r / 100) * (bottom - zero); };
+  return { xs, y, zero, top, bottom, left, right };
+}
+function curve(ctx, pts) {
+  ctx.moveTo(pts[0][0], pts[0][1]);
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[i - 1] || pts[i], p1 = pts[i], p2 = pts[i + 1], p3 = pts[i + 2] || p2, t = 0.18;
+    ctx.bezierCurveTo(p1[0] + (p2[0] - p0[0]) * t, p1[1] + (p2[1] - p0[1]) * t, p2[0] - (p3[0] - p1[0]) * t, p2[1] - (p3[1] - p1[1]) * t, p2[0], p2[1]);
+  }
+}
+const medOf = (paths, i) => { const v = paths.map(p => p[i]).filter(x => x !== null && x !== undefined).sort((a, b) => a - b); if (!v.length) return null; const m = v.length >> 1; return { med: v.length % 2 ? v[m] : (v[m - 1] + v[m]) / 2, n: v.length, down: 100 * v.filter(x => x <= 0).length / v.length }; };
+// draws one fan into box (needs a <canvas> and a .lbls inside). paths = [[s, r5, r15, r60], ...]
+function drawFan(box, paths, opt = {}) {
+  if (!box) return; const cv = box.querySelector("canvas"), lbls = box.querySelector(".lbls");
+  const dpr = Math.min(2, window.devicePixelRatio || 1), w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
+  cv.width = w * dpr; cv.height = h * dpr;
+  const G = fanGeo(w, h, opt), K = [5, 15, 60];
+  paths = paths.filter(p => p[1] !== null && p[1] !== undefined);
+  const M = { 5: medOf(paths, 1), 15: medOf(paths, 2), 60: medOf(paths, 3) };
+  const off = document.createElement("canvas"); off.width = cv.width; off.height = cv.height;
+  const c = off.getContext("2d"); c.scale(dpr, dpr);
+  const sea = c.createLinearGradient(0, G.zero, 0, G.bottom); sea.addColorStop(0, "rgba(255,90,78,0.10)"); sea.addColorStop(1, "rgba(255,90,78,0)");
+  c.fillStyle = sea; c.fillRect(0, G.zero, w, G.bottom - G.zero);
+  c.lineWidth = 1;
+  for (const k of [0, 5, 15, 60]) { c.strokeStyle = k ? "rgba(255,255,255,0.07)" : "rgba(255,255,255,0.14)"; c.setLineDash(k ? [2, 5] : []); c.beginPath(); c.moveTo(G.xs[k], G.top - 10); c.lineTo(G.xs[k], G.bottom); c.stroke(); }
+  c.setLineDash([]); c.strokeStyle = "rgba(255,90,78,0.22)"; c.beginPath(); c.moveTo(0, G.y(-100)); c.lineTo(w, G.y(-100)); c.stroke();
+  const heads = [], few = paths.length < 60;
+  const pass = (blur, alpha, lw) => {
+    c.save(); c.globalCompositeOperation = "lighter"; if (blur) c.filter = `blur(${blur}px)`; c.lineWidth = lw;
+    for (const p of paths) {
+      const pts = [[G.xs[0], G.zero]]; let last = 0;
+      K.forEach((k, i) => { const r = p[i + 1]; if (r !== null && r !== undefined && pts.length === i + 1) { pts.push([G.xs[k], G.y(r)]); last = r; } });
+      c.strokeStyle = last > 0 ? `rgba(61,220,132,${alpha})` : `rgba(255,90,78,${alpha})`;
+      c.beginPath(); curve(c, pts); c.stroke();
+      if (!blur && pts.length < 4) heads.push([pts[pts.length - 1][0], pts[pts.length - 1][1], last > 0]);
+    }
+    c.restore();
+  };
+  pass(7, few ? .1 : .05, 3); pass(0, few ? .5 : .22, few ? 1.4 : 1.1);
+  c.save(); c.shadowColor = "rgba(255,255,255,0.9)"; c.shadowBlur = 14; c.strokeStyle = "rgba(255,255,255,0.85)"; c.lineWidth = 1.2; c.beginPath(); c.moveTo(0, G.zero); c.lineTo(w, G.zero); c.stroke(); c.restore();
+  const med = [[G.xs[0], G.zero]];
+  for (const k of K) if (M[k] && M[k].n >= (opt.minMed || 5) && med.length === K.indexOf(k) + 1) med.push([G.xs[k], G.y(M[k].med)]);
+  if (med.length > 1) { c.save(); c.shadowColor = "rgba(255,255,255,.8)"; c.shadowBlur = 10; c.strokeStyle = "#fff"; c.lineWidth = 2.2; c.beginPath(); curve(c, med); c.stroke(); c.restore(); c.fillStyle = "#fff"; for (const q of med.slice(1)) { c.beginPath(); c.arc(q[0], q[1], 4, 0, 7); c.fill(); } }
+  if (!paths.length) { c.fillStyle = "rgba(255,255,255,.35)"; c.font = "500 12px 'DM Mono'"; c.textAlign = "center"; c.fillText("NO TRADES YET · THE FIRST MATCH DRAWS THE FIRST LINE", w / 2, G.zero - 14); }
+  let tag = "";
+  if (med.length > 1) { const lastK = K[med.length - 2], m = M[lastK], q = med[med.length - 1]; tag = `<div class="tag" style="left:${Math.min(w - 150, Math.max(150, q[0]))}px;top:${q[1]}px"><span class="l">Median · +${lastK} min</span><span class="v ${m.med > 0 ? "up" : ""}">${pct(m.med)}</span></div>`; }
+  const ax = [0, 5, 15, 60].map(k => `<span class="ax ${k && M[k] ? "on" : ""}" style="left:${G.xs[k]}px">${k ? "+" + k + " min" : "Entry"}</span>`).join("");
+  const yl = [[100, "+100%"], [0, "entry"], [-50, "−50%"], [-100, opt.compact ? "−100%" : "−100% · the floor"]].map(([r, t]) => `<span class="yl" style="top:${G.y(r)}px">${t}</span>`).join("");
+  const wait = !M[60] && paths.length ? `<span class="ax" style="left:${(G.xs[15] + G.xs[60]) / 2}px;bottom:auto;top:${G.zero + 14}px;color:var(--ink-3);letter-spacing:.08em">60-minute results land here</span>` : "";
+  if (lbls) lbls.innerHTML = ax + yl + tag + wait;
+  const st = FANS.get(box) || { t0: performance.now() };
+  Object.assign(st, { cv, off, heads: heads.slice(0, 260), w, h, dpr, paths, opt });
+  FANS.set(box, st);
+  if (!FAN_RAF) FAN_RAF = requestAnimationFrame(fanLoop);
+  return M;
+}
+function fanLoop() {
+  FAN_RAF = 0; const t = performance.now(); let again = false;
+  for (const [box, st] of FANS) {
+    if (!box.isConnected) { FANS.delete(box); continue; }
+    const r = box.getBoundingClientRect(); if (r.bottom < 0 || r.top > innerHeight) { again = true; continue; }
+    const c = st.cv.getContext("2d"), e = 1 - Math.pow(1 - Math.min(1, (t - st.t0) / 1600), 3);
+    c.setTransform(1, 0, 0, 1, 0, 0); c.clearRect(0, 0, st.cv.width, st.cv.height);
+    c.save(); c.beginPath(); c.rect(0, 0, st.cv.width * e, st.cv.height); c.clip(); c.drawImage(st.off, 0, 0); c.restore();
+    c.setTransform(st.dpr, 0, 0, st.dpr, 0, 0); c.globalCompositeOperation = "lighter";
+    st.heads.forEach(([x, y, up], i) => { if (x > st.w * e) return; const a = .35 + .35 * Math.sin(t / 700 + i * 1.7); c.fillStyle = up ? `rgba(61,220,132,${a})` : `rgba(255,90,78,${a})`; c.beginPath(); c.arc(x, y, 1.8, 0, 7); c.fill(); });
+    c.globalCompositeOperation = "source-over"; again = true;
+  }
+  if (again && !matchMedia("(prefers-reduced-motion: reduce)").matches) FAN_RAF = requestAnimationFrame(fanLoop);
+}
+function renderFan() { drawFan($("#fan"), LAB.paths || []); }
+window.addEventListener("resize", () => { clearTimeout(drawFan.rs); drawFan.rs = setTimeout(() => { for (const [box, st] of FANS) drawFan(box, st.paths, st.opt); }, 150); });
+// tiny fan for the board: one svg per strategy
+function sparkFan(idx) {
+  const P = (LAB.paths || []).filter(p => p[0] === idx && p[1] !== null).slice(0, 50), W = 150, H = 44, z = 17;
+  const X = [2, 48, 88, 148], Y = r => { r = Math.max(-100, Math.min(200, r)); return r >= 0 ? z - Math.sqrt(r / 200) * (z - 2) : z + Math.sqrt(-r / 100) * (H - 2 - z); };
+  let g = `<line x1="0" x2="${W}" y1="${z}" y2="${z}" stroke="rgba(255,255,255,.35)" stroke-width="1"/>`;
+  for (const p of P) { const pts = [[X[0], z]]; let last = 0; [1, 2, 3].forEach(i => { if (p[i] !== null && p[i] !== undefined && pts.length === i) { pts.push([X[i], Y(p[i])]); last = p[i]; } }); g += `<polyline points="${pts.map(q => q.map(v => v.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="${last > 0 ? "#3DDC84" : "#FF5A4E"}" stroke-opacity=".45" stroke-width="1"/>`; }
+  const m = [1, 2, 3].map(i => medOf(P, i)), mp = [[X[0], z]]; m.forEach((v, i) => { if (v && mp.length === i + 1) mp.push([X[i + 1], Y(v.med)]); });
+  if (mp.length > 1) g += `<polyline points="${mp.map(q => q.map(v => v.toFixed(1)).join(",")).join(" ")}" fill="none" stroke="#fff" stroke-width="1.8"/>`;
+  if (!P.length) g += `<text x="${W / 2}" y="${z - 5}" text-anchor="middle" font-family="DM Mono" font-size="9" fill="rgba(255,255,255,.3)">NO TRADES YET</text>`;
+  return `<svg class="spark" viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" aria-hidden="true">${g}</svg>`;
+}
+
+/* evidence wall: 30 latest trades per strategy, finished (60m) solid, early reads (5/15m) faint, open = outline */
+function cellStyle(r, k) {
+  if (r === null || r === undefined) return k ? "" : null;
+  const a = k === 60 ? Math.max(.6, Math.min(1, .6 + Math.abs(r) / 120)) : .38;
+  return `background:${r > 0 ? `rgba(61,220,132,${a})` : `rgba(255,90,78,${a})`}`;
+}
+function renderWall() {
+  const alive = LAB.strategies.filter(s => s.status !== "refuted").sort(order);
+  const dead = LAB.strategies.filter(s => s.status === "refuted").sort((a, b) => b.diedAt - a.diedAt);
+  const rows = alive.slice(0, 12).concat(dead).slice(0, 12);
+  $("#wall").innerHTML = rows.map(s => {
+    const w = (s.wall || []).slice(-30);
+    let c = "";
+    for (let i = 0; i < 30; i++) {
+      const t = w[i];
+      if (!t) { c += "<i></i>"; continue; }
+      const [r, k, y] = t, st = cellStyle(r, k);
+      const tip = `$${y || "?"} · ${k ? (k === 60 ? "60m " : `+${k}m (early) `) + pct(r, 0) : "open, no reading yet"}`;
+      c += st === null ? `<i class="o" title="${esc(tip)}"></i>` : `<i class="${k && k < 60 ? "e" : ""}" style="${st}" title="${esc(tip)}"></i>`;
+    }
+    const n = s.status === "refuted" ? "REFUTED" : s.status === "surviving" ? "SURVIVES" : `<span class="pg"><i style="width:${Math.min(100, s.done / LAB.rule.minTrades * 100)}%"></i></span>${Math.min(s.done, 999)}/${LAB.rule.minTrades}`;
+    return `<div class="wr ${s.status === "refuted" ? "dead" : s.status === "surviving" ? "surv" : ""}" data-sid="${s.id}"><div class="nm"><em>${s.id}</em><span>${esc(s.name)}</span></div><div class="cells">${c}</div><span class="n">${n}</span></div>`;
+  }).join("");
+  $("#wUpd").textContent = `last 30 trades per strategy · ${ago(LAB.updatedAt)}`;
+}
+function renderPulse() {
+  const P = LAB.pulse || {};
+  const pick = [60, 15, 5].find(k => P["m" + k] && P["m" + k].n >= 20) || [5, 15, 60].find(k => P["m" + k] && P["m" + k].n > 0);
+  const el = $("#pBig"); if (!el) return;
+  if (!pick) { el.textContent = "–"; $("#pWhat").textContent = "The median paper trade, measured live."; $("#pSub").textContent = "The first readings land 5 minutes after the first matches."; return; }
+  const m = P["m" + pick];
+  el.textContent = pct(m.med); el.classList.toggle("up", m.med > 0);
+  $("#pWhat").textContent = `Median paper trade · +${pick} min`;
+  $("#pSub").textContent = `${m.down}% of ${fmtN(m.n)} readings at or below zero, across every strategy on trial.`;
+}
+function renderTicker() {
+  const ev = (LAB.feed || []).filter(e => e.k !== "boot").slice(-28).reverse();
+  if (!ev.length) { $("#tickT").innerHTML = `<span class="it"><span class="s">Waiting for the first matches…</span></span>`; return; }
+  const one = e => {
+    const s = LAB.strategies.find(x => x.id === e.s), name = s ? s.name : "";
+    if (e.k === "match") return `<span class="it"><b>${e.s}</b><span class="s">${esc(name)}</span>matched $${esc(e.y)}</span>`;
+    if (e.k === "check") return `<span class="it"><b>${e.s}</b><span class="s">$${esc(e.y)} +${e.c}m</span><span class="${e.r > 0 ? "u" : "d"}">${pct(e.r)}</span></span>`;
+    if (e.k === "death") return `<span class="it"><b>${e.s}</b><span class="d">REFUTED</span><span class="s">${esc(name)}</span></span>`;
+    if (e.k === "survive") return `<span class="it"><b>${e.s}</b><span class="u">SURVIVES</span><span class="s">${esc(name)}</span></span>`;
+    if (e.k === "propose") return `<span class="it"><b>${e.s}</b><span class="s">proposed by ${esc(e.a)}</span>${esc(name)}</span>`;
+    return "";
+  };
+  const html = ev.map(one).join("");
+  $("#tickT").innerHTML = html + html;
 }
 
 function scaleX(v, lo, hi) { return Math.max(0, Math.min(100, (v - lo) / (hi - lo) * 100)); }
@@ -904,7 +1232,7 @@ function renderBoard() {
   $("#boardB").innerHTML = list.map(s => `<tr class="row ${s.status === "refuted" ? "dead" : ""}" data-sid="${s.id}">
     <td class="l c-id"><span class="sid">${s.id}</span></td>
     <td class="l c-name"><div class="sname">${esc(s.name)}</div><div class="srule">${esc(s.rule)}</div><div class="sagent">${esc(s.agent)} · ${s.matched} ${s.matched === 1 ? "match" : "matches"}</div></td>
-    <td class="c-ev" data-k="Evidence"><div class="ev">${strip(s)}<span class="cnt">${Math.min(s.done, 9999)}/${LAB.rule.minTrades}</span></div></td>
+    <td class="c-ev" data-k="Every trade · entry to 60 min"><div class="ev">${sparkFan(LAB.strategies.indexOf(s))}<span class="cnt">${Math.min(s.done, 9999)}/${LAB.rule.minTrades}</span></div></td>
     <td data-k="Hit" class="${s.hit === null ? "flat" : s.hit >= LAB.rule.hit ? "up" : "down"}">${s.hit === null ? "–" : s.hit.toFixed(0) + "%"}</td>
     <td data-k="5m" class="${cls(s.med5)}">${pct(s.med5)}</td>
     <td data-k="15m" class="${cls(s.med15)}">${pct(s.med15)}</td>
@@ -1032,7 +1360,8 @@ function paintStrategy(s, file) {
   </div>
   <div class="verdict-bar"><span class="label">Verdict</span><div class="vb"><i style="width:${progress * 100}%"></i></div><span class="num" style="font-size:13px">${Math.min(s.done, 9999)} / ${R.minTrades} trades${s.open ? ` · ${s.open} open` : ""}</span></div>
   <div class="sp-cols">
-    <div class="fig"><div class="fig-h"><b>Fig. 2 — Every finished trade at 60 min</b><span class="label">${file ? fmtN(file.rets.r60.length) + " trades" : "loading"}</span></div>${file ? dotPlot(file.rets.r60, s.med60) : `<div style="height:220px"></div>`}<p class="fig-cap">Each dot is one paper trade. The red line is the median. Left of 0 lost money after the 2% haircut.</p></div>
+    <div style="display:flex;flex-direction:column;gap:18px"><div class="fig" style="overflow:hidden"><div class="fig-h"><b>Fig. 1 — Every trade, entry to 60 min</b><span class="label">${fmtN(s.matched)} trades</span></div><div class="fan sp" id="spFan"><canvas></canvas><div class="lbls"></div></div></div>
+    <div class="fig"><div class="fig-h"><b>Fig. 2 — Every finished trade at 60 min</b><span class="label">${file ? fmtN(file.rets.r60.length) + " trades" : "loading"}</span></div>${file ? dotPlot(file.rets.r60, s.med60) : `<div style="height:220px"></div>`}<p class="fig-cap">Each dot is one paper trade. The red line is the median. Left of 0 lost money after the 2% haircut.</p></div></div>
     <div style="display:flex;flex-direction:column;gap:18px">
       ${dead ? `<div class="fig autopsy"><div class="fig-h"><b style="color:var(--bone)">Autopsy</b><span class="label">THE EXAMINER</span></div><p>${esc(s.cause)}</p><span class="label">Examined ${dayY(s.diedAt)} · ${fmtN(s.diedN || s.done)} trades</span></div>` : ""}
       <div class="fig"><div class="fig-h"><b>Share the record</b><span class="label">1200 × 630</span></div><p style="margin:12px 0 14px;color:var(--ink-2);font-size:14px">${dead ? "Its death certificate, ready to post." : "Its trial record, ready to post."}</p>
@@ -1042,6 +1371,7 @@ function paintStrategy(s, file) {
   <div class="sec-h" style="margin-top:56px;grid-template-columns:200px 1fr auto"><div class="idx"><b>Trades</b>every paper trade</div><div><h2 style="font-size:clamp(32px,3.4vw,48px)">The full record.</h2></div><div class="aside"><span class="label">newest first</span></div></div>
   <div class="trades-wrap" id="tradesW">${trades ? tradeTable(trades) : `<p class="label" style="padding:20px 0">Loading trades…</p>`}</div>`;
   $("#spBody").innerHTML = h;
+  { const idx = LAB.strategies.findIndex(x => x.id === s.id); requestAnimationFrame(() => drawFan($("#spFan"), (LAB.paths || []).filter(p => p[0] === idx), { compact: true, minMed: 3 })); }
   const txt = `${s.id} ${s.name}: "${s.rule}"\n\n${dead ? "REFUTED" : s.status === "surviving" ? "Still standing" : "On trial"} after ${s.done} paper trades · median ${pct(s.med60)} at 60 min · ${s.hit === null ? "–" : s.hit.toFixed(0) + "%"} won.\n\nMost edges die here.`;
   $("#shX").href = "https://x.com/intent/post?text=" + encodeURIComponent(txt) + "&url=" + encodeURIComponent(CONFIG.site + "/#/s/" + s.id);
   $("#shDl").onclick = () => shareCard(s);
@@ -1070,7 +1400,7 @@ function dotPlot(rets, med) {
   let g = ticks.map(t => `<line x1="${x(t)}" x2="${x(t)}" y1="16" y2="${H - 26}" stroke="${t === 0 ? "var(--ink)" : "var(--rule)"}" stroke-width="${t === 0 ? 1.2 : 1}"/><text x="${x(t)}" y="${H - 8}" text-anchor="middle" font-family="DM Mono" font-size="11" fill="var(--ink-3)">${t > 0 ? "+" : t < 0 ? MINUS : ""}${Math.abs(t)}%</text>`).join("");
   g += rets.slice(-400).map(v => `<circle cx="${x(v).toFixed(1)}" cy="${(30 + rnd() * (H - 70)).toFixed(1)}" r="4.2" fill="${v > 0 ? "var(--up)" : "var(--down)"}" fill-opacity=".72"/>`).join("");
   if (med !== null && med !== undefined) g += `<line x1="${x(med)}" x2="${x(med)}" y1="8" y2="${H - 26}" stroke="var(--down)" stroke-width="2" stroke-dasharray="4 3"/><text x="${x(med) + 6}" y="18" font-family="DM Mono" font-size="11" fill="var(--down)">median ${pct(med)}</text>`;
-  if (!rets.length) g += `<text x="${W / 2}" y="${H / 2}" text-anchor="middle" font-family="Instrument Serif" font-size="24" fill="var(--ink-3)">No finished trades yet.</text>`;
+  if (!rets.length) g += `<text x="${W / 2}" y="${H / 2}" text-anchor="middle" font-family="Inter Tight" font-size="20" fill="var(--ink-3)">No finished trades yet.</text>`;
   return `<svg class="dots" viewBox="0 0 ${W} ${H}" role="img" aria-label="60-minute results">${g}</svg>`;
 }
 
@@ -1078,20 +1408,21 @@ function dotPlot(rets, med) {
 async function shareCard(s) {
   await document.fonts.ready;
   const c = document.createElement("canvas"); c.width = 1200; c.height = 630; const x = c.getContext("2d");
-  const dead = s.status === "refuted", col = dead ? "#CF3229" : s.status === "surviving" ? "#13784A" : "#2D48D2";
-  x.fillStyle = "#ECECE8"; x.fillRect(0, 0, 1200, 630);
-  x.strokeStyle = "#121212"; x.lineWidth = 2; x.strokeRect(36, 36, 1128, 558); x.lineWidth = 1; x.strokeRect(46, 46, 1108, 538);
-  x.fillStyle = "#121212"; x.font = "500 18px 'DM Mono'"; x.fillText(dead ? "CERTIFICATE OF REFUTATION" : s.status === "surviving" ? "RECORD OF SURVIVAL" : "TRIAL RECORD", 84, 104);
+  const dead = s.status === "refuted", col = dead ? "#FF5A4E" : s.status === "surviving" ? "#3DDC84" : "#7C93FF";
+  x.fillStyle = "#0A0B0D"; x.fillRect(0, 0, 1200, 630);
+  const glow = x.createRadialGradient(960, 120, 0, 960, 120, 520); glow.addColorStop(0, dead ? "rgba(255,90,78,.16)" : "rgba(61,220,132,.12)"); glow.addColorStop(1, "rgba(0,0,0,0)"); x.fillStyle = glow; x.fillRect(0, 0, 1200, 630);
+  x.strokeStyle = "rgba(255,255,255,.22)"; x.lineWidth = 1; x.strokeRect(36, 36, 1128, 558);
+  x.fillStyle = "#ECEDEF"; x.font = "500 18px 'DM Mono'"; x.fillText(dead ? "CERTIFICATE OF REFUTATION" : s.status === "surviving" ? "RECORD OF SURVIVAL" : "TRIAL RECORD", 84, 104);
   x.textAlign = "right"; x.fillText("No. " + s.id, 1116, 104); x.textAlign = "left";
-  x.fillStyle = "#7E7E80"; x.font = "500 16px 'DM Mono'"; x.fillText(dead ? "HERE LIES" : "STRATEGY", 84, 178);
-  x.fillStyle = "#121212"; let fs = 104; x.font = `400 ${fs}px 'Instrument Serif'`; while (x.measureText(s.name).width > 760 && fs > 54) { fs -= 4; x.font = `400 ${fs}px 'Instrument Serif'`; }
+  x.fillStyle = "#6D7079"; x.font = "500 16px 'DM Mono'"; x.fillText(dead ? "HERE LIES" : "STRATEGY", 84, 178);
+  x.fillStyle = "#ECEDEF"; let fs = 96; x.font = `600 ${fs}px 'Inter Tight'`; while (x.measureText(s.name).width > 760 && fs > 50) { fs -= 4; x.font = `600 ${fs}px 'Inter Tight'`; }
   x.fillText(s.name, 80, 178 + fs * .92);
-  x.font = "italic 400 30px 'Instrument Serif'"; x.fillStyle = "#47474A"; wrapText(x, "“" + s.myth + "”", 84, 178 + fs * .92 + 54, 760, 36);
+  x.font = "500 26px 'Inter Tight'"; x.fillStyle = "#A2A5AD"; wrapText(x, "“" + s.myth + "”", 84, 178 + fs * .92 + 54, 760, 36);
   const stats = [["TRADES", fmtN(s.done)], ["WON", s.hit === null ? "–" : s.hit.toFixed(0) + "%"], ["MEDIAN · 60M", pct(s.med60)], [dead ? "DIED" : "SINCE", dead ? day(s.diedAt) : day(s.born)]];
-  stats.forEach(([k, v], i) => { const X = 84 + i * 250; x.fillStyle = "#121212"; x.fillRect(X, 446, 220, 1.5); x.fillStyle = "#7E7E80"; x.font = "500 14px 'DM Mono'"; x.fillText(k, X, 474); x.fillStyle = k.startsWith("MEDIAN") ? (s.med60 > 0 ? "#13784A" : "#CF3229") : "#121212"; x.font = "400 38px 'DM Mono'"; x.fillText(v, X, 522); });
+  stats.forEach(([k, v], i) => { const X = 84 + i * 250; x.fillStyle = "rgba(255,255,255,.25)"; x.fillRect(X, 446, 220, 1); x.fillStyle = "#6D7079"; x.font = "500 14px 'DM Mono'"; x.fillText(k, X, 474); x.fillStyle = k.startsWith("MEDIAN") ? (s.med60 > 0 ? "#3DDC84" : "#FF5A4E") : "#ECEDEF"; x.font = "600 40px 'Inter Tight'"; x.fillText(v, X, 522); });
   x.save(); x.translate(970, 280); x.rotate(-0.09); x.strokeStyle = col; x.fillStyle = col; x.lineWidth = 5; const tw = dead ? 300 : 320; x.strokeRect(-tw / 2, -46, tw, 92); x.lineWidth = 2; x.strokeRect(-tw / 2 + 9, -37, tw - 18, 74);
   x.font = "500 40px 'DM Mono'"; x.textAlign = "center"; x.textBaseline = "middle"; x.fillText(dead ? "REFUTED" : s.status === "surviving" ? "SURVIVING" : "ON TRIAL", 0, 3); x.restore();
-  x.fillStyle = "#121212"; x.font = "500 16px 'DM Mono'"; x.fillText("REFUTED.FUN", 84, 570); x.textAlign = "right"; x.fillStyle = "#7E7E80"; x.fillText("MOST EDGES DIE HERE.", 1116, 570);
+  x.fillStyle = "#ECEDEF"; x.font = "500 16px 'DM Mono'"; x.fillText("REFUTED.FUN", 84, 570); x.textAlign = "right"; x.fillStyle = "#6D7079"; x.fillText("MOST EDGES DIE HERE.", 1116, 570);
   const a = document.createElement("a"); a.download = `refuted-${s.id}.png`; a.href = c.toDataURL("image/png"); a.click();
 }
 function wrapText(x, t, X, Y, w, lh) { const words = t.split(" "); let line = ""; for (const wd of words) { const tst = line ? line + " " + wd : wd; if (x.measureText(tst).width > w && line) { x.fillText(line, X, Y); line = wd; Y += lh; } else line = tst; } x.fillText(line, X, Y); }
