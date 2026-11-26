@@ -9,12 +9,12 @@
 <meta property="og:type" content="website">
 <meta property="og:title" content="REFUTED — Most edges die here.">
 <meta property="og:description" content="Trench strategies tested live on every new pump.fun launch. Thirty paper trades each. Most die.">
-<meta property="og:image" content="https://refuted.fun/og.png">
-<meta property="og:url" content="https://refuted.fun">
+<meta property="og:image" content="https://refuted.vercel.app/og.png">
+<meta property="og:url" content="https://refuted.vercel.app">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="REFUTED — Most edges die here.">
 <meta name="twitter:description" content="Trench strategies tested live on every new pump.fun launch. Thirty paper trades each. Most die.">
-<meta name="twitter:image" content="https://refuted.fun/og.png">
+<meta name="twitter:image" content="https://refuted.vercel.app/og.png">
 <link rel="icon" href="/fav.png">
 <link rel="apple-touch-icon" href="/fav.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1098,7 +1098,8 @@ function render() {
 /* ===================================================================
    the fan: every paper trade as a line of light, entry -> +5 -> +15 -> +60 min
    =================================================================== */
-const FANS = new Map(); let FAN_RAF = 0;
+const FANS = new Map(), FAN_WANT = new Map(); let FAN_RAF = 0;
+const FAN_RO = new ResizeObserver(es => { for (const e of es) { const box = e.target, want = FAN_WANT.get(box), st = FANS.get(box); if (!want || !box.clientWidth || !box.clientHeight) continue; if (st && st.w === box.clientWidth && st.h === box.clientHeight) continue; clearTimeout(box._rt); box._rt = setTimeout(() => drawFan(box, want.paths, want.opt), 60); } });
 function fanGeo(w, h, o) {
   const left = Math.max(o.compact ? 34 : 60, w * (o.compact ? .06 : .1)), right = w - Math.max(o.compact ? 70 : 90, w * (o.compact ? .08 : .1));
   const xs = { 0: left, 5: left + (right - left) * 0.30, 15: left + (right - left) * 0.56, 60: right };
@@ -1126,6 +1127,7 @@ const medOf = (paths, i) => { const v = paths.map(p => p[i]).filter(x => x !== n
 // draws one fan into box (needs a <canvas> and a .lbls inside). paths = [[s, r5, r15, r60], ...]
 function drawFan(box, paths, opt = {}) {
   if (!box) return; const cv = box.querySelector("canvas"), lbls = box.querySelector(".lbls");
+  FAN_WANT.set(box, { paths, opt }); FAN_RO.observe(box);   // redraw when the box gets a size (hidden tabs, resizes)
   const dpr = Math.min(2, window.devicePixelRatio || 1), w = box.clientWidth, h = box.clientHeight; if (!w || !h) return;
   cv.width = w * dpr; cv.height = h * dpr;
   const G = fanGeo(w, h, opt), K = [5, 15, 60];
@@ -1199,7 +1201,7 @@ function fanLoop() {
   if (again && !matchMedia("(prefers-reduced-motion: reduce)").matches) FAN_RAF = requestAnimationFrame(fanLoop);
 }
 function renderFan() { drawFan($("#fan"), LAB.paths || []); }
-window.addEventListener("resize", () => { clearTimeout(drawFan.rs); drawFan.rs = setTimeout(() => { for (const [box, st] of FANS) drawFan(box, st.paths, st.opt); }, 150); });
+
 // spread bar for the board: every trade as a tick on a -100%..+100% track, the middle half as a band, the median as a dot
 function spreadBar(idx) {
   const P = (LAB.paths || []).filter(p => p[0] === idx);
