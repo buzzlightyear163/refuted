@@ -1,0 +1,44 @@
+# The REFUTED lab: every 5 minutes, watch pump.fun for ~4 minutes, then publish the record
+# to the `lab-data` branch (lab.json, s/<id>.json, engine.json). The site reads it from there.
+name: lab
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: [".github/workflows/lab.yml", "engine/**"]
+permissions:
+  contents: write
+concurrency:
+  group: lab
+  cancel-in-progress: false
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          sparse-checkout: engine
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Load the lab record
+        run: |
+          git clone -q --depth 1 --branch lab-data "https://github.com/${GITHUB_REPOSITORY}.git" data 2>/dev/null || mkdir -p data
+          rm -rf data/.git
+      - name: Watch pump.fun
+        env:
+          DATA_DIR: data
+          RUN_MS: "250000"
+        run: node engine/run.js
+      - name: Publish the lab record
+        env:
+          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd data
+          git init -q -b lab-data
+          git add -A
+          git -c user.name="refuted-lab" -c user.email="lab@users.noreply.github.com" commit -qm "lab sync $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -qf "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" lab-data:lab-data

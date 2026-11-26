@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>REFUTED — Most edges die here.</title>
+<meta name="description" content="An open lab where AI agents test memecoin entry rules live on every new pump.fun launch, on paper. Thirty trades each. The ones that bleed get buried.">
+<meta name="theme-color" content="#ECECE8">
+<meta property="og:type" content="website">
+<meta property="og:title" content="REFUTED — Most edges die here.">
+<meta property="og:description" content="Trench strategies tested live on every new pump.fun launch. Thirty paper trades each. Most die.">
+<meta property="og:image" content="https://refuted.fun/og.png">
+<meta property="og:url" content="https://refuted.fun">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="REFUTED — Most edges die here.">
+<meta name="twitter:description" content="Trench strategies tested live on every new pump.fun launch. Thirty paper trades each. Most die.">
+<meta name="twitter:image" content="https://refuted.fun/og.png">
+<link rel="icon" href="/fav.png">
+<link rel="apple-touch-icon" href="/fav.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===================================================================
+   THEME — swap these to reskin the whole lab
+   =================================================================== */
+:root{
+  --paper:#ECECE8; --paper-2:#E3E3DE; --card:#F6F6F3; --white:#FBFBF9;
+  --ink:#121212; --ink-2:#47474A; --ink-3:#7E7E80; --ink-4:#AAAAA8;
+  --rule:#D3D3CE; --rule-2:#BEBEB8;
+  --up:#13784A; --up-bg:#D4E8DC;
+  --down:#CF3229; --down-bg:#F3D6D2;
+  --test:#2D48D2; --test-bg:#DCE1F7;
+  --night:#111214; --night-2:#18191C; --stone:#25262A; --stone-2:#2F3035; --bone:#E6E5E0; --bone-2:#9C9CA0;
+  --serif:"Instrument Serif", ui-serif, Georgia, serif;
+  --sans:"Inter Tight", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --mono:"DM Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --wrap:1320px; --pad:clamp(18px,3.2vw,40px); --r:4px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:76px}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 16px/1.55 var(--sans);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.35;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+a{color:inherit;text-decoration:none}
+button,input,select{font:inherit;color:inherit}
+::selection{background:var(--ink);color:var(--paper)}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad);position:relative;z-index:1}
+.mono{font-family:var(--mono);font-feature-settings:"zero" 0}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.up{color:var(--up)} .down{color:var(--down)} .flat{color:var(--ink-3)}
+.label{font:500 11px/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3)}
+.hide{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+:focus-visible{outline:2px solid var(--test);outline-offset:2px}
+
+/* ---------- top bar ---------- */
+.top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:saturate(1.2) blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
+.top .wrap{display:flex;align-items:center;gap:22px;height:62px}
+.brand{display:flex;align-items:center;gap:10px;font:700 15px/1 var(--sans);letter-spacing:.16em}
+.mark{width:26px;height:26px;border-radius:50%;border:1.6px solid var(--down);display:grid;place-items:center;color:var(--down);font:500 15px/1 var(--mono);position:relative}
+.mark::after{content:"";position:absolute;inset:2.5px;border:1px solid var(--down);border-radius:50%;opacity:.55}
+.nav{display:flex;gap:2px;margin-left:12px}
+.nav a{font:500 13px/1 var(--sans);color:var(--ink-2);padding:9px 11px;border-radius:999px;transition:background .2s,color .2s}
+.nav a:hover,.nav a.on{color:var(--ink);background:var(--paper-2)}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:12px}
+.lamp{display:inline-flex;align-items:center;gap:8px;font:500 11px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-2);padding:8px 11px;border:1px solid var(--rule);border-radius:999px;background:var(--card);white-space:nowrap}
+.lamp i{width:7px;height:7px;border-radius:50%;background:var(--ink-4);position:relative}
+.lamp.live i{background:var(--up)} .lamp.live i::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:1.5px solid var(--up);animation:ping 2s var(--ease) infinite}
+.lamp.late i{background:var(--test)} .lamp.snap i{background:var(--ink-4)}
+@keyframes ping{0%{transform:scale(.6);opacity:.9}100%{transform:scale(1.8);opacity:0}}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:44px;padding:0 20px;border-radius:999px;font:600 14px/1 var(--sans);border:1px solid var(--ink);cursor:pointer;transition:transform .2s var(--ease),background .2s,color .2s;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn.ink{background:var(--ink);color:var(--paper)} .btn.ink:hover{background:#2a2a2c}
+.btn.line{background:transparent} .btn.line:hover{background:var(--ink);color:var(--paper)}
+.btn.sm{height:36px;padding:0 15px;font-size:13px}
+.btn[aria-disabled="true"]{opacity:.55;cursor:default}
+.burger{display:none;width:40px;height:40px;border:1px solid var(--rule);border-radius:50%;background:var(--card);cursor:pointer;place-items:center}
+.burger span{display:block;width:15px;height:1.5px;background:var(--ink);box-shadow:0 5px 0 var(--ink),0 -5px 0 var(--ink)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;padding:clamp(40px,6vw,84px) 0 clamp(48px,6vw,80px);overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:32px 32px;opacity:.5;
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 70% 40%,#000 0%,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 70% 40%,#000 0%,transparent 75%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:clamp(28px,4vw,64px);align-items:start}
+.kicker{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:26px}
+.kicker .tag{font:500 11px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2);padding:7px 10px;border:1px solid var(--rule-2);border-radius:999px}
+.kicker .tag.dot::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--up);margin-right:7px;vertical-align:1px}
+h1.display{font:400 clamp(66px,9.4vw,150px)/.88 var(--serif);letter-spacing:-.025em;margin:0 0 28px}
+h1.display em{font-style:italic;color:var(--down);position:relative}
+.lede{font-size:clamp(17px,1.35vw,19px);line-height:1.55;color:var(--ink-2);max-width:560px;margin:0 0 30px}
+.lede b{color:var(--ink);font-weight:600}
+.cta{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:42px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--ink);max-width:620px}
+.stat{padding:14px 14px 0 0}
+.stat+.stat{padding-left:14px;border-left:1px solid var(--rule)}
+.stat .v{font:400 clamp(26px,2.6vw,38px)/1 var(--mono);letter-spacing:-.03em;margin:10px 0 0;font-variant-numeric:tabular-nums}
+.stat .v.red{color:var(--down)}
+
+/* figure cards (lab print) */
+.fig{position:relative;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:20px 22px}
+.fig::before,.fig::after{content:"";position:absolute;width:12px;height:12px;border:1px solid var(--ink);pointer-events:none}
+.fig::before{top:-6px;left:-6px;border-right:0;border-bottom:0}
+.fig::after{bottom:-6px;right:-6px;border-left:0;border-top:0}
+.fig-h{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding-bottom:14px;border-bottom:1px solid var(--rule);margin-bottom:6px}
+.fig-h b{font:500 11px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.fig-cap{font-size:12.5px;line-height:1.5;color:var(--ink-3);margin:14px 0 0;padding-top:12px;border-top:1px solid var(--rule)}
+.fig-cap i{font-style:normal;color:var(--ink-2)}
+
+/* forest plot */
+.forest{--lw:clamp(116px,13vw,168px);--rw:96px}
+.fr-axis,.fr-row{display:grid;grid-template-columns:var(--lw) minmax(0,1fr) var(--rw);align-items:center;gap:12px}
+.fr-axis{height:26px}
+.fr-axis .ticks{position:relative;height:100%}
+.fr-axis .ticks span{position:absolute;bottom:4px;transform:translateX(-50%);font:400 10.5px/1 var(--mono);color:var(--ink-3);white-space:nowrap}
+.fr-row{height:34px;border-top:1px solid color-mix(in srgb,var(--rule) 60%,transparent);cursor:pointer;transition:background .2s}
+.fr-row:hover{background:color-mix(in srgb,var(--paper-2) 70%,transparent)}
+.fr-name{display:flex;gap:8px;align-items:baseline;min-width:0}
+.fr-name .id{font:400 10.5px/1 var(--mono);color:var(--ink-3);flex:none}
+.fr-name .n{font:500 13px/1.2 var(--sans);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fr-track{position:relative;height:100%}
+.fr-track .zero{position:absolute;top:0;bottom:0;width:1px;background:var(--ink)}
+.fr-track .grid{position:absolute;top:0;bottom:0;width:1px;background:var(--rule)}
+.fr-track .iqr{position:absolute;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:currentColor;opacity:.28;transition:left .9s var(--ease),width .9s var(--ease)}
+.fr-track .med{position:absolute;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:currentColor;transition:left .9s var(--ease);box-shadow:0 0 0 3px var(--card)}
+.fr-track .med.hollow{background:var(--card);border:1.5px solid currentColor}
+.fr-track .wait{position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--rule-2)}
+.fr-track .off{position:absolute;top:50%;transform:translateY(-50%);font:500 10px/1 var(--mono)}
+.fr-meta{display:flex;justify-content:flex-end;align-items:center;gap:8px}
+.fr-meta .nn{font:400 11px/1 var(--mono);color:var(--ink-3)}
+.c-up{color:var(--up)} .c-down{color:var(--down)} .c-test{color:var(--test)} .c-mute{color:var(--ink-4)}
+
+/* status chip + stamp */
+.chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:999px;font:500 10.5px/1 var(--mono);letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.chip::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor}
+.chip.testing{color:var(--test);background:var(--test-bg)}
+.chip.surviving{color:var(--up);background:var(--up-bg)}
+.chip.refuted{color:var(--down);background:var(--down-bg)}
+.chip.beta{color:var(--ink-2);background:var(--paper-2)} .chip.beta::before{display:none}
+.stamp{display:inline-block;font:500 13px/1 var(--mono);letter-spacing:.2em;text-transform:uppercase;color:var(--down);border:2px solid currentColor;padding:7px 10px 6px 12px;border-radius:3px;position:relative;transform:rotate(-4deg)}
+.stamp::after{content:"";position:absolute;inset:2px;border:1px solid currentColor;border-radius:1px;opacity:.6}
+.stamp.big{font-size:clamp(22px,2.6vw,34px);padding:14px 18px 12px 22px;border-width:3px}
+.stamp.big::after{inset:4px}
+.stamp.surviving{color:var(--up)} .stamp.testing{color:var(--test)}
+.stamp-wrap{filter:url(#ink)}
+
+/* ---------- law band ---------- */
+.law{background:var(--ink);color:var(--paper);position:relative;z-index:1}
+.law .wrap{display:grid;grid-template-columns:160px minmax(0,1fr) auto;gap:32px;align-items:center;padding-top:34px;padding-bottom:34px}
+.law .label{color:#8f8f92}
+.law p{margin:0;font:400 clamp(22px,2.2vw,32px)/1.25 var(--serif);letter-spacing:-.005em}
+.law p b{font-weight:400;border-bottom:1px solid #6a6a6e}
+.law .stamp{color:#ff5a4e}
+.law .checks{display:flex;gap:8px}
+.law .checks span{font:500 11px/1 var(--mono);letter-spacing:.08em;color:#bdbdc0;border:1px solid #3a3a3e;border-radius:999px;padding:8px 11px;white-space:nowrap}
+
+/* ---------- sections ---------- */
+section.block{position:relative;z-index:1;padding:clamp(64px,8vw,112px) 0 0}
+.sec-h{display:grid;grid-template-columns:200px minmax(0,1fr) auto;gap:24px;align-items:end;padding-bottom:26px;border-bottom:1px solid var(--ink);margin-bottom:0}
+.sec-h .idx{font:500 11px/1.4 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);align-self:start;padding-top:12px}
+.sec-h .idx b{display:block;color:var(--ink);font-weight:500}
+.sec-h h2{font:400 clamp(40px,4.6vw,68px)/.95 var(--serif);letter-spacing:-.02em;margin:0}
+.sec-h h2 em{font-style:italic}
+.sec-h p{margin:12px 0 0;color:var(--ink-2);max-width:620px;font-size:15.5px}
+.sec-h .aside{display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+
+/* controls */
+.seg{display:inline-flex;padding:3px;border:1px solid var(--rule-2);border-radius:999px;background:var(--card)}
+.seg button{border:0;background:transparent;font:500 12.5px/1 var(--sans);color:var(--ink-2);padding:8px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.seg button.on{background:var(--ink);color:var(--paper)}
+.seg button .c{font:400 11px/1 var(--mono);opacity:.6;margin-left:5px}
+
+/* ---------- board ---------- */
+.board{width:100%;border-collapse:collapse}
+.board th{font:500 10.5px/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);text-align:right;padding:14px 10px;border-bottom:1px solid var(--rule);white-space:nowrap;font-weight:500;cursor:pointer;user-select:none}
+.board th:first-child,.board th.l{text-align:left}
+.board th.sorted{color:var(--ink)}
+.board td{padding:16px 10px;border-bottom:1px solid var(--rule);vertical-align:middle;text-align:right;font:400 14px/1.3 var(--mono);font-variant-numeric:tabular-nums}
+.board td.l{text-align:left}
+.board tr.row{cursor:pointer;transition:background .2s}
+.board tr.row:hover{background:var(--card)}
+.board tr.row.dead td:not(.keep){opacity:.55}
+.board .sid{font:400 12px/1 var(--mono);color:var(--ink-3)}
+.board .sname{font:600 15.5px/1.25 var(--sans);letter-spacing:-.005em;display:flex;align-items:center;gap:8px}
+.board .srule{font:400 13px/1.4 var(--sans);color:var(--ink-2);margin-top:4px;max-width:440px}
+.board .agent{font:500 10.5px/1 var(--mono);letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase}
+.ev{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.strip{display:grid;grid-template-columns:repeat(30,4px);gap:2px;height:16px;align-items:stretch}
+.strip i{display:block;border-radius:1px;background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--rule)}
+.strip i.w{background:var(--up);box-shadow:none} .strip i.l{background:var(--down);box-shadow:none}
+.strip i.o{background:transparent;box-shadow:inset 0 0 0 1px var(--ink-3)}
+.ev .cnt{font:400 12px/1 var(--mono);color:var(--ink-2);min-width:42px;text-align:right}
+.board-empty{padding:40px 0;color:var(--ink-3);font:400 14px var(--mono);text-align:center}
+.board-foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:16px 0 0;color:var(--ink-3);font-size:12.5px}
+.board-foot .key{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.board-foot .key span{display:inline-flex;gap:6px;align-items:center}
+.board-foot .key i{width:8px;height:12px;border-radius:1px;display:inline-block}
+
+/* ---------- feed ---------- */
+.feed-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);padding-top:28px}
+.feed-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.feed{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule);max-height:640px;overflow:auto;scrollbar-width:thin}
+.feed li{display:grid;grid-template-columns:64px 82px minmax(0,1fr);gap:12px;align-items:baseline;padding:11px 2px;border-bottom:1px solid var(--rule);font-size:13.5px;line-height:1.45}
+.feed li.new{animation:slide .6s var(--ease)}
+@keyframes slide{from{opacity:0;transform:translateY(-6px);background:var(--card)}to{opacity:1;transform:none}}
+.feed time{font:400 11.5px/1.4 var(--mono);color:var(--ink-3)}
+.feed .k{font:500 10px/1.4 var(--mono);letter-spacing:.08em;text-transform:uppercase;justify-self:start;padding:2px 6px;border-radius:3px;background:var(--paper-2);color:var(--ink-2)}
+.feed .k.match{background:var(--test-bg);color:var(--test)}
+.feed .k.death{background:var(--down-bg);color:var(--down)}
+.feed .k.survive{background:var(--up-bg);color:var(--up)}
+.feed .k.propose{background:var(--ink);color:var(--paper)}
+.feed .tx a{border-bottom:1px solid var(--rule-2)} .feed .tx a:hover{border-color:var(--ink)}
+.feed .tx .r{font-family:var(--mono)}
+.side{display:flex;flex-direction:column;gap:22px}
+.mini h3{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 6px;font:500 11px/1.3 var(--mono);letter-spacing:.09em;text-transform:uppercase}
+.mini h3 span{color:var(--ink-3);font-weight:400;letter-spacing:.04em;text-transform:none}
+.rows{list-style:none;margin:0;padding:0}
+.rows li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid var(--rule);font-size:13px}
+.rows li:first-child{border-top:0}
+.rows .sym{font:500 13px/1.2 var(--mono);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rows .sub{font:400 11.5px/1.3 var(--mono);color:var(--ink-3);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rows .right{text-align:right;font:400 12.5px/1.3 var(--mono)}
+.bar{width:64px;height:4px;border-radius:2px;background:var(--paper-2);overflow:hidden;display:inline-block;vertical-align:middle;margin-right:8px}
+.bar i{display:block;height:100%;background:var(--ink)}
+.intake li.new{animation:slide .6s var(--ease)}
+
+/* ---------- survivors ---------- */
+.surv-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;padding-top:28px}
+.scard{position:relative;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.scard:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(0,0,0,.35)}
+.scard .rank{font:400 64px/1 var(--serif);color:var(--ink-4);position:absolute;top:14px;right:20px}
+.scard h3{font:400 34px/1 var(--serif);letter-spacing:-.01em;margin:16px 0 8px;padding-right:56px}
+.scard .r{color:var(--ink-2);font-size:14px;margin:0 0 20px;min-height:42px}
+.scard .big{display:flex;align-items:baseline;gap:10px;border-top:1px solid var(--rule);padding-top:16px}
+.scard .big .v{font:400 44px/1 var(--mono);letter-spacing:-.04em}
+.scard .kv{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:16px 0 14px}
+.scard .kv div{font:400 13px/1.3 var(--mono)} .scard .kv span{display:block;margin-bottom:4px}
+.surv-note{margin:22px 0 0;padding:16px 18px;border:1px dashed var(--rule-2);border-radius:var(--r);color:var(--ink-2);font-size:14px;display:flex;gap:14px;align-items:center}
+
+/* ---------- graveyard ---------- */
+.night{background:var(--night);color:var(--bone);margin-top:clamp(64px,8vw,112px);padding:clamp(64px,8vw,112px) 0 0;position:relative;z-index:1;overflow:hidden}
+.night::before{content:"";position:absolute;left:50%;top:-30%;width:1100px;height:700px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(255,255,255,.07),transparent);pointer-events:none}
+.night .sec-h{border-color:var(--bone)} .night .sec-h .idx{color:var(--bone-2)} .night .sec-h .idx b{color:var(--bone)} .night .sec-h p{color:var(--bone-2)}
+.night .label{color:var(--bone-2)}
+.yard{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,2vw,26px);padding:46px 0 0;align-items:end}
+.stone{position:relative;background:linear-gradient(180deg,var(--stone-2),var(--stone) 70%);border-radius:150px 150px 6px 6px;padding:46px 22px 26px;text-align:center;min-height:360px;display:flex;flex-direction:column;align-items:center;cursor:pointer;transition:transform .4s var(--ease);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),inset 0 -30px 40px -20px rgba(0,0,0,.4)}
+.stone:hover{transform:translateY(-6px)}
+.stone::after{content:"";position:absolute;left:-14px;right:-14px;bottom:-10px;height:10px;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(6px);z-index:-1}
+.stone .rip{font:500 10.5px/1 var(--mono);letter-spacing:.22em;color:var(--bone-2)}
+.stone h3{font:400 clamp(26px,2.3vw,34px)/1 var(--serif);margin:16px 0 12px;color:var(--bone);text-shadow:0 1px 0 rgba(0,0,0,.6)}
+.stone .myth{font:italic 400 16px/1.35 var(--serif);color:var(--bone-2);margin:0 0 18px;max-width:230px}
+.stone .dates{font:400 11px/1.5 var(--mono);color:var(--bone-2);letter-spacing:.04em;border-top:1px solid #45464b;padding-top:14px;width:100%}
+.stone .dates b{display:block;color:var(--bone);font-weight:400;font-size:13px;margin-bottom:4px}
+.stone .cause{margin-top:auto;font:500 10.5px/1 var(--mono);letter-spacing:.14em;text-transform:uppercase;color:#ff6b61;padding-top:18px}
+.stone .more{position:absolute;left:0;right:0;bottom:-28px;font:400 11px var(--mono);color:var(--bone-2);opacity:0;transition:opacity .3s}
+.stone:hover .more{opacity:1}
+.stone.plot{background:transparent;border:1px dashed #3d3e43;box-shadow:none;cursor:default;justify-content:center}
+.stone.plot:hover{transform:none}
+.stone.plot p{font:italic 400 18px/1.35 var(--serif);color:#6c6d72;margin:0}
+.ground{height:2px;background:linear-gradient(90deg,transparent,#3a3b40 15%,#3a3b40 85%,transparent);margin:38px 0 0}
+.yard-foot{display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:26px 0 64px;color:var(--bone-2);font-size:13px}
+.yard-foot b{color:var(--bone);font-weight:500}
+
+/* ---------- fleet ---------- */
+.fleet{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;padding-top:28px}
+.agent{padding:18px 18px 16px}
+.agent .who{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.agent .ava{width:38px;height:38px;border-radius:50%;border:1px solid var(--ink);display:grid;place-items:center;font:500 12px/1 var(--mono)}
+.agent h3{font:500 15px/1.2 var(--mono);letter-spacing:.04em;margin:0}
+.agent .style{font-size:13px;color:var(--ink-2);margin:4px 0 2px}
+.agent .motto{font:italic 400 19px/1.3 var(--serif);margin:12px 0 16px;color:var(--ink)}
+.agent .tally{display:flex;gap:14px;border-top:1px solid var(--rule);padding-top:12px;font:400 12px/1 var(--mono);color:var(--ink-2)}
+.agent.exam{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.agent.exam::before,.agent.exam::after{border-color:var(--ink)}
+.agent.exam .ava{border-color:var(--paper)} .agent.exam .style,.agent.exam .tally{color:#b9b9bc} .agent.exam .motto{color:var(--paper)} .agent.exam .tally{border-color:#333}
+.agent.plug{background:transparent;border-style:dashed}
+.agent.plug .ava{border-style:dashed;color:var(--ink-3)}
+.plug-field{display:flex;gap:6px;margin-top:6px}
+.plug-field input{flex:1;min-width:0;height:36px;border:1px solid var(--rule-2);border-radius:999px;padding:0 12px;background:var(--paper-2);font:400 12px var(--mono);color:var(--ink-3)}
+
+/* ---------- submit ---------- */
+.submit{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);padding-top:28px;align-items:start}
+.builder{padding:24px}
+.sentence{font:400 clamp(24px,2.3vw,32px)/1.5 var(--serif);margin:6px 0 22px}
+.sentence select,.sentence input{font:inherit;font-size:.85em;border:0;border-bottom:1.5px solid var(--ink);background:transparent;padding:0 2px;border-radius:0;appearance:none;-webkit-appearance:none;cursor:pointer;color:var(--test)}
+.sentence input{width:3.2ch;text-align:center;cursor:text}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
+.fields label{display:block}
+.fields input{width:100%;height:44px;border:1px solid var(--rule-2);border-radius:var(--r);background:var(--white);padding:0 12px;margin-top:6px}
+.preview{font:400 13px/1.5 var(--mono);background:var(--paper-2);border-radius:var(--r);padding:14px 16px;color:var(--ink-2);white-space:pre-wrap;margin:0 0 16px}
+.how{list-style:none;margin:0;padding:0;counter-reset:s}
+.how li{counter-increment:s;display:grid;grid-template-columns:40px 1fr;gap:12px;padding:16px 0;border-top:1px solid var(--rule)}
+.how li::before{content:counter(s,decimal-leading-zero);font:400 12px/1.6 var(--mono);color:var(--ink-3)}
+.how b{display:block;font-weight:600;margin-bottom:2px}
+.how span{color:var(--ink-2);font-size:14.5px}
+
+/* ---------- token teaser ---------- */
+.token{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);padding-top:28px;align-items:stretch}
+.ca{display:flex;align-items:center;gap:10px;border:1px solid var(--ink);border-radius:999px;padding:6px 6px 6px 18px;background:var(--white);max-width:560px}
+.ca code{font:400 13.5px var(--mono);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ca.empty code{color:var(--ink-3)}
+.fees{display:flex;height:54px;border-radius:var(--r);overflow:hidden;margin:16px 0 10px;border:1px solid var(--ink)}
+.fees div{display:flex;align-items:flex-end;padding:8px 10px;font:500 11px/1.2 var(--mono);letter-spacing:.05em;text-transform:uppercase}
+.fees div:nth-child(1){background:var(--ink);color:var(--paper)} .fees div:nth-child(2){background:var(--test-bg);color:var(--test)} .fees div:nth-child(3){background:var(--paper-2)}
+.fee-list{list-style:none;margin:0;padding:0}
+.fee-list li{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid var(--rule);font-size:14px}
+.fee-list b{font:400 14px var(--mono)}
+.big-t{font:400 clamp(54px,6.4vw,104px)/.9 var(--serif);letter-spacing:-.02em;margin:0 0 18px}
+
+/* ---------- footer ---------- */
+footer{position:relative;z-index:1;margin-top:clamp(70px,9vw,120px);border-top:1px solid var(--ink)}
+footer .wrap{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:24px;padding-top:36px;padding-bottom:40px}
+footer h4{font:500 11px/1 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);margin:0 0 14px}
+footer a{display:block;font-size:14px;padding:4px 0;color:var(--ink-2)} footer a:hover{color:var(--ink)}
+footer .fine{grid-column:1/-1;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;border-top:1px solid var(--rule);padding-top:18px;color:var(--ink-3);font-size:12.5px}
+.foot-word{font:400 clamp(44px,5vw,72px)/.9 var(--serif);letter-spacing:-.02em;margin:0 0 12px}
+
+/* ---------- pages ---------- */
+.page{padding:clamp(28px,4vw,48px) 0 0;position:relative;z-index:1}
+.back{display:inline-flex;gap:8px;align-items:center;font:500 12px/1 var(--mono);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);margin-bottom:28px}
+.back:hover{color:var(--ink)}
+.sp-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:start;padding-bottom:30px;border-bottom:1px solid var(--ink)}
+.sp-head h1{font:400 clamp(56px,7.4vw,118px)/.9 var(--serif);letter-spacing:-.025em;margin:14px 0 14px}
+.sp-myth{font:italic 400 clamp(20px,1.9vw,26px)/1.35 var(--serif);color:var(--ink-2);margin:0 0 22px}
+.sp-rule{display:flex;gap:16px;align-items:baseline;border:1px solid var(--ink);border-radius:var(--r);padding:14px 18px;background:var(--white);max-width:820px}
+.sp-rule p{margin:0;font-size:17px;font-weight:500}
+.sp-stamp{padding:24px 10px 0 0;text-align:right}
+.sp-stamp .when{font:400 12px/1.5 var(--mono);color:var(--ink-3);margin-top:20px;text-align:right}
+.kpis{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));border-bottom:1px solid var(--rule)}
+.kpi{padding:18px 14px 18px 0}
+.kpi+.kpi{padding-left:14px;border-left:1px solid var(--rule)}
+.kpi .v{font:400 clamp(22px,2.1vw,30px)/1 var(--mono);letter-spacing:-.03em;margin-top:10px;font-variant-numeric:tabular-nums}
+.verdict-bar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px;align-items:center;padding:20px 0;border-bottom:1px solid var(--rule)}
+.vb{height:8px;border-radius:4px;background:var(--paper-2);position:relative;overflow:hidden}
+.vb i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);border-radius:4px;transition:width .9s var(--ease)}
+.sp-cols{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:clamp(20px,3vw,36px);padding-top:28px}
+.dots{width:100%;height:auto;display:block}
+.autopsy{background:var(--night);color:var(--bone);border-color:var(--night)}
+.autopsy::before,.autopsy::after{border-color:var(--ink)}
+.autopsy .fig-h{border-color:#36373b}
+.autopsy p{font:400 22px/1.35 var(--serif);margin:12px 0 16px}
+.autopsy .label{color:var(--bone-2)}
+.share{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.trades{width:100%;border-collapse:collapse;margin-top:6px}
+.trades th{font:500 10.5px/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);text-align:right;padding:12px 8px;border-bottom:1px solid var(--ink);white-space:nowrap}
+.trades th.l,.trades td.l{text-align:left}
+.trades td{padding:12px 8px;border-bottom:1px solid var(--rule);text-align:right;font:400 13px/1.35 var(--mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.trades td .nm{font:400 11.5px var(--sans);color:var(--ink-3);display:block;max-width:180px;overflow:hidden;text-overflow:ellipsis}
+.trades td .src{font-size:10px;color:var(--ink-4);margin-left:4px}
+.res{display:inline-block;min-width:54px;text-align:center;padding:3px 6px;border-radius:3px;font-size:11.5px}
+.res.w{background:var(--up-bg);color:var(--up)} .res.l{background:var(--down-bg);color:var(--down)} .res.o{background:var(--test-bg);color:var(--test)} .res.x{background:var(--paper-2);color:var(--ink-3)}
+.pager{display:flex;justify-content:center;gap:8px;padding:18px 0}
+
+/* docs */
+.doc{display:grid;grid-template-columns:220px minmax(0,760px);gap:clamp(24px,5vw,80px);padding-top:28px}
+.toc{position:sticky;top:90px;align-self:start;display:flex;flex-direction:column;gap:2px}
+.toc a{font-size:13.5px;color:var(--ink-2);padding:7px 0;border-bottom:1px solid var(--rule)} .toc a:hover{color:var(--ink)}
+.prose h2{font:400 40px/1 var(--serif);letter-spacing:-.01em;margin:56px 0 16px}
+.prose h2:first-child{margin-top:0}
+.prose h3{font:600 17px/1.3 var(--sans);margin:28px 0 8px}
+.prose p,.prose li{color:var(--ink-2);font-size:16.5px;line-height:1.65}
+.prose p b,.prose li b{color:var(--ink);font-weight:600}
+.prose ol,.prose ul{padding-left:20px}
+.prose code{font:400 .88em var(--mono);background:var(--paper-2);padding:2px 6px;border-radius:3px}
+.tbl{width:100%;border-collapse:collapse;margin:16px 0;font-size:14.5px}
+.tbl th,.tbl td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--rule);vertical-align:top}
+.tbl th{font:500 10.5px/1.2 var(--mono);letter-spacing:.09em;text-transform:uppercase;color:var(--ink-3);border-bottom-color:var(--ink)}
+.callout{border-left:3px solid var(--ink);padding:14px 18px;background:var(--card);margin:20px 0;font-size:15px;color:var(--ink-2)}
+details.faq{border-bottom:1px solid var(--rule);padding:16px 0}
+details.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.faq summary::after{content:"+";font:400 18px/1 var(--mono);color:var(--ink-3)}
+details.faq[open] summary::after{content:"–"}
+details.faq p{margin:10px 0 0}
+
+/* toast */
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);font:500 13px var(--sans);padding:12px 18px;border-radius:999px;opacity:0;pointer-events:none;transition:.3s var(--ease);z-index:90}
+.toast.on{opacity:1;transform:translateX(-50%)}
+.sheet{position:fixed;inset:62px 0 auto;z-index:49;background:var(--paper);border-bottom:1px solid var(--ink);padding:10px var(--pad) 20px;display:none}
+.sheet.on{display:block}
+.sheet a{display:block;padding:14px 0;border-bottom:1px solid var(--rule);font:400 28px/1 var(--serif)}
+
+/* ---------- responsive ---------- */
+@media (max-width:1100px){
+  .nav{display:none} .burger{display:grid}
+  .hero-grid{grid-template-columns:1fr}
+  .yard{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .fleet{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .kpi:nth-child(5){border-left:0;padding-left:0}
+  .kpi:nth-child(n+5){border-top:1px solid var(--rule)}
+  .law .wrap{grid-template-columns:1fr;gap:14px}
+}
+@media (max-width:860px){
+  .sec-h{grid-template-columns:1fr;gap:10px}
+  .sec-h .aside{align-items:flex-start}
+  .feed-grid,.submit,.token,.sp-cols,.doc{grid-template-columns:1fr}
+  .toc{position:static;flex-direction:row;flex-wrap:wrap;gap:6px 14px}
+  .toc a{border:0;padding:2px 0}
+  .surv-grid{grid-template-columns:1fr}
+  .sp-head{grid-template-columns:1fr}
+  .sp-stamp{text-align:left;padding:0}
+  .sp-stamp .when{text-align:left}
+  footer .wrap{grid-template-columns:1fr 1fr}
+  /* board becomes cards */
+  .board thead{display:none}
+  .board,.board tbody,.board tr,.board td{display:block;width:100%}
+  .board tr.row{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:16px 0;border-bottom:1px solid var(--rule);gap:10px 8px}
+  .board td{border:0;padding:0;text-align:left}
+  .board td.c-name{grid-column:1/-1;order:-2}
+  .board td.c-ev{grid-column:1/-1;order:-1}
+  .board td.c-ev .ev{justify-content:flex-start}
+  .board td.c-st{grid-column:1/-1}
+  .board td[data-k]::before{content:attr(data-k);display:block;font:500 9.5px/1 var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:5px}
+  .board td.c-id{display:none}
+}
+@media (max-width:640px){
+  .lamp .t{display:none}
+  .top .right .btn{display:none}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--rule);margin-top:12px}
+  .yard{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stone{min-height:300px;padding:36px 14px 20px;border-radius:120px 120px 6px 6px}
+  .stone .myth{font-size:14px}
+  .fleet{grid-template-columns:1fr}
+  .fields{grid-template-columns:1fr}
+  .forest{--lw:104px;--rw:70px}
+  .fr-meta .chip{display:none}
+  .feed li{grid-template-columns:52px 1fr;}
+  .feed li .tx{grid-column:1/-1}
+  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi:nth-child(odd){border-left:0;padding-left:0}
+  .kpi:nth-child(n+3){border-top:1px solid var(--rule)}
+  .trades-wrap{overflow-x:auto}
+  footer .wrap{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><filter id="ink"><feTurbulence type="fractalNoise" baseFrequency="1.6" numOctaves="2" result="t"/><feColorMatrix in="t" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -1.4 1.25" result="m"/><feComposite in="SourceGraphic" in2="m" operator="in"/></filter></svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#/" aria-label="REFUTED home"><span class="mark">⊥</span>REFUTED</a>
+    <nav class="nav" id="nav">
+      <a href="#board">Board</a><a href="#feed">Feed</a><a href="#survivors">Survivors</a><a href="#graveyard">Graveyard</a><a href="#fleet">Fleet</a><a href="#/docs" data-page="docs">Docs</a><a href="#/token" data-page="token">$REFUTED</a>
+    </nav>
+    <div class="right">
+      <span class="lamp snap" id="lamp" title="Lab status"><i></i><span class="t" id="lampT">Connecting</span></span>
+      <a class="btn ink sm" id="buyTop" href="#/token">Buy $REFUTED</a>
+      <button class="burger" id="burger" aria-label="Menu"><span></span></button>
+    </div>
+  </div>
+</header>
+<div class="sheet" id="sheet">
+  <a href="#board">Board</a><a href="#feed">Feed</a><a href="#survivors">Survivors</a><a href="#graveyard">Graveyard</a><a href="#fleet">Fleet</a><a href="#/docs">Docs</a><a href="#/token">$REFUTED</a>
+</div>
+
+<main id="home">
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">
+          <span class="tag dot">Open lab</span><span class="tag">Live on pump.fun</span><span class="tag">Paper trades only</span>
+        </div>
+        <h1 class="display">Most edges<br><em>die</em> here.</h1>
+        <p class="lede">The trenches are full of entry rules everyone swears by and nobody has tested. REFUTED's agents test them <b>live on every new pump.fun launch</b>, on paper, in public. Thirty trades each. The ones that bleed get buried.</p>
+        <div class="cta">
+          <a class="btn ink" href="#board">Open the board</a>
+          <a class="btn line" href="#graveyard">Walk the graveyard</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><div class="label">On trial</div><div class="v" id="stTrial">–</div></div>
+          <div class="stat"><div class="label">Launches · 24h</div><div class="v" id="stLaunch">–</div></div>
+          <div class="stat"><div class="label">Paper trades</div><div class="v" id="stTrades">–</div></div>
+          <div class="stat"><div class="label">Refuted</div><div class="v red" id="stDead">–</div></div>
+        </div>
+      </div>
+      <figure class="fig" style="margin:0">
+        <div class="fig-h"><b>Fig. 1 — The trial</b><span class="label" id="figUpd">median return · 60 min after entry</span></div>
+        <div class="forest" id="forest"></div>
+        <p class="fig-cap"><i>Dot</i> = median trade. <i>Bar</i> = the middle half of all trades. <i>Hollow</i> = still under 30 trades. Left of the black line loses money. Click a row for every trade.</p>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ THE RULE ============ -->
+  <div class="law">
+    <div class="wrap">
+      <span class="label">The rule</span>
+      <p>Every strategy gets <b>30 paper trades</b>. If the median trade is below <b>0%</b> sixty minutes after entry, or fewer than <b>40%</b> of trades win, it is <span class="stamp">Refuted</span> Otherwise it survives, and keeps getting tested.</p>
+      <div class="checks"><span>+5 MIN</span><span>+15 MIN</span><span>+60 MIN</span></div>
+    </div>
+  </div>
+
+  <!-- ============ BOARD ============ -->
+  <section class="block" id="board">
+    <div class="wrap">
+      <div class="sec-h">
+        <div class="idx"><b>01</b>Live board</div>
+        <div><h2>Every edge <em>on trial.</em></h2><p>Each strategy is one plain rule. When a new coin matches it, the lab buys on paper and measures the result 5, 15 and 60 minutes later. 2% is taken off every trade for fees and slippage.</p></div>
+        <div class="aside"><div class="seg" id="boardSeg"></div></div>
+      </div>
+      <table class="board" id="boardT">
+        <thead><tr>
+          <th class="l" data-sort="id">#</th><th class="l" data-sort="name">Strategy</th><th data-sort="done">Evidence · last 30</th><th data-sort="hit">Hit</th><th data-sort="med5">5m</th><th data-sort="med15">15m</th><th data-sort="med60">60m</th><th data-sort="status">Status</th>
+        </tr></thead>
+        <tbody id="boardB"><tr><td colspan="8" class="board-empty">Loading the lab…</td></tr></tbody>
+      </table>
+      <div class="board-foot">
+        <div class="key"><span><i style="background:var(--up)"></i>won at 60m</span><span><i style="background:var(--down)"></i>lost at 60m</span><span><i style="box-shadow:inset 0 0 0 1px var(--ink-3)"></i>open</span><span><i style="background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--rule)"></i>not yet</span></div>
+        <span id="boardMeta">Medians after the 2% haircut.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEED ============ -->
+  <section class="block" id="feed">
+    <div class="wrap">
+      <div class="sec-h">
+        <div class="idx"><b>02</b>Feed</div>
+        <div><h2>Everything, <em>as it happens.</em></h2><p>A strategy is proposed, a coin matches, the checkpoints come in, the Examiner rules. Nothing is edited after the fact.</p></div>
+        <div class="aside"><div class="seg" id="feedSeg"></div></div>
+      </div>
+      <div class="feed-grid">
+        <div>
+          <ul class="feed" id="feedL"></ul>
+        </div>
+        <div class="side">
+          <div class="fig mini">
+            <h3>Intake <span id="intakeT">new pump.fun launches</span></h3>
+            <ul class="rows intake" id="intake"></ul>
+          </div>
+          <div class="fig mini">
+            <h3>On the bench <span id="benchT">open paper trades</span></h3>
+            <ul class="rows" id="bench"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ SURVIVORS ============ -->
+  <section class="block" id="survivors">
+    <div class="wrap">
+      <div class="sec-h">
+        <div class="idx"><b>03</b>Survivors</div>
+        <div><h2>Still <em>standing.</em></h2><p>Strategies that passed their verdict. They stay on trial: every new trade can still kill them.</p></div>
+        <div class="aside"><span class="label" id="survMeta"></span></div>
+      </div>
+      <div class="surv-grid" id="surv"></div>
+      <div id="survNote"></div>
+    </div>
+  </section>
+
+  <!-- ============ GRAVEYARD ============ -->
+  <section class="night" id="graveyard">
+    <div class="wrap">
+      <div class="sec-h">
+        <div class="idx"><b>04</b>Graveyard</div>
+        <div><h2>Here lie <em>the edges.</em></h2><p>Every strategy the Examiner refuted, with its cause of death. Click a stone for the autopsy and every trade it took.</p></div>
+        <div class="aside"><span class="label" id="yardMeta"></span></div>
+      </div>
+      <div class="yard" id="yard"></div>
+      <div class="ground"></div>
+      <div class="yard-foot"><span id="yardFoot">The fleet proposes a replacement every time one dies.</span><span>Cause of death is written by <b>THE EXAMINER</b>.</span></div>
+    </div>
+  </section>
+
+  <!-- ============ FLEET ============ -->
+  <section class="block" id="fleet">
+    <div class="wrap">
+      <div class="sec-h">
+        <div class="idx"><b>05</b>The fleet <span class="chip beta" style="margin-top:8px">Beta</span></div>
+        <div><h2>The agents <em>&amp; the Examiner.</em></h2><p>Six agents propose the strategies. Each has a style, and a tally of what it got buried. The Examiner rules on every one.</p></div>
+        <div class="aside"></div>
+      </div>
+      <div class="fleet" id="fleetG"></div>
+    </div>
+  </section>
+
+  <!-- ============ SUBMIT ============ -->
+  <section class="block" id="submit">
+    <div class="wrap">
+      <div class="sec-h">
+        <div class="idx"><b>06</b>Submit an edge <span class="chip beta" style="margin-top:8px">Beta</span></div>
+        <div><h2>Think you have <em>one?</em></h2><p>Write it as one rule. Accepted edges go on the board under your name, and get the same 30 trades as everyone else.</p></div>
+        <div class="aside"></div>
+      </div>
+      <div class="submit">
+        <div class="fig builder">
+          <div class="label">Your rule</div>
+          <p class="sentence" id="sentence">
+            Buy when
+            <select id="bMetric">
+              <option value="bc">bonding</option><option value="holders">holders</option><option value="top10">the top 10 share</option><option value="dev">the dev's share</option><option value="buys">5-min buys</option><option value="mcap">market cap ($K)</option>
+            </select>
+            is
+            <select id="bOp"><option value="≥">at least</option><option value="≤">at most</option></select>
+            <input id="bVal" value="50" inputmode="decimal" aria-label="value">
+            <span id="bUnit">%</span>
+            <select id="bWin"><option value="5">within 5 minutes</option><option value="15">within 15 minutes</option><option value="60">within an hour</option><option value="0">at any age</option></select>.
+          </p>
+          <div class="fields">
+            <label><span class="label">Name your edge</span><input id="bName" placeholder="The Speedrun" maxlength="40"></label>
+            <label><span class="label">Your X handle</span><input id="bX" placeholder="@you" maxlength="20"></label>
+          </div>
+          <pre class="preview" id="bPrev"></pre>
+          <div class="share">
+            <a class="btn ink" id="bPost" target="_blank" rel="noopener">Post it to @RefutedLab</a>
+            <button class="btn line" id="bCopy" type="button">Copy</button>
+          </div>
+        </div>
+        <ol class="how">
+          <li><div><b>Post it</b><span>The button writes the post for you. It's public, so everyone sees whose idea it was.</span></div></li>
+          <li><div><b>We review it by hand</b><span>In beta, submissions are checked manually. It has to be one rule the lab can measure.</span></div></li>
+          <li><div><b>It goes on trial</b><span>Accepted edges enter the board with your handle, take 30 paper trades, and get the same verdict as every other strategy.</span></div></li>
+          <li><div><b>It survives, or it's buried</b><span>Either way it stays public. A refuted edge gets a stone with your name on it.</span></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TOKEN ============ -->
+  <section class="block" id="tokenS">
+    <div class="wrap">
+      <div class="sec-h">
+        <div class="idx"><b>07</b>$REFUTED</div>
+        <div><h2>The lab's <em>token.</em></h2><p>Creator fees keep the lab running and buy back $REFUTED.</p></div>
+        <div class="aside"></div>
+      </div>
+      <div class="token">
+        <div>
+          <div class="big-t">$REFUTED</div>
+          <div class="ca empty" id="caBox"><code id="caT">CA posted here and on X at launch</code><button class="btn ink sm" id="caCopy" type="button" aria-disabled="true">Copy</button></div>
+          <div class="share" style="margin-top:14px"><a class="btn line" id="buyMain" href="#/token">Buy on pump.fun</a><a class="btn line" href="#/token">Token page</a></div>
+        </div>
+        <div class="fig">
+          <div class="fig-h"><b>Fee flow</b><span class="label">creator fees</span></div>
+          <div class="fees" id="feeBar"></div>
+          <ul class="fee-list" id="feeList"></ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ STRATEGY PAGE ============ -->
+<main id="pStrategy" class="hide">
+  <div class="wrap page" id="spBody"></div>
+</main>
+
+<!-- ============ DOCS PAGE ============ -->
+<main id="pDocs" class="hide">
+  <div class="wrap page">
+    <a class="back" href="#/">← Back to the lab</a>
+    <div class="sec-h">
+      <div class="idx"><b>Docs</b>How the lab works</div>
+      <div><h2>The method, <em>in plain words.</em></h2><p>What gets tested, how a paper trade is measured, how the verdict works, and what is still beta.</p></div>
+      <div class="aside"></div>
+    </div>
+    <div class="doc">
+      <nav class="toc"><a href="#d-how">How it works</a><a href="#d-trade">A paper trade</a><a href="#d-rule">The verdict</a><a href="#d-data">Where the data comes from</a><a href="#d-beta">Live vs. beta</a><a href="#d-faq">FAQ</a><a href="#d-risk">Risks</a></nav>
+      <article class="prose">
+        <h2 id="d-how">How it works</h2>
+        <ol>
+          <li><b>A strategy is one rule.</b> "Buy coins that hit 50% bonding in under 5 minutes." The lab opened with 12 of the trenches' favorite rules.</li>
+          <li><b>The lab watches every new pump.fun launch.</b> Around the clock, even when nobody has this page open. Young coins are read about every 15 seconds.</li>
+          <li><b>A match is a paper buy.</b> The first time a coin meets a rule, the lab "buys" at the price at that moment. One trade per coin per strategy.</li>
+          <li><b>Three checkpoints.</b> The price is read again 5, 15 and 60 minutes after entry.</li>
+          <li><b>The verdict.</b> After 30 finished trades the Examiner rules. Losers go to the graveyard and the fleet proposes a replacement, so the board stays full.</li>
+        </ol>
+        <h2 id="d-trade">A paper trade</h2>
+        <p><b>Entry</b> is the coin's price the moment the lab sees it meet the rule. For threshold rules (like "crosses 90% bonding") the lab must have watched the coin cross the line, so no entry is ever back-dated.</p>
+        <p><b>Result</b> = exit price ÷ entry price, minus a flat <b>2%</b> for fees and slippage. A trade "wins" if it is above 0% at the 60-minute checkpoint.</p>
+        <p><b>Checkpoint sources.</b> Most checkpoints are read live, within 60 seconds of their due time. If a checkpoint lands in a short gap between two lab runs, the lab reads the price for that exact minute from the coin's candle history instead. If neither is possible, the checkpoint is marked as a miss and the trade is left out of the stats. Every trade on a strategy page shows its source: <code>live</code>, <code>candle</code>, <code>late</code> or <code>miss</code>.</p>
+        <div class="callout">Paper trades have no price impact and never get rugged mid-fill. Real fills are worse. Treat every number here as a best case.</div>
+        <h2 id="d-rule">The verdict</h2>
+        <table class="tbl">
+          <tr><th>When</th><th>Test</th><th>Result</th></tr>
+          <tr><td>Fewer than 30 finished trades</td><td>none yet</td><td><span class="chip testing">Testing</span></td></tr>
+          <tr><td>30 or more finished trades</td><td>median at 60 min below 0%, <b>or</b> under 40% winners</td><td><span class="chip refuted">Refuted</span></td></tr>
+          <tr><td>30 or more finished trades</td><td>median at 60 min 0% or more, <b>and</b> 40% winners or more</td><td><span class="chip surviving">Surviving</span></td></tr>
+          <tr><td>24 hours, fewer than 5 trades</td><td>the setup barely exists</td><td><span class="chip refuted">Refuted · starved</span></td></tr>
+        </table>
+        <p>A surviving strategy is judged again after every new trade. One bad stretch can still kill it, and it says so on its stone.</p>
+        <h2 id="d-data">Where the data comes from</h2>
+        <ul>
+          <li><b>Jupiter</b> (free, no key): new pump.fun launches, bonding curve %, price, market cap, holders, top 10 share, dev share, snipers, insiders and 5-minute flow.</li>
+          <li><b>GeckoTerminal</b> minute candles: only to fill a checkpoint that fell between two runs.</li>
+          <li><b>The lab itself</b> runs on a schedule every 5 minutes and publishes its full record. Every trade, checkpoint and verdict is public.</li>
+        </ul>
+        <h2 id="d-beta">Live vs. beta</h2>
+        <table class="tbl">
+          <tr><th>Part</th><th>Status</th><th>What that means</th></tr>
+          <tr><td>Paper test, matching, checkpoints, verdicts</td><td><span class="chip surviving">Live</span></td><td>Runs for real on real launches, around the clock.</td></tr>
+          <tr><td>Board, feed, graveyard, survivors</td><td><span class="chip surviving">Live</span></td><td>Built straight from the lab's record.</td></tr>
+          <tr><td>The agent fleet</td><td><span class="chip beta">Beta</span></td><td>The agents' names and styles are a frame. Proposals come from a fixed queue of trench folklore and parameter variants.</td></tr>
+          <tr><td>The Examiner</td><td><span class="chip beta">Beta</span></td><td>In practice it is the verdict rule above, applied automatically.</td></tr>
+          <tr><td>Plug in your own agent</td><td><span class="chip beta">Not in v1</span></td><td>Shown, not switched on yet.</td></tr>
+          <tr><td>Holder submissions</td><td><span class="chip beta">Beta</span></td><td>A form in v1. Reviewed by hand before anything goes on trial.</td></tr>
+        </table>
+        <h2 id="d-faq">FAQ</h2>
+        <details class="faq"><summary>Does the lab trade real money?</summary><p>No. Every trade is on paper. The lab never holds or moves funds.</p></details>
+        <details class="faq"><summary>Why 60 minutes?</summary><p>Most pump.fun coins are decided in their first hour. 5 and 15 minutes show the path, 60 minutes is the verdict.</p></details>
+        <details class="faq"><summary>Why the median and not the average?</summary><p>One 50x can carry a terrible strategy on average. The median is what a typical trade actually did.</p></details>
+        <details class="faq"><summary>Can a refuted strategy come back?</summary><p>Not under the same rule. The fleet can propose a variant with different numbers, and that variant gets its own 30 trades.</p></details>
+        <details class="faq"><summary>How fresh is the board?</summary><p>The lab publishes every few minutes. The lamp in the top bar shows when it last synced. The intake list and open trades also update live in your browser.</p></details>
+        <h2 id="d-risk">Risks</h2>
+        <p>Surviving here means a rule did not lose on paper over its trades so far. It is not a promise about the next trade. Memecoins are extremely risky, most go to zero, and real fills are worse than paper. Nothing on this site is financial advice.</p>
+      </article>
+    </div>
+  </div>
+</main>
+
+<!-- ============ TOKEN PAGE ============ -->
+<main id="pToken" class="hide">
+  <div class="wrap page">
+    <a class="back" href="#/">← Back to the lab</a>
+    <div class="sec-h">
+      <div class="idx"><b>Token</b>$REFUTED</div>
+      <div><h2>$REFUTED. <em>Most edges die here.</em></h2><p>The token of an open lab that tests trench strategies in public.</p></div>
+      <div class="aside"></div>
+    </div>
+    <div class="token">
+      <div>
+        <div class="ca empty" id="caBox2"><code id="caT2">CA posted here and on X at launch</code><button class="btn ink sm" id="caCopy2" type="button" aria-disabled="true">Copy</button></div>
+        <div class="share" style="margin-top:14px"><a class="btn ink" id="buy2" target="_blank" rel="noopener" aria-disabled="true">Buy on pump.fun</a><a class="btn line" id="chart2" target="_blank" rel="noopener" aria-disabled="true">Chart</a><a class="btn line" id="x2" target="_blank" rel="noopener">X</a></div>
+        <ol class="how" style="margin-top:34px">
+          <li><div><b>The lab is the product</b><span>A paper test that runs on every pump.fun launch, around the clock, with its whole record in public.</span></div></li>
+          <li><div><b>Fees keep it running</b><span>Part of the creator fees pays for the lab and the agent fleet. The rest buys back $REFUTED.</span></div></li>
+          <li><div><b>Holders submit edges</b><span>Accepted edges go on trial under the holder's name.</span></div></li>
+          <li><div><b>Next</b><span>Plug-in agents: bring your own agent and let it propose strategies to the board.</span></div></li>
+        </ol>
+      </div>
+      <div class="fig">
+        <div class="fig-h"><b>Fee flow</b><span class="label">creator fees</span></div>
+        <div class="fees" id="feeBar2"></div>
+        <ul class="fee-list" id="feeList2"></ul>
+        <p class="fig-cap">Paper trades only. The lab never trades with the fees. Not financial advice.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><div class="foot-word">Most edges die here.</div><p style="color:var(--ink-2);margin:0;max-width:360px;font-size:14px">An open lab testing trench strategies on every new pump.fun launch. Paper trades only.</p></div>
+    <div><h4>Lab</h4><a href="#board">Live board</a><a href="#feed">Feed</a><a href="#survivors">Survivors</a><a href="#graveyard">Graveyard</a></div>
+    <div><h4>Read</h4><a href="#/docs">Docs</a><a href="#/docs" data-anchor="d-rule">The verdict</a><a href="#/docs" data-anchor="d-beta">Live vs. beta</a></div>
+    <div><h4>$REFUTED</h4><a href="#/token">Token</a><a id="xFoot" href="https://x.com/RefutedLab" target="_blank" rel="noopener">X · @RefutedLab</a><a id="dataFoot" href="#" target="_blank" rel="noopener">Raw lab data</a></div>
+    <div class="fine"><span>© REFUTED. Not financial advice. Memecoins can go to zero.</span><span id="footSync">–</span></div>
+  </div>
+</footer>
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===================================================================
+   CONFIG — fill in at launch
+   =================================================================== */
+const CONFIG = {
+  name: "REFUTED",
+  ticker: "$REFUTED",
+  ca: "",                                   // contract address. Empty = "posted here and on X at launch"
+  x: "https://x.com/RefutedLab",
+  xHandle: "RefutedLab",
+  site: "https://refuted.fun",
+  dexscreener: "",                          // optional chart link; filled from the CA if empty
+  repo: "buzzlightyear163/refuted",         // where the lab publishes its record
+  dataBranch: "lab-data",
+  api: "/api/lab",                          // cached proxy of the lab record (falls back to GitHub, then snapshot.json)
+  fees: [
+    { label: "Buy back $REFUTED", pct: 60 },
+    { label: "Keep the lab running", pct: 40 },
+  ],
+  poll: 60,                                 // seconds between lab syncs in the browser
+};
+
+/* ===================================================================
+   helpers
+   =================================================================== */
+const $ = s => document.querySelector(s), $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const MINUS = "−";
+const pct = (v, d = 1) => v === null || v === undefined || isNaN(v) ? "–" : (v > 0 ? "+" : v < 0 ? MINUS : "") + Math.abs(v).toFixed(d) + "%";
+const cls = v => v === null || v === undefined ? "flat" : v > 0 ? "up" : v < 0 ? "down" : "flat";
+const fmtN = n => n === null || n === undefined ? "–" : Number(n).toLocaleString("en-US");
+const usd = n => !n ? "–" : n >= 1e6 ? "$" + (n / 1e6).toFixed(2) + "M" : n >= 1e3 ? "$" + (n / 1e3).toFixed(1) + "K" : "$" + Math.round(n);
+const short = m => m ? m.slice(0, 4) + "…" + m.slice(-4) : "";
+const ago = t => { const s = Math.max(0, Math.round((Date.now() - t) / 1000)); return s < 60 ? s + "s ago" : s < 3600 ? Math.floor(s / 60) + "m ago" : s < 86400 ? Math.floor(s / 3600) + "h ago" : Math.floor(s / 86400) + "d ago"; };
+const hms = t => new Date(t).toISOString().slice(11, 19);
+const day = t => new Date(t).toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+const dayY = t => new Date(t).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric", timeZone: "UTC" });
+const coinUrl = m => "https://pump.fun/coin/" + m;
+const buyUrl = ca => !ca ? "" : /pump$/.test(ca) ? "https://pump.fun/coin/" + ca : "https://raydium.io/launchpad/token/?mint=" + ca;
+const STATUS = { testing: "Testing", surviving: "Surviving", refuted: "Refuted" };
+const chip = s => `<span class="chip ${s}">${STATUS[s] || s}</span>`;
+function toast(t) { const el = $("#toast"); el.textContent = t; el.classList.add("on"); clearTimeout(toast.h); toast.h = setTimeout(() => el.classList.remove("on"), 1800); }
+function copy(t) { navigator.clipboard && navigator.clipboard.writeText(t).then(() => toast("Copied"), () => toast("Copy failed")); }
+function countTo(el, v) {
+  if (!el) return; const n = +v || 0, from = +(el.dataset.v || 0); el.dataset.v = n;
+  if (from === n) { el.textContent = fmtN(n); return; }
+  const t0 = performance.now(), d = 900;
+  (function f(t) { const k = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - k, 3); el.textContent = fmtN(Math.round(from + (n - from) * e)); if (k < 1) requestAnimationFrame(f); })(t0);
+}
+
+/* ===================================================================
+   data: the lab record
+   =================================================================== */
+const RAW = `https://raw.githubusercontent.com/${CONFIG.repo}/${CONFIG.dataBranch}/`;
+let LAB = null, SOURCE = "", LAST_SEEN_FEED = 0;
+const SCACHE = {};
+async function getFile(path) {
+  const tries = [
+    () => fetch(`${CONFIG.api}?f=${encodeURIComponent(path)}`, { cache: "no-store" }),
+    () => fetch(RAW + path + "?t=" + Math.floor(Date.now() / 60000), { cache: "no-store" }),
+  ];
+  for (const t of tries) { try { const r = await t(); if (r.ok) { const j = await r.json(); if (j && j.v) return j; } } catch (e) {} }
+  return null;
+}
+async function loadLab() {
+  let j = await getFile("lab.json"), src = "live";
+  if (!j) { try { const r = await fetch("/snapshot.json", { cache: "no-store" }); if (r.ok) { j = await r.json(); src = "snapshot"; } } catch (e) {} }
+  if (!j) { setLamp(null); return; }
+  if (LAB && j.updatedAt === LAB.updatedAt) { setLamp(j, src); return; }
+  LAB = j; SOURCE = src; setLamp(j, src); render();
+}
+function setLamp(j, src) {
+  const el = $("#lamp"), t = $("#lampT");
+  el.classList.remove("live", "late", "snap");
+  if (!j) { el.classList.add("snap"); t.textContent = "Offline"; return; }
+  const age = Date.now() - j.updatedAt;
+  if (src === "snapshot") { el.classList.add("snap"); t.textContent = "Snapshot"; }
+  else if (age < 12 * 60e3) { el.classList.add("live"); t.textContent = "Live · " + ago(j.updatedAt).replace(" ago", ""); }
+  else { el.classList.add("late"); t.textContent = "Delayed · " + ago(j.updatedAt); }
+  $("#footSync").textContent = `Lab record ${src === "snapshot" ? "snapshot" : "synced"} ${ago(j.updatedAt)} · run ${fmtN(j.sync && j.sync.runs)}`;
+}
+
+/* ===================================================================
+   home renderers
+   =================================================================== */
+function render() {
+  if (!LAB) return;
+  const T = LAB.totals;
+  countTo($("#stTrial"), T.testing + T.surviving);
+  countTo($("#stLaunch"), T.launches24h);
+  countTo($("#stTrades"), T.trades);
+  countTo($("#stDead"), T.refuted);
+  $("#figUpd").textContent = "median · 60 min after entry";
+  renderForest(); renderBoard(); renderFeed(); renderBench(); renderSurvivors(); renderYard(); renderFleet();
+  if (location.hash.startsWith("#/s/")) route();
+}
+
+function scaleX(v, lo, hi) { return Math.max(0, Math.min(100, (v - lo) / (hi - lo) * 100)); }
+function renderForest() {
+  const list = LAB.strategies.filter(s => s.status !== "refuted").sort(order).slice(0, 12);
+  const dead = LAB.strategies.filter(s => s.status === "refuted").sort((a, b) => b.diedAt - a.diedAt).slice(0, Math.max(0, 14 - list.length));
+  const rows = list.concat(dead);
+  const LO = -80, HI = 80;
+  const ticks = [-80, -40, 0, 40, 80];
+  let h = `<div class="fr-axis"><span class="label">Strategy</span><div class="ticks">${ticks.map(t => `<span style="left:${scaleX(t, LO, HI)}%">${t > 0 ? "+" : t < 0 ? MINUS : ""}${Math.abs(t)}%</span>`).join("")}</div><span class="label" style="text-align:right">Trades</span></div>`;
+  for (const s of rows) {
+    const col = s.status === "refuted" ? "c-down" : s.status === "surviving" ? "c-up" : s.med60 === null ? "c-mute" : s.med60 >= 0 ? "c-up" : "c-down";
+    let track = ticks.map(t => t === 0 ? "" : `<i class="grid" style="left:${scaleX(t, LO, HI)}%"></i>`).join("") + `<i class="zero" style="left:${scaleX(0, LO, HI)}%"></i>`;
+    if (s.med60 === null) track += `<i class="wait"></i>`;
+    else {
+      const a = scaleX(s.q1 ?? s.med60, LO, HI), b = scaleX(s.q3 ?? s.med60, LO, HI);
+      track += `<i class="iqr ${col}" style="left:${a}%;width:${Math.max(1, b - a)}%"></i><i class="med ${col} ${s.done < LAB.rule.minTrades ? "hollow" : ""}" style="left:${scaleX(s.med60, LO, HI)}%" title="median ${pct(s.med60)}"></i>`;
+      if (s.med60 < LO) track += `<span class="off c-down" style="left:2px">◂ ${pct(s.med60, 0)}</span>`;
+      if (s.med60 > HI) track += `<span class="off c-up" style="right:2px">${pct(s.med60, 0)} ▸</span>`;
+    }
+    h += `<div class="fr-row" data-sid="${s.id}"><div class="fr-name"><span class="id">${s.id}</span><span class="n">${esc(s.name)}</span></div><div class="fr-track">${track}</div><div class="fr-meta"><span class="nn">${Math.min(s.done, 999)}/${LAB.rule.minTrades}</span>${s.status === "refuted" ? `<span class="chip refuted">Dead</span>` : ""}</div></div>`;
+  }
+  $("#forest").innerHTML = h;
+}
+const ORDER = { surviving: 0, testing: 1, refuted: 2 };
+function order(a, b) { return (ORDER[a.status] - ORDER[b.status]) || ((b.done || 0) - (a.done || 0)) || (a.id < b.id ? -1 : 1); }
+
+let boardFilter = "all", boardSort = { k: "status", d: 1 };
+function strip(s) {
+  const n = LAB.rule.minTrades, last = (s.last || []).slice(-n), open = Math.min(s.open || 0, n - last.length);
+  let h = ""; for (let i = 0; i < n; i++) { if (i < last.length) h += `<i class="${last[i] > 0 ? "w" : "l"}"></i>`; else if (i < last.length + open) h += `<i class="o"></i>`; else h += `<i></i>`; }
+  return `<div class="strip" aria-label="${s.done} finished trades">${h}</div>`;
+}
+function renderBoard() {
+  const S = LAB.strategies, counts = { all: S.length, testing: 0, surviving: 0, refuted: 0 };
+  S.forEach(s => counts[s.status]++);
+  $("#boardSeg").innerHTML = ["all", "testing", "surviving", "refuted"].map(k => `<button data-f="${k}" class="${boardFilter === k ? "on" : ""}">${k === "all" ? "All" : STATUS[k]}<span class="c">${counts[k]}</span></button>`).join("");
+  let list = S.filter(s => boardFilter === "all" || s.status === boardFilter);
+  const k = boardSort.k, d = boardSort.d;
+  list.sort((a, b) => {
+    if (k === "status") return order(a, b);
+    if (k === "id" || k === "name") return (a[k] < b[k] ? -1 : 1) * d;
+    const x = a[k] ?? -1e9, y = b[k] ?? -1e9; return (y - x) * d;
+  });
+  $$("#boardT th").forEach(th => th.classList.toggle("sorted", th.dataset.sort === k));
+  if (!list.length) { $("#boardB").innerHTML = `<tr><td colspan="8" class="board-empty">Nothing here yet.</td></tr>`; return; }
+  $("#boardB").innerHTML = list.map(s => `<tr class="row ${s.status === "refuted" ? "dead" : ""}" data-sid="${s.id}">
+    <td class="l c-id"><span class="sid">${s.id}</span></td>
+    <td class="l c-name"><div class="sname">${esc(s.name)}</div><div class="srule">${esc(s.rule)}</div><div class="agent" style="margin-top:6px">${esc(s.agent)} · ${s.matched} ${s.matched === 1 ? "match" : "matches"}</div></td>
+    <td class="c-ev" data-k="Evidence"><div class="ev">${strip(s)}<span class="cnt">${Math.min(s.done, 9999)}/${LAB.rule.minTrades}</span></div></td>
+    <td data-k="Hit" class="${s.hit === null ? "flat" : s.hit >= LAB.rule.hit ? "up" : "down"}">${s.hit === null ? "–" : s.hit.toFixed(0) + "%"}</td>
+    <td data-k="5m" class="${cls(s.med5)}">${pct(s.med5)}</td>
+    <td data-k="15m" class="${cls(s.med15)}">${pct(s.med15)}</td>
+    <td data-k="60m" class="${cls(s.med60)}"><b style="font-weight:500">${pct(s.med60)}</b></td>
+    <td class="keep c-st" data-k="">${chip(s.status)}</td></tr>`).join("");
+  $("#boardMeta").textContent = `Medians after the 2% haircut · ${fmtN(LAB.totals.done)} finished trades · ${fmtN(LAB.totals.open)} open`;
+}
+
+let feedFilter = "all";
+const FEEDK = { all: "All", match: "Matches", check: "Results", verdict: "Verdicts" };
+const KLABEL = { boot: "Lab", propose: "Proposal", match: "Match", check: "Result", death: "Refuted", survive: "Survives" };
+function linkify(e) {
+  let t = esc(e.tx);
+  if (e.s) t = t.replace(new RegExp("\\b" + e.s + "\\b"), `<a href="#/s/${e.s}">${e.s}</a>`);
+  if (e.m && e.y) t = t.replace("$" + esc(e.y), `<a href="${coinUrl(e.m)}" target="_blank" rel="noopener">$${esc(e.y)}</a>`);
+  t = t.replace(/([+−-]\d+(\.\d+)?%)/g, m => `<span class="r ${m[0] === "+" ? "up" : "down"}">${m.replace("-", MINUS)}</span>`);
+  return t;
+}
+function renderFeed() {
+  $("#feedSeg").innerHTML = Object.keys(FEEDK).map(k => `<button data-f="${k}" class="${feedFilter === k ? "on" : ""}">${FEEDK[k]}</button>`).join("");
+  const all = (LAB.feed || []).concat((LAB.log || []).filter(e => !(LAB.feed || []).some(f => f.t === e.t && f.k === e.k && f.s === e.s)));
+  all.sort((a, b) => b.t - a.t);
+  const list = all.filter(e => feedFilter === "all" || (feedFilter === "verdict" ? ["death", "survive", "propose", "boot"].includes(e.k) : e.k === feedFilter)).slice(0, 120);
+  const prev = LAST_SEEN_FEED; LAST_SEEN_FEED = all.length ? all[0].t : 0;
+  $("#feedL").innerHTML = list.map(e => `<li class="${prev && e.t > prev ? "new" : ""}"><time>${hms(e.t)}</time><span class="k ${e.k}">${KLABEL[e.k] || e.k}</span><span class="tx">${linkify(e)}</span></li>`).join("") || `<li><time></time><span></span><span class="tx" style="color:var(--ink-3)">Waiting for the first events…</span></li>`;
+}
+
+/* live in the browser: intake (new launches) + live price of open paper trades */
+let livePx = {}, intakeSeen = new Set();
+function renderBench() {
+  const b = (LAB.bench || []).slice(0, 9);
+  $("#benchT").textContent = `${fmtN(LAB.totals.open)} open paper trades`;
+  $("#bench").innerHTML = b.map(t => {
+    const ks = LAB.rule.checkpoints, next = ks.find(k => !t.ck[k]);
+    const dueIn = next ? Math.max(0, t.at + next * 60e3 - Date.now()) : 0;
+    const now = livePx[t.m];
+    const r = now ? ((now / t.px) * 0.98 - 1) * 100 : (t.ck[15] ? t.ck[15].r : t.ck[5] ? t.ck[5].r : null);
+    return `<li><div><div class="sym"><a href="${coinUrl(t.m)}" target="_blank" rel="noopener">$${esc(t.y)}</a> <span style="color:var(--ink-3)">· <a href="#/s/${t.s}">${t.s}</a></span></div><div class="sub">in ${ago(t.at).replace(" ago", "")} ago · next +${next || 60}m in ${Math.ceil(dueIn / 60000)}m</div></div><div class="right"><span class="${cls(r)}">${pct(r)}</span><div class="sub">${now ? "live" : "last check"}</div></div></li>`;
+  }).join("") || `<li><div class="sub">No open trades right now.</div></li>`;
+}
+async function liveBench() {
+  if (!LAB || !(LAB.bench || []).length) return;
+  const ids = [...new Set(LAB.bench.slice(0, 40).map(t => t.m))];
+  try { const r = await fetch("https://lite-api.jup.ag/price/v3?ids=" + ids.join(",")); if (r.ok) { const j = await r.json(); for (const [m, v] of Object.entries(j)) if (v && v.usdPrice) livePx[m] = v.usdPrice; renderBench(); } } catch (e) {}
+}
+async function liveIntake() {
+  let pools = null;
+  try {
+    const r = await fetch("https://datapi.jup.ag/v1/pools/gems", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ recent: { timeframe: "24h", launchpads: ["pump.fun"] } }) });
+    if (r.ok) pools = ((await r.json()).recent || {}).pools || null;
+  } catch (e) {}
+  let rows;
+  if (pools && pools.length) {
+    rows = pools.slice(0, 8).map(p => ({ m: p.baseAsset.id, y: String(p.baseAsset.symbol || "?").replace(/^\$+/, "").slice(0, 12), c: Date.parse(p.baseAsset.createdAt), bc: p.bondingCurve || 0, h: p.baseAsset.holderCount || 0 }));
+    $("#intakeT").textContent = "live from pump.fun";
+  } else if (LAB) { rows = (LAB.intake || []).slice(0, 8); $("#intakeT").textContent = "last lab sync"; }
+  if (!rows) return;
+  $("#intake").innerHTML = rows.map(t => { const n = !intakeSeen.has(t.m); intakeSeen.add(t.m); return `<li class="${n && intakeSeen.size > 8 ? "new" : ""}"><div><div class="sym"><a href="${coinUrl(t.m)}" target="_blank" rel="noopener">$${esc(t.y)}</a></div><div class="sub">${ago(t.c)} · ${t.h} holders</div></div><div class="right"><span class="bar"><i style="width:${Math.min(100, t.bc || 0)}%"></i></span>${(t.bc || 0).toFixed(1)}%</div></li>`; }).join("");
+}
+
+function renderSurvivors() {
+  const S = LAB.strategies.filter(s => s.status === "surviving").sort((a, b) => (b.med60 ?? -1e9) - (a.med60 ?? -1e9));
+  $("#survMeta").textContent = `${S.length} surviving`;
+  const card = (s, i) => `<div class="fig scard" data-sid="${s.id}"><span class="rank">${String(i + 1).padStart(2, "0")}</span><div class="label">${s.id} · ${esc(s.agent)}</div><h3>${esc(s.name)}</h3><p class="r">${esc(s.rule)}</p>
+    <div class="big"><span class="v ${cls(s.med60)}">${pct(s.med60)}</span><span class="label">median at 60 min</span></div>
+    <div class="kv"><div><span class="label">Hit</span>${s.hit === null ? "–" : s.hit.toFixed(0) + "%"}</div><div><span class="label">Trades</span>${fmtN(s.done)}</div><div><span class="label">Since</span>${s.survivedAt ? day(s.survivedAt) : "–"}</div></div>${strip(s)}</div>`;
+  if (S.length) { $("#surv").innerHTML = S.slice(0, 6).map(card).join(""); $("#survNote").innerHTML = ""; return; }
+  const close = LAB.strategies.filter(s => s.status === "testing" && s.done >= 3 && s.med60 !== null).sort((a, b) => b.med60 - a.med60).slice(0, 3);
+  $("#surv").innerHTML = close.map(card).join("");
+  $("#survNote").innerHTML = `<div class="surv-note"><span class="chip testing">No survivors yet</span><span>Nothing has passed its verdict so far. ${close.length ? "These are the closest to the line, still under 30 trades." : "The first verdicts land once strategies reach 30 finished trades."}</span></div>`;
+}
+
+function renderYard() {
+  const D = LAB.strategies.filter(s => s.status === "refuted").sort((a, b) => b.diedAt - a.diedAt);
+  $("#yardMeta").textContent = `${D.length} buried`;
+  const stone = s => `<div class="stone" data-sid="${s.id}"><span class="rip">${s.id} · HERE LIES</span><h3>${esc(s.name)}</h3><p class="myth">“${esc(s.myth)}”</p>
+    <div class="dates"><b>${day(s.born)} — ${day(s.diedAt)}</b>${fmtN(s.done)} trades · median ${pct(s.med60)} · ${s.hit === null ? "–" : s.hit.toFixed(0) + "%"} won</div><span class="cause">${esc(s.causeShort || "Refuted")}</span><span class="more">Read the autopsy →</span></div>`;
+  const plots = Math.max(0, (D.length < 4 ? 4 : (4 - D.length % 4) % 4));
+  $("#yard").innerHTML = D.map(stone).join("") + Array.from({ length: D.length ? plots : 4 }, (_, i) => `<div class="stone plot"><p>${D.length ? "Plot reserved." : i === 0 ? "No edge has died yet." : i === 1 ? "Give it a few hours." : "Plot reserved."}</p></div>`).join("");
+  const next = LAB.strategies.filter(s => s.status !== "refuted").sort((a, b) => b.done - a.done)[0];
+  $("#yardFoot").textContent = next ? `Closest to its verdict: ${next.id} ${next.name}, ${Math.min(next.done, LAB.rule.minTrades)} of ${LAB.rule.minTrades} trades.` : "The fleet proposes a replacement every time one dies.";
+}
+
+function renderFleet() {
+  const A = LAB.agents || [];
+  const dead = LAB.totals.refuted, alive = LAB.totals.testing + LAB.totals.surviving;
+  $("#fleetG").innerHTML = A.map(a => `<div class="fig agent"><div class="who"><span class="ava">${esc(a.id.slice(0, 2))}</span><span class="chip beta">Agent</span></div><h3>${esc(a.id)}</h3><div class="style">${esc(a.style)}</div><div class="motto">“${esc(a.motto)}”</div><div class="tally"><span>${a.proposed} proposed</span><span class="up">${a.alive} alive</span><span class="down">${a.dead} buried</span></div></div>`).join("")
+    + `<div class="fig agent exam"><div class="who"><span class="ava">EX</span><span class="chip beta" style="background:#2a2a2d;color:#ddd">Judge</span></div><h3>THE EXAMINER</h3><div class="style">Rules on every strategy</div><div class="motto">“Thirty trades. Then the truth.”</div><div class="tally"><span>${alive} on trial</span><span style="color:#ff7a70">${dead} refuted</span></div></div>`
+    + `<div class="fig agent plug"><div class="who"><span class="ava">+</span><span class="chip beta">Not in v1</span></div><h3>YOUR AGENT</h3><div class="style">Plug in your own</div><div class="motto" style="color:var(--ink-3)">Let your agent propose strategies to the board.</div><div class="plug-field"><input placeholder="agent endpoint · soon" disabled><button class="btn sm line" aria-disabled="true" disabled>Connect</button></div></div>`;
+}
+
+/* ===================================================================
+   strategy page
+   =================================================================== */
+async function renderStrategy(id) {
+  const body = $("#spBody");
+  const s0 = LAB && LAB.strategies.find(s => s.id === id);
+  if (!s0 && LAB) { body.innerHTML = `<a class="back" href="#/">← Back to the lab</a><p>No strategy called ${esc(id)}.</p>`; return; }
+  if (!s0) { body.innerHTML = `<a class="back" href="#/">← Back to the lab</a><p class="label">Loading…</p>`; return; }
+  paintStrategy(s0, SCACHE[id] || null);
+  const f = await getFile("s/" + id + ".json");
+  if (f) { SCACHE[id] = f; if (location.hash === "#/s/" + id) paintStrategy(f.strategy || s0, f); }
+}
+let tradePage = 0;
+function paintStrategy(s, file) {
+  const R = LAB.rule, dead = s.status === "refuted";
+  const stampTxt = dead ? "Refuted" : s.status === "surviving" ? "Surviving" : "On trial";
+  const trades = file ? file.trades : null;
+  const kpi = (l, v, c = "") => `<div class="kpi"><div class="label">${l}</div><div class="v ${c}">${v}</div></div>`;
+  const progress = Math.min(1, (s.done || 0) / R.minTrades);
+  let h = `<a class="back" href="#/">← Back to the board</a>
+  <div class="sp-head">
+    <div>
+      <div class="label">${s.id} · proposed by ${esc(s.agent)} · born ${dayY(s.born)} ${hms(s.born).slice(0, 5)} UTC</div>
+      <h1>${esc(s.name)}</h1>
+      <p class="sp-myth">“${esc(s.myth)}” <span class="label" style="font-style:normal">— trench folklore</span></p>
+      <div class="sp-rule"><span class="label">The rule</span><p>${esc(s.rule)}</p></div>
+    </div>
+    <div class="sp-stamp"><span class="stamp-wrap"><span class="stamp big ${s.status}">${stampTxt}</span></span>
+      <div class="when">${dead ? `Died ${dayY(s.diedAt)} · after ${fmtN(s.diedN || s.done)} trades` : s.status === "surviving" ? `Passed its verdict ${s.survivedAt ? dayY(s.survivedAt) : ""}<br>re-judged after every trade` : `${Math.max(0, R.minTrades - s.done)} trades to the verdict`}</div></div>
+  </div>
+  <div class="kpis">
+    ${kpi("Matched", fmtN(s.matched))}${kpi("Finished", fmtN(s.done))}${kpi("Hit rate", s.hit === null ? "–" : s.hit.toFixed(0) + "%", s.hit === null ? "" : s.hit >= R.hit ? "up" : "down")}
+    ${kpi("Median 5m", pct(s.med5), cls(s.med5))}${kpi("Median 15m", pct(s.med15), cls(s.med15))}${kpi("Median 60m", pct(s.med60), cls(s.med60))}${kpi("Best 60m", pct(s.best, 0), cls(s.best))}${kpi("Worst 60m", pct(s.worst, 0), cls(s.worst))}
+  </div>
+  <div class="verdict-bar"><span class="label">Verdict</span><div class="vb"><i style="width:${progress * 100}%"></i></div><span class="num" style="font-size:13px">${Math.min(s.done, 9999)} / ${R.minTrades} trades${s.open ? ` · ${s.open} open` : ""}</span></div>
+  <div class="sp-cols">
+    <div class="fig"><div class="fig-h"><b>Fig. 2 — Every finished trade at 60 min</b><span class="label">${file ? fmtN(file.rets.r60.length) + " trades" : "loading"}</span></div>${file ? dotPlot(file.rets.r60, s.med60) : `<div style="height:220px"></div>`}<p class="fig-cap">Each dot is one paper trade. The red line is the median. Left of 0 lost money after the 2% haircut.</p></div>
+    <div style="display:flex;flex-direction:column;gap:18px">
+      ${dead ? `<div class="fig autopsy"><div class="fig-h"><b style="color:var(--bone)">Autopsy</b><span class="label">THE EXAMINER</span></div><p>${esc(s.cause)}</p><span class="label">Examined ${dayY(s.diedAt)} · ${fmtN(s.diedN || s.done)} trades</span></div>` : ""}
+      <div class="fig"><div class="fig-h"><b>Share the record</b><span class="label">1200 × 630</span></div><p style="margin:12px 0 14px;color:var(--ink-2);font-size:14px">${dead ? "Its death certificate, ready to post." : "Its trial record, ready to post."}</p>
+        <div class="share"><button class="btn ink sm" id="shDl" type="button">Download card</button><a class="btn line sm" id="shX" target="_blank" rel="noopener">Post on X</a></div></div>
+    </div>
+  </div>
+  <div class="sec-h" style="margin-top:56px;grid-template-columns:200px 1fr auto"><div class="idx"><b>Trades</b>every paper trade</div><div><h2 style="font-size:clamp(32px,3.4vw,48px)">The full record.</h2></div><div class="aside"><span class="label">newest first</span></div></div>
+  <div class="trades-wrap" id="tradesW">${trades ? tradeTable(trades) : `<p class="label" style="padding:20px 0">Loading trades…</p>`}</div>`;
+  $("#spBody").innerHTML = h;
+  const txt = `${s.id} ${s.name}: "${s.rule}"\n\n${dead ? "REFUTED" : s.status === "surviving" ? "Still standing" : "On trial"} after ${s.done} paper trades · median ${pct(s.med60)} at 60 min · ${s.hit === null ? "–" : s.hit.toFixed(0) + "%"} won.\n\nMost edges die here.`;
+  $("#shX").href = "https://x.com/intent/post?text=" + encodeURIComponent(txt) + "&url=" + encodeURIComponent(CONFIG.site + "/#/s/" + s.id);
+  $("#shDl").onclick = () => shareCard(s);
+  const pg = $("#tradesW"); pg.onclick = e => { const b = e.target.closest("[data-pg]"); if (!b || !trades) return; tradePage = +b.dataset.pg; pg.innerHTML = tradeTable(trades); };
+}
+function resCell(c, open) {
+  if (!c) return open ? `<span class="res o">open</span>` : `<span class="res x">–</span>`;
+  if (c.r === null) return `<span class="res x">miss</span>`;
+  return `<span class="${cls(c.r)}">${pct(c.r)}</span>${c.src && c.src !== "live" ? `<span class="src">${c.src}</span>` : ""}`;
+}
+function tradeTable(trades) {
+  const per = 50, pages = Math.ceil(trades.length / per), p = Math.min(tradePage, Math.max(0, pages - 1));
+  const rows = trades.slice(p * per, p * per + per).map(t => {
+    const r60 = t.ck[60];
+    const res = !r60 ? `<span class="res o">open</span>` : r60.r === null ? `<span class="res x">miss</span>` : r60.r > 0 ? `<span class="res w">won</span>` : `<span class="res l">lost</span>`;
+    return `<tr><td class="l">${day(t.at)} ${hms(t.at).slice(0, 5)}</td><td class="l"><a href="${coinUrl(t.m)}" target="_blank" rel="noopener">$${esc(t.y)}</a><span class="nm">${esc(t.n)} · ${short(t.m)}</span></td><td class="l" style="white-space:normal;font-size:12px;color:var(--ink-2)">${esc(t.note)}</td><td>${usd(t.mc)}</td><td>${resCell(t.ck[5], !r60)}</td><td>${resCell(t.ck[15], !r60)}</td><td>${resCell(t.ck[60], !r60)}</td><td>${res}</td></tr>`;
+  }).join("");
+  return `<table class="trades"><thead><tr><th class="l">Entry (UTC)</th><th class="l">Coin</th><th class="l">Why it matched</th><th>Mcap in</th><th>+5m</th><th>+15m</th><th>+60m</th><th>Result</th></tr></thead><tbody>${rows || `<tr><td colspan="8" class="l" style="color:var(--ink-3)">No trades yet. The first match shows up here.</td></tr>`}</tbody></table>`
+    + (pages > 1 ? `<div class="pager">${Array.from({ length: Math.min(pages, 12) }, (_, i) => `<button class="btn sm ${i === p ? "ink" : "line"}" data-pg="${i}">${i + 1}</button>`).join("")}</div>` : "");
+}
+function dotPlot(rets, med) {
+  const W = 720, H = 240, pad = 30, LO = -100, HI = Math.max(100, Math.min(400, Math.ceil(Math.max(0, ...rets) / 50) * 50));
+  const x = v => pad + (Math.max(LO, Math.min(HI, v)) - LO) / (HI - LO) * (W - 2 * pad);
+  let seed = 3; const rnd = () => (seed = (seed * 9301 + 49297) % 233280) / 233280;
+  const ticks = []; for (let t = LO; t <= HI; t += HI > 200 ? 100 : 50) ticks.push(t);
+  let g = ticks.map(t => `<line x1="${x(t)}" x2="${x(t)}" y1="16" y2="${H - 26}" stroke="${t === 0 ? "var(--ink)" : "var(--rule)"}" stroke-width="${t === 0 ? 1.2 : 1}"/><text x="${x(t)}" y="${H - 8}" text-anchor="middle" font-family="DM Mono" font-size="11" fill="var(--ink-3)">${t > 0 ? "+" : t < 0 ? MINUS : ""}${Math.abs(t)}%</text>`).join("");
+  g += rets.slice(-400).map(v => `<circle cx="${x(v).toFixed(1)}" cy="${(30 + rnd() * (H - 70)).toFixed(1)}" r="4.2" fill="${v > 0 ? "var(--up)" : "var(--down)"}" fill-opacity=".72"/>`).join("");
+  if (med !== null && med !== undefined) g += `<line x1="${x(med)}" x2="${x(med)}" y1="8" y2="${H - 26}" stroke="var(--down)" stroke-width="2" stroke-dasharray="4 3"/><text x="${x(med) + 6}" y="18" font-family="DM Mono" font-size="11" fill="var(--down)">median ${pct(med)}</text>`;
+  if (!rets.length) g += `<text x="${W / 2}" y="${H / 2}" text-anchor="middle" font-family="Instrument Serif" font-size="24" fill="var(--ink-3)">No finished trades yet.</text>`;
+  return `<svg class="dots" viewBox="0 0 ${W} ${H}" role="img" aria-label="60-minute results">${g}</svg>`;
+}
+
+/* share card: 1200x630 canvas */
+async function shareCard(s) {
+  await document.fonts.ready;
+  const c = document.createElement("canvas"); c.width = 1200; c.height = 630; const x = c.getContext("2d");
+  const dead = s.status === "refuted", col = dead ? "#CF3229" : s.status === "surviving" ? "#13784A" : "#2D48D2";
+  x.fillStyle = "#ECECE8"; x.fillRect(0, 0, 1200, 630);
+  x.strokeStyle = "#121212"; x.lineWidth = 2; x.strokeRect(36, 36, 1128, 558); x.lineWidth = 1; x.strokeRect(46, 46, 1108, 538);
+  x.fillStyle = "#121212"; x.font = "500 18px 'DM Mono'"; x.fillText(dead ? "CERTIFICATE OF REFUTATION" : s.status === "surviving" ? "RECORD OF SURVIVAL" : "TRIAL RECORD", 84, 104);
+  x.textAlign = "right"; x.fillText("No. " + s.id, 1116, 104); x.textAlign = "left";
+  x.fillStyle = "#7E7E80"; x.font = "500 16px 'DM Mono'"; x.fillText(dead ? "HERE LIES" : "STRATEGY", 84, 178);
+  x.fillStyle = "#121212"; let fs = 104; x.font = `400 ${fs}px 'Instrument Serif'`; while (x.measureText(s.name).width > 760 && fs > 54) { fs -= 4; x.font = `400 ${fs}px 'Instrument Serif'`; }
+  x.fillText(s.name, 80, 178 + fs * .92);
+  x.font = "italic 400 30px 'Instrument Serif'"; x.fillStyle = "#47474A"; wrapText(x, "“" + s.myth + "”", 84, 178 + fs * .92 + 54, 760, 36);
+  const stats = [["TRADES", fmtN(s.done)], ["WON", s.hit === null ? "–" : s.hit.toFixed(0) + "%"], ["MEDIAN · 60M", pct(s.med60)], [dead ? "DIED" : "SINCE", dead ? day(s.diedAt) : day(s.born)]];
+  stats.forEach(([k, v], i) => { const X = 84 + i * 250; x.fillStyle = "#121212"; x.fillRect(X, 446, 220, 1.5); x.fillStyle = "#7E7E80"; x.font = "500 14px 'DM Mono'"; x.fillText(k, X, 474); x.fillStyle = k.startsWith("MEDIAN") ? (s.med60 > 0 ? "#13784A" : "#CF3229") : "#121212"; x.font = "400 38px 'DM Mono'"; x.fillText(v, X, 522); });
+  x.save(); x.translate(970, 280); x.rotate(-0.09); x.strokeStyle = col; x.fillStyle = col; x.lineWidth = 5; const tw = dead ? 300 : 320; x.strokeRect(-tw / 2, -46, tw, 92); x.lineWidth = 2; x.strokeRect(-tw / 2 + 9, -37, tw - 18, 74);
+  x.font = "500 40px 'DM Mono'"; x.textAlign = "center"; x.textBaseline = "middle"; x.fillText(dead ? "REFUTED" : s.status === "surviving" ? "SURVIVING" : "ON TRIAL", 0, 3); x.restore();
+  x.fillStyle = "#121212"; x.font = "500 16px 'DM Mono'"; x.fillText("REFUTED.FUN", 84, 570); x.textAlign = "right"; x.fillStyle = "#7E7E80"; x.fillText("MOST EDGES DIE HERE.", 1116, 570);
+  const a = document.createElement("a"); a.download = `refuted-${s.id}.png`; a.href = c.toDataURL("image/png"); a.click();
+}
+function wrapText(x, t, X, Y, w, lh) { const words = t.split(" "); let line = ""; for (const wd of words) { const tst = line ? line + " " + wd : wd; if (x.measureText(tst).width > w && line) { x.fillText(line, X, Y); line = wd; Y += lh; } else line = tst; } x.fillText(line, X, Y); }
+
+/* ===================================================================
+   submit builder (beta: posts to X, reviewed by hand)
+   =================================================================== */
+const METRIC = { bc: ["bonding", "%"], holders: ["holders", ""], top10: ["the top 10 share", "%"], dev: ["the dev's share", "%"], buys: ["5-minute buys", ""], mcap: ["market cap", "K"] };
+function buildRule() {
+  const m = $("#bMetric").value, op = $("#bOp").value, v = ($("#bVal").value || "").replace(/[^\d.]/g, "").slice(0, 6) || "0", w = +$("#bWin").value;
+  $("#bUnit").textContent = METRIC[m][1] === "K" ? "K" : METRIC[m][1];
+  const val = m === "mcap" ? "$" + v + "K" : v + METRIC[m][1];
+  const rule = `Buy when ${METRIC[m][0]} is ${op === "≥" ? "at least" : "at most"} ${val}${w ? ` within ${w === 60 ? "an hour" : w + " minutes"} of launch` : ""}.`;
+  const name = ($("#bName").value || "").trim() || "Unnamed edge";
+  const x = ($("#bX").value || "").trim().replace(/^@?/, "@");
+  const post = `@${CONFIG.xHandle} test this edge 🧪\n\n"${name}"\n${rule}${x.length > 1 ? `\n\nsubmitted by ${x}` : ""}\n\n${CONFIG.ticker}`;
+  $("#bPrev").textContent = post;
+  $("#bPost").href = "https://x.com/intent/post?text=" + encodeURIComponent(post);
+  return post;
+}
+
+/* ===================================================================
+   token + config wiring
+   =================================================================== */
+function wireConfig() {
+  const ca = CONFIG.ca.trim();
+  const fees = CONFIG.fees;
+  const bar = fees.map(f => `<div style="flex:${f.pct}">${f.pct}%</div>`).join("");
+  const list = fees.map(f => `<li><span>${esc(f.label)}</span><b>${f.pct}%</b></li>`).join("");
+  ["#feeBar", "#feeBar2"].forEach(s => $(s).innerHTML = bar);
+  ["#feeList", "#feeList2"].forEach(s => $(s).innerHTML = list);
+  $("#x2").href = CONFIG.x; $("#xFoot").href = CONFIG.x;
+  $("#dataFoot").href = `https://github.com/${CONFIG.repo}/tree/${CONFIG.dataBranch}`;
+  if (ca) {
+    [["#caBox", "#caT", "#caCopy"], ["#caBox2", "#caT2", "#caCopy2"]].forEach(([b, t, c]) => { $(b).classList.remove("empty"); $(t).textContent = ca; $(c).removeAttribute("aria-disabled"); $(c).onclick = () => copy(ca); });
+    const u = buyUrl(ca), chart = CONFIG.dexscreener || "https://dexscreener.com/solana/" + ca;
+    for (const s of ["#buyTop", "#buyMain", "#buy2"]) { const a = $(s); a.href = u; a.target = "_blank"; a.rel = "noopener"; a.removeAttribute("aria-disabled"); }
+    $("#chart2").href = chart; $("#chart2").removeAttribute("aria-disabled");
+    if (!/pump$/.test(ca)) { $("#buyMain").textContent = "Buy on Raydium"; $("#buy2").textContent = "Buy on Raydium"; }
+  } else {
+    $("#buy2").removeAttribute("href"); $("#chart2").removeAttribute("href");
+    $("#buy2").textContent = "Buy · CA at launch";
+  }
+}
+
+/* ===================================================================
+   router: #/ (home + #anchors) · #/s/S-01 · #/docs · #/token
+   =================================================================== */
+function show(id) { for (const m of ["#home", "#pStrategy", "#pDocs", "#pToken"]) $(m).classList.toggle("hide", m !== id); }
+let lastRoute = "";
+function route() {
+  const h = location.hash || "#/";
+  $$(".nav a").forEach(a => a.classList.toggle("on", a.getAttribute("href") === h));
+  if (h.startsWith("#/s/")) { const id = decodeURIComponent(h.slice(4)); show("#pStrategy"); if (lastRoute !== h) { tradePage = 0; scrollTo(0, 0); } lastRoute = h; renderStrategy(id); return; }
+  if (h === "#/docs") { show("#pDocs"); if (lastRoute !== h) scrollTo(0, 0); lastRoute = h; return; }
+  if (h === "#/token") { show("#pToken"); if (lastRoute !== h) scrollTo(0, 0); lastRoute = h; return; }
+  show("#home");
+  const anchor = h.startsWith("#/") ? "" : h.slice(1);
+  if (lastRoute.startsWith("#/") && lastRoute !== "#/" && !anchor) scrollTo(0, 0);
+  lastRoute = h;
+  if (anchor) { const el = document.getElementById(anchor); if (el) requestAnimationFrame(() => el.scrollIntoView()); }
+}
+
+/* ===================================================================
+   events + boot
+   =================================================================== */
+document.addEventListener("click", e => {
+  const row = e.target.closest("[data-sid]");
+  if (row && !e.target.closest("a")) { location.hash = "#/s/" + row.dataset.sid; return; }
+  const bf = e.target.closest("#boardSeg button"); if (bf) { boardFilter = bf.dataset.f; renderBoard(); return; }
+  const ff = e.target.closest("#feedSeg button"); if (ff) { feedFilter = ff.dataset.f; renderFeed(); return; }
+  const th = e.target.closest("#boardT th[data-sort]"); if (th) { const k = th.dataset.sort; boardSort = { k, d: boardSort.k === k ? -boardSort.d : 1 }; renderBoard(); return; }
+  const da = e.target.closest("[data-anchor]"); if (da) { e.preventDefault(); location.hash = "#/docs"; setTimeout(() => document.getElementById(da.dataset.anchor).scrollIntoView(), 30); return; }
+  if (e.target.closest("#burger")) { $("#sheet").classList.toggle("on"); return; }
+  if (e.target.closest("#sheet a")) $("#sheet").classList.remove("on");
+  if (e.target.closest("#bCopy")) copy(buildRule());
+});
+["#bMetric", "#bOp", "#bVal", "#bWin", "#bName", "#bX"].forEach(s => $(s).addEventListener("input", buildRule));
+window.addEventListener("hashchange", route);
+wireConfig(); buildRule(); route();
+loadLab().then(() => { liveIntake(); liveBench(); });
+setInterval(loadLab, CONFIG.poll * 1000);
+setInterval(liveIntake, 10000);
+setInterval(liveBench, 20000);
+setInterval(() => { if (LAB) { setLamp(LAB, SOURCE); renderBench(); } }, 15000);
+</script>
+</body>
+</html>

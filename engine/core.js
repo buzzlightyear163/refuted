@@ -76,7 +76,7 @@ function upsert(st, a, now) {
     if (!created) return null;
     T = st.tokens[a.id] = { m: a.id, s: clean(a.symbol).slice(0, 16), n: clean(a.name).slice(0, 40), c: created, fs: now, tw: 0, web: 0, tg: 0, dev0: null,
       bc: null, px: null, mc: null, h: null, pkBc: 0, pkPx: 0, t50: null, below50: false, hit50: false, fell: false, grad: 0, up: 0, ok: [] };
-    if (now - created < 30 * 60e3) { st.launches++; const hk = hourKey(created); st.hourly[hk] = (st.hourly[hk] || 0) + 1; }
+    if (now - created < 10 * 60e3) { st.launches++; const hk = hourKey(created); st.hourly[hk] = (st.hourly[hk] || 0) + 1; }
   }
   // socials only come with the discovery feed
   if (a.twitter) T.tw = 1; if (a.website) T.web = 1; if (a.telegram) T.tg = 1;

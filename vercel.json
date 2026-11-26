@@ -1,0 +1,8 @@
+{
+  "cleanUrls": true,
+  "git": { "deploymentEnabled": { "lab-data": false } },
+  "functions": { "api/lab.js": { "maxDuration": 10 } },
+  "headers": [
+    { "source": "/(.*)\\.png", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }] }
+  ]
+}
