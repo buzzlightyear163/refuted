@@ -597,6 +597,21 @@ h1.d3 em{font-style:normal;color:var(--down)}
 .board-foot .key i.sw{width:18px;height:6px;border-radius:3px}
 @media (max-width:860px){.board tr.row{grid-template-columns:repeat(3,minmax(0,1fr))}.board td.c-sp{grid-column:1/-1;order:-1}.board .srule{white-space:normal}}
 
+
+.surv-grid{grid-template-columns:1.1fr 1fr 1fr 1fr}
+.surv-grid .zero{display:flex;flex-direction:column;justify-content:space-between;padding:6px 10px 6px 0}
+.surv-grid .zero .zn{font:600 clamp(80px,9vw,140px)/.85 var(--sans);letter-spacing:-.06em;color:var(--down)}
+.surv-grid .zero .zn span{color:var(--ink-4);font-size:.45em;letter-spacing:-.03em}
+.surv-grid .zero p{color:var(--ink-2);font-size:15px;margin:18px 0 0;max-width:300px}
+.surv-grid .zero p b{color:var(--ink);font-weight:600;display:block;margin-bottom:4px}
+.scard .big .v{font:600 40px/1 var(--sans);letter-spacing:-.04em}
+.scard h3{font-size:26px}
+.scard .vbar{height:3px;border-radius:2px;background:#202328;overflow:hidden;margin-top:16px}
+.scard .vbar i{display:block;height:100%;background:var(--ink-2)}
+.scard .kv div{font:500 13px/1.3 var(--sans)}
+@media (max-width:1100px){.surv-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.surv-grid{grid-template-columns:1fr}}
+
 /* ---------- responsive ---------- */
 @media (max-width:1100px){
   .nav{display:none} .burger{display:grid}
@@ -1142,7 +1157,7 @@ function drawFan(box, paths, opt = {}) {
   if (med.length > 1) { c.save(); c.shadowColor = "rgba(255,255,255,.8)"; c.shadowBlur = 10; c.strokeStyle = "#fff"; c.lineWidth = 2.2; c.beginPath(); curve(c, med); c.stroke(); c.restore(); c.fillStyle = "#fff"; for (const q of med.slice(1)) { c.beginPath(); c.arc(q[0], q[1], 4, 0, 7); c.fill(); } }
   if (!paths.length) { c.fillStyle = "rgba(255,255,255,.35)"; c.font = "500 12px 'DM Mono'"; c.textAlign = "center"; c.fillText("NO TRADES YET · THE FIRST MATCH DRAWS THE FIRST LINE", w / 2, G.zero - 14); }
   let tag = "";
-  if (med.length > 1) { const lastK = K[med.length - 2], m = M[lastK], q = med[med.length - 1]; tag = `<div class="tag" style="left:${Math.min(w - 150, Math.max(150, q[0]))}px;top:${q[1]}px"><span class="l">Median · +${lastK} min</span><span class="v ${m.med > 0 ? "up" : ""}">${pct(m.med)}</span></div>`; }
+  if (med.length > 1) { const lastK = K[med.length - 2], m = M[lastK], q = med[med.length - 1]; tag = `<div class="tag" style="left:${Math.min(w - 260, Math.max(150, q[0]))}px;top:${q[1]}px"><span class="l">Median · +${lastK} min</span><span class="v ${m.med > 0 ? "up" : ""}">${pct(m.med)}</span></div>`; }
   const ax = [0, 5, 15, 60].map(k => `<span class="ax ${k && M[k] ? "on" : ""}" style="left:${G.xs[k]}px">${k ? "+" + k + " min" : "Entry"}</span>`).join("");
   const yl = [[100, "+100%"], [0, "entry"], [-50, "−50%"], [-100, opt.compact ? "−100%" : "−100% · the floor"]].map(([r, t]) => `<span class="yl" style="top:${G.y(r)}px">${t}</span>`).join("");
   const wait = !M[60] && paths.length ? `<span class="ax" style="left:${(G.xs[15] + G.xs[60]) / 2}px;bottom:auto;top:${G.zero + 14}px;color:var(--ink-3);letter-spacing:.08em">60-minute results land here</span>` : "";
@@ -1384,9 +1399,13 @@ function renderSurvivors() {
     <div class="big"><span class="v ${cls(s.med60)}">${pct(s.med60)}</span><span class="label">median at 60 min</span></div>
     <div class="kv"><div><span class="label">Hit</span>${s.hit === null ? "–" : s.hit.toFixed(0) + "%"}</div><div><span class="label">Trades</span>${fmtN(s.done)}</div><div><span class="label">Since</span>${s.survivedAt ? day(s.survivedAt) : "–"}</div></div>${strip(s)}</div>`;
   if (S.length) { $("#surv").innerHTML = S.slice(0, 6).map(card).join(""); $("#survNote").innerHTML = ""; return; }
-  const close = LAB.strategies.filter(s => s.status === "testing" && s.done >= 3 && s.med60 !== null).sort((a, b) => b.med60 - a.med60).slice(0, 3);
-  $("#surv").innerHTML = close.map(card).join("");
-  $("#survNote").innerHTML = `<div class="surv-note"><span class="chip testing">No survivors yet</span><span>Nothing has passed its verdict so far. ${close.length ? "These are the closest to the line, still under 30 trades." : "The first verdicts land once strategies reach 30 finished trades."}</span></div>`;
+  const judged = LAB.strategies.filter(s => s.status !== "testing").length;
+  const next = LAB.strategies.filter(s => s.status === "testing").sort((a, b) => b.done - a.done).slice(0, 3);
+  const ncard = s => `<div class="fig scard" data-sid="${s.id}"><div class="label">${s.id} · next verdict</div><h3>${esc(s.name)}</h3><p class="r">${esc(s.rule)}</p>
+    <div class="big"><span class="v ${cls(s.med60)}">${s.med60 === null ? "–" : pct(s.med60)}</span><span class="label">median at 60 min so far</span></div>
+    <div class="vbar"><i style="width:${Math.min(100, s.done / LAB.rule.minTrades * 100)}%"></i></div><div class="label" style="margin-top:8px">${s.done} of ${LAB.rule.minTrades} trades · ${s.hit === null ? "–" : s.hit.toFixed(0) + "% won"}</div></div>`;
+  $("#surv").innerHTML = `<div class="zero"><div class="zn">0<span>/${judged}</span></div><p><b>Nothing has survived its verdict.</b> ${judged ? `${judged} ${judged === 1 ? "strategy has" : "strategies have"} been judged so far, and every one of them was refuted.` : "The first verdicts land once strategies reach 30 finished trades."}</p></div>` + next.map(ncard).join("");
+  $("#survNote").innerHTML = "";
 }
 
 function renderYard() {

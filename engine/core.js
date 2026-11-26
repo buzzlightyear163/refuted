@@ -329,8 +329,10 @@ function buildLab(st, now, meta) {
   // trade paths for the hero chart: [strategy index, +5m, +15m, +60m] for the most recent 600 trades
   const sIdx = Object.fromEntries(st.strategies.map((x, i) => [x.id, i]));
   const rr = (t, k) => t.ck[k] && t.ck[k].r !== null ? Math.round(t.ck[k].r * 10) / 10 : null;
-  const paths = st.open.concat(...Object.values(st.done)).sort((a, b) => b.at - a.at).slice(0, 600)
-    .map(t => [sIdx[t.s] ?? -1, rr(t, 5), rr(t, 15), rr(t, 60), Math.round((now - t.at) / 1000)]);
+  // half finished trades (full hour), half still running, newest first
+  const finished = [].concat(...Object.values(st.done)).filter(t => t.ck[60] && t.ck[60].r !== null).sort((a, b) => b.closed - a.closed).slice(0, 360);
+  const running = st.open.slice().sort((a, b) => b.at - a.at).slice(0, 240);
+  const paths = finished.concat(running).map(t => [sIdx[t.s] ?? -1, rr(t, 5), rr(t, 15), rr(t, 60), Math.round((now - t.at) / 1000)]);
   return {
     v: 1, updatedAt: now, startedAt: st.started, pulse, paths,
     sync: { every: meta.every || 300, runs: st.runs.n, lastRunMs: meta.runMs || 0, reads: meta.reads || 0, source: "jupiter" },
