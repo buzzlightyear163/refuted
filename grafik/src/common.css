@@ -1,0 +1,6 @@
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--paper:#ECECE8;--card:#F6F6F3;--ink:#121212;--ink2:#47474A;--ink3:#7E7E80;--rule:#D3D3CE;--up:#13784A;--down:#CF3229;--test:#2D48D2;--testbg:#DCE1F7;--night:#111214;--bone:#E6E5E0;--bone2:#9C9CA0}
+body{font-family:"Inter Tight",sans-serif;-webkit-font-smoothing:antialiased}
+.serif{font-family:"Instrument Serif",serif}.mono{font-family:"DM Mono",monospace}
+.grain::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .07 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.grid{background-image:linear-gradient(var(--rule) 1px,transparent 1px),linear-gradient(90deg,var(--rule) 1px,transparent 1px);background-size:40px 40px}

@@ -59,8 +59,7 @@ button,input,select{font:inherit;color:inherit}
 .top{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 86%,transparent);backdrop-filter:saturate(1.2) blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--rule)}
 .top .wrap{display:flex;align-items:center;gap:22px;height:62px}
 .brand{display:flex;align-items:center;gap:10px;font:700 15px/1 var(--sans);letter-spacing:.16em}
-.mark{width:26px;height:26px;border-radius:50%;border:1.6px solid var(--down);display:grid;place-items:center;color:var(--down);font:500 15px/1 var(--mono);position:relative}
-.mark::after{content:"";position:absolute;inset:2.5px;border:1px solid var(--down);border-radius:50%;opacity:.55}
+.mark{width:28px;height:28px;color:var(--down);flex:none}
 .nav{display:flex;gap:2px;margin-left:12px}
 .nav a{font:500 13px/1 var(--sans);color:var(--ink-2);padding:9px 11px;border-radius:999px;transition:background .2s,color .2s}
 .nav a:hover,.nav a.on{color:var(--ink);background:var(--paper-2)}
@@ -126,6 +125,7 @@ h1.display em{font-style:italic;color:var(--down);position:relative}
 .fr-track .iqr{position:absolute;top:50%;height:4px;margin-top:-2px;border-radius:2px;background:currentColor;opacity:.28;transition:left .9s var(--ease),width .9s var(--ease)}
 .fr-track .med{position:absolute;top:50%;width:11px;height:11px;margin:-5.5px 0 0 -5.5px;border-radius:50%;background:currentColor;transition:left .9s var(--ease);box-shadow:0 0 0 3px var(--card)}
 .fr-track .med.hollow{background:var(--card);border:1.5px solid currentColor}
+.fr-track .med.early{background:var(--card);border:1.5px dashed var(--ink-3);width:10px;height:10px;margin:-5px 0 0 -5px}
 .fr-track .wait{position:absolute;left:0;right:0;top:50%;border-top:1px dashed var(--rule-2)}
 .fr-track .off{position:absolute;top:50%;transform:translateY(-50%);font:500 10px/1 var(--mono)}
 .fr-meta{display:flex;justify-content:flex-end;align-items:center;gap:8px}
@@ -185,7 +185,7 @@ section.block{position:relative;z-index:1;padding:clamp(64px,8vw,112px) 0 0}
 .board .sid{font:400 12px/1 var(--mono);color:var(--ink-3)}
 .board .sname{font:600 15.5px/1.25 var(--sans);letter-spacing:-.005em;display:flex;align-items:center;gap:8px}
 .board .srule{font:400 13px/1.4 var(--sans);color:var(--ink-2);margin-top:4px;max-width:440px}
-.board .agent{font:500 10.5px/1 var(--mono);letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase}
+.board .sagent{font:500 10.5px/1 var(--mono);letter-spacing:.06em;color:var(--ink-3);text-transform:uppercase;margin-top:7px}
 .ev{display:flex;align-items:center;gap:10px;justify-content:flex-end}
 .strip{display:grid;grid-template-columns:repeat(30,4px);gap:2px;height:16px;align-items:stretch}
 .strip i{display:block;border-radius:1px;background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--rule)}
@@ -201,7 +201,7 @@ section.block{position:relative;z-index:1;padding:clamp(64px,8vw,112px) 0 0}
 /* ---------- feed ---------- */
 .feed-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:clamp(20px,3vw,40px);padding-top:28px}
 .feed-top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;flex-wrap:wrap}
-.feed{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule);max-height:640px;overflow:auto;scrollbar-width:thin}
+.feed{list-style:none;margin:0;padding:0;border-top:1px solid var(--rule);max-height:820px;overflow:auto;scrollbar-width:thin}
 .feed li{display:grid;grid-template-columns:64px 82px minmax(0,1fr);gap:12px;align-items:baseline;padding:11px 2px;border-bottom:1px solid var(--rule);font-size:13.5px;line-height:1.45}
 .feed li.new{animation:slide .6s var(--ease)}
 @keyframes slide{from{opacity:0;transform:translateY(-6px);background:var(--card)}to{opacity:1;transform:none}}
@@ -444,7 +444,7 @@ details.faq p{margin:10px 0 0}
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="#/" aria-label="REFUTED home"><span class="mark">⊥</span>REFUTED</a>
+    <a class="brand" href="#/" aria-label="REFUTED home"><svg class="mark" viewBox="0 0 512 512" aria-hidden="true"><g fill="none" stroke="currentColor"><circle cx="256" cy="256" r="220" stroke-width="30"/><circle cx="256" cy="256" r="172" stroke-width="12"/></g><rect x="230" y="146" width="52" height="170" fill="currentColor"/><rect x="166" y="316" width="180" height="50" fill="currentColor"/></svg>REFUTED</a>
     <nav class="nav" id="nav">
       <a href="#board">Board</a><a href="#feed">Feed</a><a href="#survivors">Survivors</a><a href="#graveyard">Graveyard</a><a href="#fleet">Fleet</a><a href="#/docs" data-page="docs">Docs</a><a href="#/token" data-page="token">$REFUTED</a>
     </nav>
@@ -483,7 +483,7 @@ details.faq p{margin:10px 0 0}
       <figure class="fig" style="margin:0">
         <div class="fig-h"><b>Fig. 1 — The trial</b><span class="label" id="figUpd">median return · 60 min after entry</span></div>
         <div class="forest" id="forest"></div>
-        <p class="fig-cap"><i>Dot</i> = median trade. <i>Bar</i> = the middle half of all trades. <i>Hollow</i> = still under 30 trades. Left of the black line loses money. Click a row for every trade.</p>
+        <p class="fig-cap"><i>Dot</i> = median trade. <i>Bar</i> = the middle half of all trades. <i>Hollow</i> = still under 30 trades. <i>Dashed</i> = early read at 5 or 15 min, before the first 60-min results. Left of the black line loses money.</p>
       </figure>
     </div>
   </section>
@@ -866,7 +866,9 @@ function renderForest() {
   for (const s of rows) {
     const col = s.status === "refuted" ? "c-down" : s.status === "surviving" ? "c-up" : s.med60 === null ? "c-mute" : s.med60 >= 0 ? "c-up" : "c-down";
     let track = ticks.map(t => t === 0 ? "" : `<i class="grid" style="left:${scaleX(t, LO, HI)}%"></i>`).join("") + `<i class="zero" style="left:${scaleX(0, LO, HI)}%"></i>`;
-    if (s.med60 === null) track += `<i class="wait"></i>`;
+    const early = s.med60 === null ? (s.med15 ?? s.med5 ?? null) : null;
+    if (s.med60 === null && early === null) track += `<i class="wait"></i>`;
+    else if (s.med60 === null) track += `<i class="wait"></i><i class="med early" style="left:${scaleX(early, LO, HI)}%" title="early read ${pct(early)} (${s.med15 !== null && s.med15 !== undefined ? "15" : "5"} min)"></i>`;
     else {
       const a = scaleX(s.q1 ?? s.med60, LO, HI), b = scaleX(s.q3 ?? s.med60, LO, HI);
       track += `<i class="iqr ${col}" style="left:${a}%;width:${Math.max(1, b - a)}%"></i><i class="med ${col} ${s.done < LAB.rule.minTrades ? "hollow" : ""}" style="left:${scaleX(s.med60, LO, HI)}%" title="median ${pct(s.med60)}"></i>`;
@@ -901,7 +903,7 @@ function renderBoard() {
   if (!list.length) { $("#boardB").innerHTML = `<tr><td colspan="8" class="board-empty">Nothing here yet.</td></tr>`; return; }
   $("#boardB").innerHTML = list.map(s => `<tr class="row ${s.status === "refuted" ? "dead" : ""}" data-sid="${s.id}">
     <td class="l c-id"><span class="sid">${s.id}</span></td>
-    <td class="l c-name"><div class="sname">${esc(s.name)}</div><div class="srule">${esc(s.rule)}</div><div class="agent" style="margin-top:6px">${esc(s.agent)} · ${s.matched} ${s.matched === 1 ? "match" : "matches"}</div></td>
+    <td class="l c-name"><div class="sname">${esc(s.name)}</div><div class="srule">${esc(s.rule)}</div><div class="sagent">${esc(s.agent)} · ${s.matched} ${s.matched === 1 ? "match" : "matches"}</div></td>
     <td class="c-ev" data-k="Evidence"><div class="ev">${strip(s)}<span class="cnt">${Math.min(s.done, 9999)}/${LAB.rule.minTrades}</span></div></td>
     <td data-k="Hit" class="${s.hit === null ? "flat" : s.hit >= LAB.rule.hit ? "up" : "down"}">${s.hit === null ? "–" : s.hit.toFixed(0) + "%"}</td>
     <td data-k="5m" class="${cls(s.med5)}">${pct(s.med5)}</td>
@@ -933,7 +935,7 @@ function renderFeed() {
 /* live in the browser: intake (new launches) + live price of open paper trades */
 let livePx = {}, intakeSeen = new Set();
 function renderBench() {
-  const b = (LAB.bench || []).slice(0, 9);
+  const b = (LAB.bench || []).slice(0, 6);
   $("#benchT").textContent = `${fmtN(LAB.totals.open)} open paper trades`;
   $("#bench").innerHTML = b.map(t => {
     const ks = LAB.rule.checkpoints, next = ks.find(k => !t.ck[k]);
@@ -956,11 +958,11 @@ async function liveIntake() {
   } catch (e) {}
   let rows;
   if (pools && pools.length) {
-    rows = pools.slice(0, 8).map(p => ({ m: p.baseAsset.id, y: String(p.baseAsset.symbol || "?").replace(/^\$+/, "").slice(0, 12), c: Date.parse(p.baseAsset.createdAt), bc: p.bondingCurve || 0, h: p.baseAsset.holderCount || 0 }));
+    rows = pools.slice(0, 6).map(p => ({ m: p.baseAsset.id, y: String(p.baseAsset.symbol || "?").replace(/^\$+/, "").slice(0, 12), c: Date.parse(p.baseAsset.createdAt), bc: p.bondingCurve || 0, h: p.baseAsset.holderCount || 0 }));
     $("#intakeT").textContent = "live from pump.fun";
-  } else if (LAB) { rows = (LAB.intake || []).slice(0, 8); $("#intakeT").textContent = "last lab sync"; }
+  } else if (LAB) { rows = (LAB.intake || []).slice(0, 6); $("#intakeT").textContent = "last lab sync"; }
   if (!rows) return;
-  $("#intake").innerHTML = rows.map(t => { const n = !intakeSeen.has(t.m); intakeSeen.add(t.m); return `<li class="${n && intakeSeen.size > 8 ? "new" : ""}"><div><div class="sym"><a href="${coinUrl(t.m)}" target="_blank" rel="noopener">$${esc(t.y)}</a></div><div class="sub">${ago(t.c)} · ${t.h} holders</div></div><div class="right"><span class="bar"><i style="width:${Math.min(100, t.bc || 0)}%"></i></span>${(t.bc || 0).toFixed(1)}%</div></li>`; }).join("");
+  $("#intake").innerHTML = rows.map(t => { const n = !intakeSeen.has(t.m); intakeSeen.add(t.m); return `<li class="${n && intakeSeen.size > 6 ? "new" : ""}"><div><div class="sym"><a href="${coinUrl(t.m)}" target="_blank" rel="noopener">$${esc(t.y)}</a></div><div class="sub">${ago(t.c)} · ${t.h} holders</div></div><div class="right"><span class="bar"><i style="width:${Math.min(100, t.bc || 0)}%"></i></span>${(t.bc || 0).toFixed(1)}%</div></li>`; }).join("");
 }
 
 function renderSurvivors() {
@@ -1045,8 +1047,8 @@ function paintStrategy(s, file) {
   $("#shDl").onclick = () => shareCard(s);
   const pg = $("#tradesW"); pg.onclick = e => { const b = e.target.closest("[data-pg]"); if (!b || !trades) return; tradePage = +b.dataset.pg; pg.innerHTML = tradeTable(trades); };
 }
-function resCell(c, open) {
-  if (!c) return open ? `<span class="res o">open</span>` : `<span class="res x">–</span>`;
+function resCell(c, open, first) {
+  if (!c) return open ? (first ? `<span class="res o">pending</span>` : `<span style="color:var(--ink-4)">·</span>`) : `<span class="res x">–</span>`;
   if (c.r === null) return `<span class="res x">miss</span>`;
   return `<span class="${cls(c.r)}">${pct(c.r)}</span>${c.src && c.src !== "live" ? `<span class="src">${c.src}</span>` : ""}`;
 }
@@ -1055,7 +1057,7 @@ function tradeTable(trades) {
   const rows = trades.slice(p * per, p * per + per).map(t => {
     const r60 = t.ck[60];
     const res = !r60 ? `<span class="res o">open</span>` : r60.r === null ? `<span class="res x">miss</span>` : r60.r > 0 ? `<span class="res w">won</span>` : `<span class="res l">lost</span>`;
-    return `<tr><td class="l">${day(t.at)} ${hms(t.at).slice(0, 5)}</td><td class="l"><a href="${coinUrl(t.m)}" target="_blank" rel="noopener">$${esc(t.y)}</a><span class="nm">${esc(t.n)} · ${short(t.m)}</span></td><td class="l" style="white-space:normal;font-size:12px;color:var(--ink-2)">${esc(t.note)}</td><td>${usd(t.mc)}</td><td>${resCell(t.ck[5], !r60)}</td><td>${resCell(t.ck[15], !r60)}</td><td>${resCell(t.ck[60], !r60)}</td><td>${res}</td></tr>`;
+    return `<tr><td class="l">${day(t.at)} ${hms(t.at).slice(0, 5)}</td><td class="l"><a href="${coinUrl(t.m)}" target="_blank" rel="noopener">$${esc(t.y)}</a><span class="nm">${esc(t.n)} · ${short(t.m)}</span></td><td class="l" style="white-space:normal;font-size:12px;color:var(--ink-2)">${esc(t.note)}</td><td>${usd(t.mc)}</td><td>${resCell(t.ck[5], !r60, true)}</td><td>${resCell(t.ck[15], !r60, !!t.ck[5])}</td><td>${resCell(t.ck[60], !r60, !!t.ck[15])}</td><td>${res}</td></tr>`;
   }).join("");
   return `<table class="trades"><thead><tr><th class="l">Entry (UTC)</th><th class="l">Coin</th><th class="l">Why it matched</th><th>Mcap in</th><th>+5m</th><th>+15m</th><th>+60m</th><th>Result</th></tr></thead><tbody>${rows || `<tr><td colspan="8" class="l" style="color:var(--ink-3)">No trades yet. The first match shows up here.</td></tr>`}</tbody></table>`
     + (pages > 1 ? `<div class="pager">${Array.from({ length: Math.min(pages, 12) }, (_, i) => `<button class="btn sm ${i === p ? "ink" : "line"}" data-pg="${i}">${i + 1}</button>`).join("")}</div>` : "");
@@ -1098,7 +1100,12 @@ function wrapText(x, t, X, Y, w, lh) { const words = t.split(" "); let line = ""
    submit builder (beta: posts to X, reviewed by hand)
    =================================================================== */
 const METRIC = { bc: ["bonding", "%"], holders: ["holders", ""], top10: ["the top 10 share", "%"], dev: ["the dev's share", "%"], buys: ["5-minute buys", ""], mcap: ["market cap", "K"] };
+function fitSelects() {
+  const c = fitSelects.c || (fitSelects.c = document.createElement("canvas").getContext("2d"));
+  for (const el of $$("#sentence select")) { const cs = getComputedStyle(el); c.font = `${cs.fontStyle} ${cs.fontWeight} ${cs.fontSize} ${cs.fontFamily}`; el.style.width = Math.ceil(c.measureText(el.options[el.selectedIndex].text).width + 6) + "px"; }
+}
 function buildRule() {
+  fitSelects();
   const m = $("#bMetric").value, op = $("#bOp").value, v = ($("#bVal").value || "").replace(/[^\d.]/g, "").slice(0, 6) || "0", w = +$("#bWin").value;
   $("#bUnit").textContent = METRIC[m][1] === "K" ? "K" : METRIC[m][1];
   const val = m === "mcap" ? "$" + v + "K" : v + METRIC[m][1];
@@ -1169,7 +1176,7 @@ document.addEventListener("click", e => {
 });
 ["#bMetric", "#bOp", "#bVal", "#bWin", "#bName", "#bX"].forEach(s => $(s).addEventListener("input", buildRule));
 window.addEventListener("hashchange", route);
-wireConfig(); buildRule(); route();
+wireConfig(); buildRule(); route(); document.fonts && document.fonts.ready.then(fitSelects);
 loadLab().then(() => { liveIntake(); liveBench(); });
 setInterval(loadLab, CONFIG.poll * 1000);
 setInterval(liveIntake, 10000);

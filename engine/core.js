@@ -233,10 +233,13 @@ function quant(a, q) { if (!a.length) return null; const b = a.slice().sort((x, 
 function stats(st, s) {
   const R = st.rets[s.id] || { r5: [], r15: [], r60: [] }, a = R.r60;
   const wins = a.filter(x => x > 0).length;
+  // 5 and 15 min also count trades that are still open (their early checkpoints are already in)
+  const openCk = k => st.open.filter(t => t.s === s.id && t.ck[k] && t.ck[k].r !== null).map(t => t.ck[k].r);
+  const e5 = R.r5.concat(openCk(5)), e15 = R.r15.concat(openCk(15));
   return {
     done: a.length, open: st.open.filter(t => t.s === s.id).length,
     hit: a.length ? r1(100 * wins / a.length) : null,
-    med5: r1(median(R.r5)), med15: r1(median(R.r15)), med60: r1(median(a)), mean60: a.length ? r1(a.reduce((x, y) => x + y, 0) / a.length) : null,
+    med5: r1(median(e5)), med15: r1(median(e15)), n5: e5.length, n15: e15.length, med60: r1(median(a)), mean60: a.length ? r1(a.reduce((x, y) => x + y, 0) / a.length) : null,
     q1: r1(quant(a, 0.25)), q3: r1(quant(a, 0.75)), best: a.length ? r1(Math.max(...a)) : null, worst: a.length ? r1(Math.min(...a)) : null,
   };
 }
@@ -332,7 +335,7 @@ function slimTrade(t) {
   return { id: t.id, s: t.s, m: t.m, y: t.y, n: t.n, at: t.at, px: t.px, mc: t.mc ? Math.round(t.mc) : null, bc: t.bc, age: t.age, h: t.h, note: t.note, ck, closed: t.closed || 0 };
 }
 function buildStrategyFile(st, s, now) {
-  const trades = st.open.filter(t => t.s === s.id).concat((st.done[s.id] || []).slice().reverse()).map(slimTrade);
+  const trades = st.open.filter(t => t.s === s.id).sort((a, b) => b.at - a.at).concat((st.done[s.id] || []).slice().reverse()).map(slimTrade);
   return { v: 1, updatedAt: now, strategy: publicStrategy(st, s), rets: st.rets[s.id] || { r5: [], r15: [], r60: [] }, trades };
 }
 
