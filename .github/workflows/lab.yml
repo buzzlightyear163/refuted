@@ -10,6 +10,7 @@ on:
     paths: [".github/workflows/lab.yml", "engine/**"]
 permissions:
   contents: write
+  actions: write
 concurrency:
   group: lab
   cancel-in-progress: false
@@ -42,3 +43,12 @@ jobs:
           git add -A
           git -c user.name="refuted-lab" -c user.email="lab@users.noreply.github.com" commit -qm "lab sync $(date -u +%Y-%m-%dT%H:%MZ)"
           git push -qf "https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}.git" lab-data:lab-data
+      # GitHub's cron is often late or skipped, so each run queues the next one (only one waits at a time).
+      # If a run fails, the chain stops and the cron above starts it again.
+      - name: Queue the next run
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          waiting=$(gh run list -R "$GITHUB_REPOSITORY" --workflow lab.yml --limit 20 --json status -q '[.[] | select(.status=="queued" or .status=="pending" or .status=="waiting" or .status=="requested")] | length' || echo 1)
+          if [ "$waiting" = "0" ]; then gh workflow run lab.yml -R "$GITHUB_REPOSITORY" --ref main && echo "next run queued"; else echo "a run is already waiting"; fi

@@ -326,8 +326,13 @@ function buildLab(st, now, meta) {
   for (const t of st.open.concat(...Object.values(st.done))) for (const k of RULE.checkpoints) if (t.ck[k] && t.ck[k].r !== null) all[k].push(t.ck[k].r);
   const pulse = {};
   for (const k of RULE.checkpoints) pulse["m" + k] = { med: r1(median(all[k])), n: all[k].length, down: all[k].length ? r1(100 * all[k].filter(x => x <= 0).length / all[k].length) : null };
+  // trade paths for the hero chart: [strategy index, +5m, +15m, +60m] for the most recent 600 trades
+  const sIdx = Object.fromEntries(st.strategies.map((x, i) => [x.id, i]));
+  const rr = (t, k) => t.ck[k] && t.ck[k].r !== null ? Math.round(t.ck[k].r * 10) / 10 : null;
+  const paths = st.open.concat(...Object.values(st.done)).sort((a, b) => b.at - a.at).slice(0, 600)
+    .map(t => [sIdx[t.s] ?? -1, rr(t, 5), rr(t, 15), rr(t, 60), Math.round((now - t.at) / 1000)]);
   return {
-    v: 1, updatedAt: now, startedAt: st.started, pulse,
+    v: 1, updatedAt: now, startedAt: st.started, pulse, paths,
     sync: { every: meta.every || 300, runs: st.runs.n, lastRunMs: meta.runMs || 0, reads: meta.reads || 0, source: "jupiter" },
     rule: RULE,
     totals: { launches: st.launches, launches24h: h24, watching: Object.keys(st.tokens).length, trades: strategies.reduce((a, s) => a + s.matched, 0), open: st.open.length, done: allDone,
