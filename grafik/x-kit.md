@@ -1,106 +1,118 @@
-# REFUTED — X-kit
+# REFUTED — X-kit (uppdaterad 26 nov, ny stil med kolven)
 
 ## Namn, ticker, handle, domän
 - **Nuvarande:** REFUTED ($REFUTED) – Most edges die here.
-- Alternativ: GRAVEYARD ($GRAVE) – Where edges go to die. · VERDICT ($VERDICT) – Thirty trades. Then the truth. · BACKTEST ($TESTED) – Tested live, not in theory.
+- Alternativ: GRAVEYARD ($GRAVE) – Where edges go to die. · VERDICT ($VERDICT) – Thirty trades. Then the truth. · TESTED ($TESTED) – Tested live, not in theory.
 - **Handle:** @RefutedLab (bäst: säger "labb" direkt) · @RefutedFun · @RefutedXYZ
-- **Domän:** refuted.fun (ledig 26 nov) · refutedlab.fun · refuted.xyz
+- **Domän:** refuted.fun (ej köpt än) · refutedlab.fun · refuted.xyz
 - **Visningsnamn:** REFUTED
 - Kolla själv att handle/domän är lediga och att ingen aktiv coin kör $REFUTED på Axiom/DexScreener.
 
-**Kärnmening (postas inte):** $REFUTED is an open lab that tests the trenches' favorite entry rules live on every new pump.fun launch, on paper, and buries the ones that lose.
+**Kärnmening (postas inte):** $REFUTED is an open lab that paper-tests the trenches' favorite entry rules live on every new pump.fun launch, and publicly buries the ones that lose.
 
 ## Bio (ingen $ticker)
 
-Manifest (150):
+Manifest (153):
 ```text
-Most edges die here. An open lab testing trench entry rules live on every new pump.fun launch. Live board, public feed and a graveyard for the losers.
+Most edges die here. Trench entry rules, paper-tested live on every new pump.fun launch. 30 trades, one verdict, a graveyard for the rest.
 ```
 
-Överblick (152):
+Överblick (157):
 ```text
-Trench entry rules, tested live on every new pump.fun launch.
-· live board: 30 paper trades per rule
-· graveyard: causes of death
-· submit your own edge
+Trench entry rules, paper-tested on every new pump.fun launch.
+· the board: 30 trades per rule
+· the graveyard: how they died
+· submit an edge
 ```
 
 - Webbplats: refuted.fun (fylls i när launch-inlägget postas)
 - Plats: `the graveyard`
+- Profilbild: `grafik/pfp.png` (kolven). Banner: `grafik/banner.png`.
 
-## Launch-inlägg (~1 190 tecken · vecket efter "refuted.fun")
-Bifoga: `grafik/launch.png` (status Live).
+## Launch-inlägg (~1,264 tecken · vecket efter "refuted.fun")
+Bifoga: `grafik/launch.mp4` (17 s). Reserv: `grafik/launch.png`.
+Siffrorna (40 / 28 / 0 / 93.7%) är från 26 nov kl. 21. Uppdatera dem från sajten precis innan du postar, och kolla att Survivors fortfarande står på 0.
 
 ```text
 $REFUTED is live.
 
-The trenches are full of entry rules everyone swears by and nobody has tested. REFUTED tests them live, on every new pump.fun launch, in public. Thirty paper trades each. The losers get buried.
+The trenches swear by entry rules nobody has ever tested. So we built a lab that tests them live, on every new pump.fun launch, in public.
+
+40 rules on trial. 28 already dead. None survived.
 
 refuted.fun
 
-Fast fifty. Fat dev bag. Buy the first dip. The final stretch.
-Every one of them is on trial right now.
+Fast fifty. Fat dev bag. The final stretch. Holder rush. Buy the first dip. Every one of them has already been refuted.
 
-→ Live Board: each strategy is one plain rule, with its hit rate and median result at +5, +15 and +60 minutes
-→ Feed: every match, checkpoint and verdict as it happens
-→ Graveyard: every refuted edge gets a stone and a cause of death
-→ Survivors: the rules that actually held up
+How it works:
+→ Each strategy is one plain rule, paper-traded on every launch that matches it
+→ The price is read 5, 15 and 60 minutes after entry, minus 2% for fees and slippage
+→ After 30 finished trades the Examiner rules: a median below 0% at 60 minutes, or under 40% winners, means REFUTED
+
+On the site:
+→ The board: every rule on trial, its 30 trades filling in live
+→ The graveyard: a stone for every dead rule, with the myth it was built on and how it died
+→ Survivors: 0 so far
 → Strategy pages: every paper trade, coin by coin
+→ Submit your own edge. If it's accepted, it goes on trial under your name
 
-The verdict is one rule. 30 finished trades. Median below 0% an hour after entry, or under 40% winners: REFUTED. Otherwise it survives and keeps getting tested.
+So far, 93.7% of all paper trades were below entry an hour after the buy.
 
-The lab runs around the clock on real launches, whether anyone is watching or not. 2% comes off every trade for fees and slippage. Nothing is edited after the fact.
-
-Got an edge you swear by? Submit it on the site. Accepted edges go on trial under your name.
+The lab runs around the clock on real launches, whether anyone is watching or not. Nothing is edited after the fact.
 
 Creator fees keep the lab running and buy back $REFUTED.
 
 Most edges die here.
 ```
 
-Svar 1 – CA (118):
+Svar 1 – CA (125):
 ```text
 CA: [CA]
 
-The only CA. Every trade the lab takes is on refuted.fun.
+The only CA. Every trade the lab takes is public on refuted.fun.
 ```
 
 ## Efter launch
 
-**1. Första timmarna – CA och kärnan** (201)
+**1. Första timmarna – CA och kärnan** (213)
 ```text
-The open lab testing trench entry rules on every new pump.fun launch. 30 paper trades per rule, then a verdict.
+An open lab that tests trench entry rules on every new pump.fun launch. 30 paper trades per rule, then a verdict. Most die.
 
 CA: [CA]
 
 refuted.fun
 ```
 
-**2. Dag 1–2 – Graveyard på djupet** (645) · bifoga skärmdump av kyrkogården eller ett dödsattest-kort från en strategisida
+**2. Dag 1–2 – kyrkogården på djupet** (588) · bifoga skärmdump av Graduation Chase-sidan (/#/s/S-03) eller kyrkogården
 ```text
-Every edge that dies gets a stone.
+Graduation Chase is dead.
 
-The REFUTED graveyard is where the trenches' favorite entry rules end up once the Examiner rules on them. Each stone has the rule, the folklore behind it, when it was born and when it died.
+The rule: buy in the first 90 seconds after a coin migrates. The myth: "Migration is the real launch."
 
-Three ways to die:
-→ Bled out: median below 0% an hour after entry
-→ Lost the coin flip: under 40% of trades won
-→ Starved: the setup barely ever happens on pump.fun
+30 paper trades later, the median trade was down 95.3% an hour after entry. 3 of 30 won.
 
-Click a stone and you get the autopsy: the cause of death, the result of every single paper trade, and a death certificate card ready to post.
+It now has a stone in the REFUTED graveyard, next to 27 other rules the trenches swear by.
 
-Try it: refuted.fun, scroll to the graveyard, pick the edge you used to trust.
+Every stone shows:
+→ the rule and the myth it was built on
+→ its last 30 trades as red and green squares
+→ the cause of death
+→ the full autopsy: every paper trade, coin by coin
+
+Try it: refuted.fun, scroll to the graveyard and find the rule you used to trust.
 ```
 
-**3. Dag 2–3 – milstolpe + narrativet** (571) · fyll i eller stryk första raden
+**3. Dag 2–3 – milstolpe + noll överlevare** (533) · fyll i eller stryk första raden, kolla att Survivors fortfarande är 0
 ```text
-[X] holders. [X] edges buried so far.
+[X] holders. [X] rules buried.
 
-REFUTED exists for one reason: so you can see which entry rules actually hold up on real pump.fun launches before you risk anything on them.
+Still zero survivors.
 
-Every rule on the board is a thing someone in the trenches swears by. The lab gives each one the same 30 paper trades and the same verdict. Most die. The few that survive are worth knowing about, and they stay on trial after every new trade.
+That isn't the lab being harsh. Every strategy gets the same test: after 30 trades, a median above 0% at 60 minutes and at least 40% winners. Nothing the trenches swear by has passed it yet.
 
-Have a rule of your own? Write it on the site, post it, and if it's accepted it goes on trial under your name.
+That's the point of REFUTED. You see which entry rules hold up on real pump.fun launches before you risk anything on them.
+
+New rules keep going on trial, and you can submit your own on the site. The first one that survives shows up under Survivors.
 
 Most edges die here.
 ```

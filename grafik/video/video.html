@@ -1,0 +1,151 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><style>html,body{margin:0;background:#000}canvas{display:block}</style></head>
+<body><canvas id="c" width="1920" height="1080"></canvas>
+<script src="termkit.js"></script>
+<script>
+// REFUTED launch video. frame(t) draws the moment t (seconds) deterministically.
+const C = window.CFG, T = TK.THEMES.stone, W = 1920, H = 1080;
+const cv = document.getElementById("c"), x = cv.getContext("2d");
+const COL = { bg: "#e1dfd9", paper: "#ebe9e3", ink: "#171614", mut: "#75716a", faint: "#a7a39a", hair: "#c8c5bd", line: "#2b2926", red: "#d63a26", up: "#23854c", shadow: "#cfccc4" };
+const DISP = "Martian Mono", MONO = "IBM Plex Mono", PIX = "Silkscreen";
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v)), p01 = (t, a, b) => clamp((t - a) / (b - a));
+const eo = k => 1 - Math.pow(1 - k, 3), eio = k => k < .5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+const back = k => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(k - 1, 3) + c1 * Math.pow(k - 1, 2); };
+const fmt = n => Number(n).toLocaleString("en-US"), pct = v => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(1) + "%";
+function font(w, s, f) { x.font = `${w} ${s}px "${f}"`; }
+function txt(s, X, Y, w, sz, f, col, al = "left", ls = 0) { font(w, sz, f); x.fillStyle = col; x.textAlign = al; x.letterSpacing = ls + "px"; x.fillText(s, X, Y); const m = x.measureText(s).width; x.letterSpacing = "0px"; return m; }
+function tw(s, w, sz, f, ls = 0) { font(w, sz, f); x.letterSpacing = ls + "px"; const m = x.measureText(s).width; x.letterSpacing = "0px"; return m; }
+function typed(s, t, t0, cps) { return s.slice(0, Math.max(0, Math.floor((t - t0) * cps))); }
+function cursor(X, Y, h, t, on = true) { if (on && Math.floor(t * 2.2) % 2 === 0) { x.fillStyle = COL.red; x.fillRect(X, Y - h * .82, h * .5, h); } }
+function bg() { x.fillStyle = COL.bg; x.fillRect(0, 0, W, H); x.fillStyle = "rgba(40,36,30,.055)"; for (let i = 0; i < W; i += 40) x.fillRect(i, 0, 1, H); for (let j = 0; j < H; j += 40) x.fillRect(0, j, W, 1); }
+function tag(s, X, Y, fill, colTxt, sz = 17, border) { font(400, sz, PIX); x.letterSpacing = "2px"; const w = x.measureText(s).width + sz * 1.2, h = sz * 1.9;
+  x.fillStyle = fill; x.fillRect(X, Y - h / 2, w, h); if (border) { x.strokeStyle = border; x.lineWidth = 1.5; x.strokeRect(X + .75, Y - h / 2 + .75, w - 1.5, h - 1.5); }
+  x.fillStyle = colTxt; x.textAlign = "left"; x.fillText(s, X + sz * .6, Y + sz * .38); x.letterSpacing = "0px"; return w; }
+const PROMPT = "anon@refuted-lab ~ %";
+const LOGO = TK.OBJECTS.flask({ fill: .55 }), HERO = TK.OBJECTS.flask({ fill: .55, bubbles: false });
+const RED = []; for (let yy = 0; yy < HERO.h; yy++) for (let xx = 0; xx < HERO.w; xx++) if (HERO.get(xx, yy) === "red") RED.push([xx, yy]);
+
+function header(t, a) { if (a <= 0) return; x.save(); x.globalAlpha = a;
+  TK.draw(x, LOGO, { theme: T, cell: 1, x: 150, y: 70, shadow: false });
+  txt("refuted", 202, 108, 800, 30, DISP, COL.ink, "left", -1.5);
+  const s = `lab live · ${fmt(C.totals.trades)} paper trades`, w = tw(s, 400, 22, MONO);
+  txt(s, W - 150, 104, 400, 22, MONO, COL.mut, "right"); if (Math.floor(t * 1.6) % 2 === 0) { x.fillStyle = COL.up; x.fillRect(W - 150 - w - 22, 92, 11, 11); }
+  x.fillStyle = COL.hair; x.fillRect(150, 150, W - 300, 1); x.restore(); }
+
+// ---------- S1: the hook ----------
+function s1(t) {
+  const out = eio(p01(t, 2.45, 2.8)), a = 1 - out, dy = -50 * out;
+  x.save(); x.globalAlpha = a; x.translate(0, dy);
+  const pw = txt(PROMPT, 150, 340, 400, 30, MONO, COL.mut);
+  const tp = typed("examiner --judge --live", t, .05, 45); txt(tp, 150 + pw + 18, 340, 400, 30, MONO, COL.ink);
+  const words = [["every", 0, .4], [" trench", 0, .53], [" rule", 0, .66], ["you", 1, .92], [" swear by.", 1, 1.1]];
+  let cx = [146, 146], endX = 146;
+  for (const [w, ln, t0] of words) { const k = eo(p01(t, t0, t0 + .22)); const bold = w.includes("swear");
+    const Y = 520 + ln * 140, wd = tw(w, bold ? 800 : 400, 128, DISP, -7);
+    if (k > 0) { x.save(); x.globalAlpha = a * k; txt(w, cx[ln], Y + 26 * (1 - k), bold ? 800 : 400, 128, DISP, COL.ink, "left", -7); x.restore(); }
+    cx[ln] += wd; if (ln === 1) endX = cx[1]; }
+  cursor(endX + 14, 660, 104, t, t > 1.3);
+  if (tp.length < 23) cursor(150 + pw + 18 + tw(tp, 400, 30, MONO) + 4, 340, 30, t, true);
+  x.restore();
+}
+
+// ---------- S2 + S3: the board, then the verdicts ----------
+const ROW0 = 400, RH = 112, CX = 980, CS = 22, CG = 4, MX = 1532;
+function board(t) {
+  // title
+  const titleA = "on trial on every new launch.", titleB = "30 trades. then the verdict.";
+  const pw = txt(PROMPT, 150, 238, 400, 25, MONO, COL.mut); txt(typed("examiner board", t, 2.85, 40), 150 + pw + 14, 238, 400, 25, MONO, COL.ink);
+  let title; if (t < 6.85) title = typed(titleA, t, 3.0, 70); else if (t < 7.05) title = titleA.slice(0, Math.max(0, Math.round(titleA.length * (1 - p01(t, 6.85, 7.0))))); else title = typed(titleB, t, 7.05, 70);
+  const tW = txt(title, 146, 318, 400, 62, DISP, COL.ink, "left", -3.5); cursor(146 + tW + 10, 318, 56, t, true);
+  // header row
+  const exit = i => eio(p01(t, 9.7 + i * .06, 10.25 + i * .06));
+  x.fillStyle = COL.line; x.fillRect(150, ROW0 - 22, W - 300, 2);
+  txt("RULE", 250, ROW0 - 36, 400, 14, MONO, COL.faint, "left", 2); txt("30 PAPER TRADES · +60M", CX, ROW0 - 36, 400, 14, MONO, COL.faint, "left", 2);
+  txt("MEDIAN", MX, ROW0 - 36, 400, 14, MONO, COL.faint, "right", 2); txt("STATUS", W - 150, ROW0 - 36, 400, 14, MONO, COL.faint, "right", 2);
+  C.rows.forEach((s, i) => {
+    const inK = eo(p01(t, 2.95 + i * .12, 3.35 + i * .12)), ek = exit(i);
+    const ts = 7.45 + i * .42, hit = t >= ts, sk = p01(t, ts, ts + .14), shake = hit && t < ts + .16 ? Math.sin((t - ts) * 120) * 5 * (1 - p01(t, ts, ts + .16)) : 0;
+    const top = ROW0 + i * RH, ox = 70 * (1 - inK) - 260 * ek + shake;
+    x.save(); x.globalAlpha = inK * (1 - ek); x.translate(ox, 0);
+    const dim = hit ? .45 + .55 * (1 - p01(t, ts + .1, ts + .4)) : 1;
+    x.save(); x.globalAlpha *= dim;
+    txt(s.id, 150, top + 50, 600, 22, MONO, COL.mut);
+    txt(s.name.toLowerCase(), 250, top + 48, 600, 36, MONO, COL.ink);
+    let rule = s.rule; while (tw(rule, 400, 20, MONO) > 700 && rule.length > 10) rule = rule.slice(0, -2).trim() + "…";
+    txt(rule, 250, top + 84, 400, 20, MONO, COL.mut);
+    // cells fill with the strategy's real 30 trades
+    const fp = p01(t, 3.45 + i * .08, 6.55 + i * .08), n = Math.floor(30 * fp), filled = [];
+    for (let k = 0; k < 30; k++) { const cxk = CX + (k % 15) * (CS + CG), cyk = top + 22 + Math.floor(k / 15) * (CS + CG), r = s.wall[k];
+      if (k < n) { filled.push(r); const pop = k === n - 1 ? 3 : 0; x.fillStyle = r > 0 ? COL.up : COL.red; x.fillRect(cxk - pop / 2, cyk - pop / 2, CS + pop, CS + pop); }
+      else { x.fillStyle = "rgba(200,197,189,.75)"; x.fillRect(cxk, cyk, CS, CS); } }
+    if (filled.length) { const so = filled.slice().sort((a, b) => a - b), med = so[Math.floor(so.length / 2)];
+      txt(pct(med), MX, top + 60, 400, 30, DISP, med >= 0 ? COL.up : COL.red, "right", -2); }
+    else txt("–", MX, top + 60, 400, 34, DISP, COL.faint, "right");
+    if (!hit || sk < .5) tag("testing", W - 150 - 128, top + 50, COL.paper, COL.ink, 16, COL.line);
+    x.restore();
+    x.fillStyle = COL.hair; x.fillRect(150, top + RH - 1, W - 300, 1);
+    // the stamp
+    if (hit) { const k = back(clamp(sk)), sc = 2.3 - 1.3 * k;
+      x.save(); x.translate(W - 150 - 104, top + 52); x.rotate(-6 * Math.PI / 180); x.scale(sc, sc); x.globalAlpha *= clamp(sk * 3);
+      font(400, 22, PIX); x.letterSpacing = "3px"; const sw = x.measureText("REFUTED").width + 30, sh = 48;
+      x.strokeStyle = COL.red; x.lineWidth = 4; x.strokeRect(-sw / 2, -sh / 2, sw, sh); x.fillStyle = COL.red; x.textAlign = "center"; x.fillText("REFUTED", 2, 8); x.letterSpacing = "0px"; x.restore(); }
+    x.restore();
+  });
+}
+
+// ---------- S4: the number ----------
+function stat(t) {
+  const out = p01(t, 13.25, 13.6), a = 1 - out; x.save(); x.globalAlpha = a;
+  const k = eo(p01(t, 10.5, 11.6)), v = C.pulse.m60.down * k;
+  const l1 = eo(p01(t, 10.45, 10.75)); x.save(); x.globalAlpha *= l1; txt("one hour after entry,", 150, 330, 400, 34, MONO, COL.mut); x.restore();
+  txt(v.toFixed(1) + "%", 138, 580, 800, 236, DISP, COL.red, "left", -16);
+  const l2 = eo(p01(t, 11.3, 11.6)); x.save(); x.globalAlpha *= l2; txt("of paper trades were", 150, 668, 500, 40, MONO, COL.ink); txt("below the price they bought at.", 150, 720, 500, 40, MONO, COL.ink); x.restore();
+  const s3 = `${fmt(C.totals.done)} finished trades · ${C.totals.refuted} rules refuted · ${C.totals.surviving} survived`;
+  const tp = typed(s3, t, 11.9, 70); txt(tp, 150, 812, 400, 25, MONO, COL.mut);
+  // the wall: real trades at +60m
+  const cols = 17, rows = 15, sz = 30, g = 6, wx = W - 150 - cols * (sz + g) + g, wy = 262, bw = cols * (sz + g) - g, bh = rows * (sz + g) - g;
+  const bk = eo(p01(t, 10.45, 10.8));
+  x.save(); x.globalAlpha *= bk; x.fillStyle = COL.shadow; const sl = 900 * eo(p01(t, 10.5, 11.4)); for (let i = 1; i < sl; i += 2) x.fillRect(wx - 18 + i, wy - 18 + i, bw + 36, bh + 36);
+  x.fillStyle = COL.paper; x.fillRect(wx - 18, wy - 18, bw + 36, bh + 36); x.strokeStyle = COL.line; x.lineWidth = 3; x.strokeRect(wx - 18, wy - 18, bw + 36, bh + 36); x.restore();
+  C.wall.slice(0, cols * rows).forEach((r, i) => { const c = i % cols, rr = Math.floor(i / cols), d = (c + rr) / (cols + rows), sk = p01(t, 10.7 + d * 1.3, 10.85 + d * 1.3);
+    if (sk <= 0) return; const s = sz * (.4 + .6 * eo(sk)); x.fillStyle = r > 0 ? COL.up : COL.red; x.fillRect(wx + c * (sz + g) + (sz - s) / 2, wy + rr * (sz + g) + (sz - s) / 2, s, s); });
+  const lk = p01(t, 12.4, 12.7); x.save(); x.globalAlpha *= lk; txt("each square is a real paper trade at +60m", wx - 18, wy + bh + 62, 400, 21, MONO, COL.mut); x.restore();
+  x.restore();
+}
+
+// ---------- S5: end card ----------
+function endcard(t) {
+  const fk = eo(p01(t, 13.6, 13.95)), cell = 14, fx = 520 - HERO.w * cell / 2, fy = 548 - HERO.h * cell / 2 + 40 * (1 - fk);
+  const sl = 2600 * eo(p01(t, 13.75, 14.6));
+  x.save(); x.globalAlpha = fk; TK.draw(x, HERO, { theme: T, cell, x: fx, y: fy, shadowLen: Math.max(1, Math.round(sl)) });
+  // bubbles: deterministic, rising through the red
+  const bottom = RED.filter(([, yy]) => yy >= 39);
+  for (let j = 0; j < 7; j++) { const per = 1.5 + (j % 3) * .25, ph = ((t - 13.9 + j * .37) / per); if (ph < 0) continue;
+    const cyc = Math.floor(ph), u = ph - cyc, seed = (j * 97 + cyc * 31) % bottom.length, [bx, by] = bottom[seed];
+    const yy = Math.round(by - u * 14), xx = bx + Math.round(Math.sin((cyc + j) * 1.7 + u * 3) * 1.2);
+    if (HERO.get(xx, yy) === "red") { x.fillStyle = T.hi; x.fillRect(Math.round(fx + xx * cell), Math.round(fy + yy * cell), cell, cell); } }
+  x.restore();
+  const X0 = 960;
+  const pa = eo(p01(t, 13.8, 14.0)); x.save(); x.globalAlpha = pa; const pw = txt(PROMPT, X0, 352, 400, 27, MONO, COL.mut); txt(typed("refuted --live", t, 13.85, 40), X0 + pw + 14, 352, 400, 27, MONO, COL.ink); x.restore();
+  const words = [["most", 0, 13.95], [" edges", 0, 14.1], ["die", 1, 14.3], [" here.", 1, 14.45]]; let cx = [X0 - 4, X0 - 4];
+  for (const [w, ln, t0] of words) { const k = eo(p01(t, t0, t0 + .22)), bold = w.includes("here"), Y = 500 + ln * 128;
+    const wd = tw(w, bold ? 800 : 400, 120, DISP, -7);
+    if (k > 0) { x.save(); x.globalAlpha = k; txt(w, cx[ln], Y + 24 * (1 - k), bold ? 800 : 400, 120, DISP, COL.ink, "left", -7); x.restore(); } cx[ln] += wd; }
+  cursor(cx[1] + 12, 628, 96, t, t > 14.6);
+  const ta = eo(p01(t, 14.8, 15.1)); x.save(); x.globalAlpha = ta; x.translate(0, 16 * (1 - ta));
+  const tk = txt("$REFUTED", X0, 736, 800, 54, DISP, COL.ink, "left", -3); tag("live", X0 + tk + 24, 718, COL.up, "#fff", 20); x.restore();
+  const la = eo(p01(t, 15.2, 15.5)); x.save(); x.globalAlpha = la; txt("an open lab on pump.fun. every rule gets 30 trades.", X0, 806, 400, 27, MONO, COL.mut); x.restore();
+}
+
+function frame(t) {
+  bg();
+  header(t, t < 13.25 ? eo(p01(t, .05, .35)) : 1 - p01(t, 13.25, 13.55));
+  if (t < 2.8) s1(t);
+  else if (t < 10.45) board(t);
+  if (t >= 10.4 && t < 13.6) stat(t);
+  if (t >= 13.6) endcard(t);
+}
+window.frame = frame;
+Promise.all([["Martian Mono", "400", "martian-400"], ["Martian Mono", "800", "martian-800"], ["IBM Plex Mono", "400", "plex-400"], ["IBM Plex Mono", "500", "plex-500"], ["IBM Plex Mono", "600", "plex-600"], ["Silkscreen", "400", "silkscreen-400"]]
+  .map(([f, w, file]) => new FontFace(f, `url(/fonts/${file}.woff2)`, { weight: w }).load().then(ff => document.fonts.add(ff)))).then(() => { frame(0); document.body.dataset.ready = 1; });
+</script></body></html>
