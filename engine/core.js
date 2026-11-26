@@ -306,8 +306,12 @@ function prune(st, now) {
 function publicStrategy(st, s) {
   const x = s.status === "refuted" && s.final ? Object.assign({}, stats(st, s), s.final, { open: stats(st, s).open }) : stats(st, s);
   const last = (st.rets[s.id] ? st.rets[s.id].r60.slice(-30) : []);
+  // the evidence wall: the latest 30 trades, finished or open, as [result %, checkpoint it comes from (60/15/5, 0 = none yet)]
+  const latest = t => t.ck[60] ? [t.ck[60].r, 60] : t.ck[15] && t.ck[15].r !== null ? [t.ck[15].r, 15] : t.ck[5] && t.ck[5].r !== null ? [t.ck[5].r, 5] : [null, 0];
+  const pool = (st.done[s.id] || []).concat(st.open.filter(t => t.s === s.id)).sort((a, b) => a.at - b.at).slice(-30);
+  const wall = pool.map(t => { const [r, k] = latest(t); return [r === null ? null : Math.round(r), k, t.y]; });
   return { id: s.id, name: s.name, agent: s.agent, myth: s.myth, rule: s.rule, born: s.born, status: s.status, diedAt: s.diedAt || 0, survivedAt: s.survivedAt || 0,
-    cause: s.cause || "", causeShort: s.causeShort || "", matched: s.n, lastMatch: s.lastMatch || 0, ...x, last };
+    cause: s.cause || "", causeShort: s.causeShort || "", matched: s.n, lastMatch: s.lastMatch || 0, ...x, last, wall };
 }
 
 function buildLab(st, now, meta) {
@@ -317,8 +321,13 @@ function buildLab(st, now, meta) {
   const agents = AGENTS.map(a => ({ ...a, proposed: st.strategies.filter(s => s.agent === a.id).length, alive: st.strategies.filter(s => s.agent === a.id && s.status !== "refuted").length, dead: st.strategies.filter(s => s.agent === a.id && s.status === "refuted").length }));
   const recent = [].concat(...Object.values(st.done)).sort((a, b) => b.closed - a.closed).slice(0, 40).map(slimTrade);
   const intake = Object.values(st.tokens).sort((a, b) => b.c - a.c).slice(0, 14).map(T => ({ m: T.m, y: T.s, n: T.n, c: T.c, bc: r1(T.bc), h: T.h || 0 }));
+  // the lab's pulse: every checkpoint reading across all strategies
+  const all = { 5: [], 15: [], 60: [] };
+  for (const t of st.open.concat(...Object.values(st.done))) for (const k of RULE.checkpoints) if (t.ck[k] && t.ck[k].r !== null) all[k].push(t.ck[k].r);
+  const pulse = {};
+  for (const k of RULE.checkpoints) pulse["m" + k] = { med: r1(median(all[k])), n: all[k].length, down: all[k].length ? r1(100 * all[k].filter(x => x <= 0).length / all[k].length) : null };
   return {
-    v: 1, updatedAt: now, startedAt: st.started,
+    v: 1, updatedAt: now, startedAt: st.started, pulse,
     sync: { every: meta.every || 300, runs: st.runs.n, lastRunMs: meta.runMs || 0, reads: meta.reads || 0, source: "jupiter" },
     rule: RULE,
     totals: { launches: st.launches, launches24h: h24, watching: Object.keys(st.tokens).length, trades: strategies.reduce((a, s) => a + s.matched, 0), open: st.open.length, done: allDone,
