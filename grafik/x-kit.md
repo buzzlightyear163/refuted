@@ -67,7 +67,7 @@ Most edges die here.
 
 Svar 1 – CA (125):
 ```text
-CA: [CA]
+CA: 4wxedUGPpUsmHWhLYyVevbPRh1GYmjS4yYDd4jUepump
 
 The only CA. Every trade the lab takes is public on refuted.fun.
 ```
@@ -78,7 +78,7 @@ The only CA. Every trade the lab takes is public on refuted.fun.
 ```text
 An open lab that tests trench entry rules on every new pump.fun launch. 30 paper trades per rule, then a verdict. Most die.
 
-CA: [CA]
+CA: 4wxedUGPpUsmHWhLYyVevbPRh1GYmjS4yYDd4jUepump
 
 refuted.fun
 ```
