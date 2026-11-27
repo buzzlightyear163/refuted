@@ -74,7 +74,7 @@ The only CA. Every trade the lab takes is public on refuted.fun.
 
 ## Efter launch
 
-**1. Första timmarna – CA och kärnan** (213)
+**1. Första timmarna – CA och kärnan** · bifoga `grafik/post1.png` (labbets siffror) (213)
 ```text
 An open lab that tests trench entry rules on every new pump.fun launch. 30 paper trades per rule, then a verdict. Most die.
 
@@ -83,7 +83,7 @@ CA: 4wxedUGPpUsmHWhLYyVevbPRh1GYmjS4yYDd4jUepump
 refuted.fun
 ```
 
-**2. Dag 1–2 – kyrkogården på djupet** (588) · bifoga skärmdump av Graduation Chase-sidan (/#/s/S-03) eller kyrkogården
+**2. Dag 1–2 – kyrkogården på djupet** (588) · bifoga `grafik/post2.png` (Graduation Chase-kortet)
 ```text
 Graduation Chase is dead.
 
@@ -102,7 +102,7 @@ Every stone shows:
 Try it: refuted.fun, scroll to the graveyard and find the rule you used to trust.
 ```
 
-**3. Dag 2–3 – milstolpe + noll överlevare** (533) · fyll i eller stryk första raden, kolla att Survivors fortfarande är 0
+**3. Dag 2–3 – milstolpe + noll överlevare** (533) · bifoga `grafik/post3.png` (0 överlevare) · fyll i eller stryk första raden, kolla att Survivors fortfarande är 0
 ```text
 [X] holders. [X] rules buried.
 

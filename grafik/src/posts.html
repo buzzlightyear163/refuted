@@ -1,0 +1,111 @@
+<!doctype html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:"Martian Mono";font-weight:400;src:url(/fonts/martian-400.woff2)}
+@font-face{font-family:"Martian Mono";font-weight:800;src:url(/fonts/martian-800.woff2)}
+@font-face{font-family:"IBM Plex Mono";font-weight:400;src:url(/fonts/plex-400.woff2)}
+@font-face{font-family:"IBM Plex Mono";font-weight:500;src:url(/fonts/plex-500.woff2)}
+@font-face{font-family:"IBM Plex Mono";font-weight:600;src:url(/fonts/plex-600.woff2)}
+@font-face{font-family:"Silkscreen";src:url(/fonts/silkscreen-400.woff2)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#777;display:flex;flex-direction:column;gap:40px;padding:40px;align-items:flex-start;font-family:"IBM Plex Mono",monospace;color:#171614}
+.f{position:relative;overflow:hidden;width:1600px;height:900px;flex:none;background:#e1dfd9;
+  background-image:linear-gradient(rgba(40,36,30,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(40,36,30,.055) 1px,transparent 1px);background-size:32px 32px;padding:0 80px}
+.f>canvas.bg{position:absolute;inset:0;z-index:0}
+.f>*:not(canvas){position:relative;z-index:1} .f>.foot,.f>.stamp{position:absolute}
+.mut{color:#75716a} .red{color:#d63a26} .up{color:#23854c} .faint{color:#a7a39a}
+.disp{font-family:"Martian Mono";letter-spacing:-.06em} .disp b{font-weight:800}
+.hd{display:flex;align-items:center;justify-content:space-between;height:104px;border-bottom:1px solid #c8c5bd}
+.brand{display:flex;align-items:center;gap:12px;font:800 27px "Martian Mono";letter-spacing:-.05em}
+.lamp{display:flex;align-items:center;gap:10px;font-size:17px;color:#75716a} .lamp i{width:10px;height:10px;background:#23854c;display:block}
+.prompt{font-size:20px;color:#75716a;margin-top:44px} .prompt span{color:#171614}
+.tag{display:inline-block;white-space:nowrap;font:400 15px Silkscreen;letter-spacing:.1em;padding:.4em .7em .3em;color:#fff;background:#d63a26;vertical-align:middle}
+.tag.t{background:#ebe9e3;color:#171614;border:1.5px solid #2b2926}
+.box{border:2px solid #2b2926;background:#ebe9e3;box-shadow:8px 8px 0 #c4c1b8}
+.k{font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#75716a}
+.foot{position:absolute;left:80px;right:80px;bottom:40px;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid #c8c5bd;padding-top:18px;font-size:17px;color:#75716a}
+.foot .disp{font-size:22px;color:#171614}
+.sq{display:grid;gap:5px} .sq i{display:block;aspect-ratio:1;background:#d63a26} .sq i.w{background:#23854c} .sq i.o{background:repeating-linear-gradient(45deg,#75716a 0 1.5px,transparent 1.5px 5px);outline:1.5px solid #a7a39a;outline-offset:-1.5px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:2px solid #2b2926;border-bottom:1px solid #c8c5bd;margin-top:44px}
+.stats>div{padding:22px 20px 24px 0} .stats>div+div{padding-left:24px;border-left:1px solid #c8c5bd}
+.stats .v{font:400 58px/1 "Martian Mono";letter-spacing:-.07em;margin-top:14px}
+.stamp{position:absolute;font:400 40px Silkscreen;letter-spacing:.12em;color:#d63a26;border:5px solid #d63a26;padding:.35em .6em .25em;transform:rotate(-6deg)}
+.row{display:grid;grid-template-columns:62px minmax(0,1fr) 270px 196px;gap:18px;align-items:center;padding:17px 0;border-bottom:1px solid #c8c5bd}
+</style></head>
+<body>
+<div id="p1" class="f"></div>
+<div id="p2" class="f"></div>
+<div id="p3" class="f"></div>
+<script src="termkit.js"></script>
+<script>
+const L = window.CFG, T = TK.THEMES.stone, t = L.totals, S = L.strategies;
+const fmt = n => Number(n).toLocaleString("en-US"), pct = v => (v > 0 ? "+" : v < 0 ? "−" : "") + Math.abs(v).toFixed(1) + "%";
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const prompt = c => `<div class="prompt">anon@refuted-lab ~ % <span>${c}</span></div>`;
+function header(el) {
+  el.insertAdjacentHTML("beforeend", `<div class="hd"><div class="brand"><canvas class="lg"></canvas>refuted</div><div class="lamp"><i></i>lab live · ${fmt(t.trades)} paper trades</div></div>`);
+  const c = el.querySelector(".lg"), g = TK.OBJECTS.flask({ fill: .55 }), k = 2; c.width = g.w * k; c.height = g.h * k; c.style.height = "44px";
+  TK.draw(c.getContext("2d"), g, { theme: T, cell: k, x: 0, y: 0, shadow: false });
+}
+const foot = (l) => `<div class="foot"><span>${l}</span><span class="disp">most edges die <b>here.</b></span></div>`;
+const judged = t.refuted + t.surviving, all = S.length;
+
+// POST 1: the lab so far
+{ const el = p1; header(el);
+  const sq = S.slice().sort((a, b) => a.id.localeCompare(b.id, "en", { numeric: true })).map(s => `<i class="${s.status === "refuted" ? "" : s.status === "surviving" ? "w" : "o"}"></i>`).join("");
+  el.insertAdjacentHTML("beforeend", `${prompt("examiner --stats")}
+    <div class="disp" style="font-size:66px;line-height:1.05;margin-top:22px">${all} rules tested.<br>${t.refuted} dead. <b>${t.surviving} survived.</b></div>
+    <div class="stats">
+      <div><div class="k">pump.fun launches read</div><div class="v">${fmt(t.launches)}</div></div>
+      <div><div class="k">paper trades</div><div class="v">${fmt(t.trades)}</div></div>
+      <div><div class="k">median at +60m</div><div class="v red">${pct(L.pulse.m60.med)}</div></div>
+      <div><div class="k">below entry at +60m</div><div class="v red">${L.pulse.m60.down.toFixed(1)}%</div></div>
+    </div>
+    <div style="margin-top:34px;display:flex;justify-content:space-between;align-items:baseline"><span class="k">one square per rule</span><span style="font-size:15px" class="mut"><span class="red">■</span> refuted &nbsp; <span class="faint">▨</span> still on trial &nbsp; <span class="up">■</span> survived</span></div>
+    <div class="sq" style="grid-template-columns:repeat(29,1fr);gap:6px;margin-top:14px">${sq}</div>
+    ${foot(`every trade on paper · 2% off each for fees and slippage`)}`);
+}
+
+// POST 2: the autopsy of Graduation Chase
+{ const el = p2; header(el); const s = S.find(x => x.id === "S-03"), w = (L.v30 || []).map(r => [r]), won = w.filter(x => x[0] > 0).length;
+  el.insertAdjacentHTML("beforeend", `${prompt("examiner show " + s.id)}
+    <div class="disp" style="font-size:96px;line-height:1;margin-top:18px">${esc(s.name.toLowerCase())}</div>
+    <div style="font-size:24px;font-style:italic;margin-top:16px" class="mut">“${esc(s.myth)}”</div>
+    <div class="box" style="display:inline-block;margin-top:22px;padding:12px 18px;font-size:19px"><span class="mut">rule ·</span> ${esc(s.rule)}</div>
+    <div class="stamp" style="right:96px;top:170px">REFUTED</div>
+    <div style="display:grid;grid-template-columns:380px 1fr;gap:56px;margin-top:44px;align-items:start">
+      <div style="border-top:2px solid #2b2926">
+        <div style="padding:16px 0;border-bottom:1px solid #c8c5bd"><div class="k">median at +60m</div><div class="disp red" style="font-size:72px;line-height:1;margin-top:10px">${pct(s.med60)}</div></div>
+        <div style="padding:14px 0;border-bottom:1px solid #c8c5bd;display:flex;justify-content:space-between;font-size:19px"><span class="mut">winners</span><b>${won} of ${w.length}</b></div>
+        <div style="padding:14px 0;border-bottom:1px solid #c8c5bd;display:flex;justify-content:space-between;font-size:19px"><span class="mut">cause</span><b class="red">${esc(s.causeShort.toLowerCase())}</b></div>
+      </div>
+      <div>
+        <div class="k">the 30 paper trades that judged it, at +60m</div>
+        <div class="sq" style="grid-template-columns:repeat(15,1fr);gap:8px;margin-top:14px">${w.map(x => `<i class="${x[0] > 0 ? "w" : ""}"></i>`).join("")}</div>
+        <div style="margin-top:22px;font-size:20px;line-height:1.5">best trade <b class="up">${pct(s.best)}</b>. the median still died at <b class="red">${pct(s.med60)}</b>.</div>
+      </div>
+    </div>
+    ${foot("one rule, 30 paper trades, one verdict")}`);
+}
+
+// POST 3: nothing has survived
+{ const el = p3; header(el);
+  const next = S.filter(s => s.status === "testing").sort((a, b) => b.done - a.done).slice(0, 4);
+  const cells = s => { const d = Math.min(30, s.done), o = Math.min(30 - d, s.open || 0); return `<div class="sq" style="grid-template-columns:repeat(15,1fr);gap:3px">${Array.from({ length: 30 }, (_, i) => `<i class="${i < d ? "" : i < d + o ? "o" : "o"}" style="${i < d ? "background:#171614" : ""}"></i>`).join("")}</div>`; };
+  const track = s => (s.med60 ?? -1) >= 0 && (s.hit ?? 0) >= 40 ? `<span class="tag" style="background:#23854c">on track</span>` : `<span class="tag">on track to die</span>`;
+  el.insertAdjacentHTML("beforeend", `${prompt("examiner --survivors")}
+    <div style="display:grid;grid-template-columns:520px 1fr;gap:64px;margin-top:26px;align-items:start">
+      <div>
+        <div class="disp" style="font-size:300px;line-height:.85;font-weight:800;letter-spacing:-.09em">0<span style="font-weight:400;font-size:110px;color:#a7a39a;letter-spacing:-.06em">/${judged}</span></div>
+        <div class="disp" style="font-size:38px;line-height:1.2;margin-top:30px">nothing has survived<br>the <b>examiner.</b></div>
+        <div class="box" style="margin-top:28px;padding:14px 18px;font-size:17px;line-height:1.55">to survive: median <b>≥ 0%</b> at +60m<br>and <b>40%+</b> winners after 30 trades</div>
+      </div>
+      <div>
+        <div class="k" style="padding-bottom:12px;border-bottom:2px solid #2b2926">closest to a verdict</div>
+        ${next.map(s => `<div class="row"><b style="font-size:17px">${s.id}</b><div style="min-width:0"><div style="font-weight:600;font-size:20px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(s.name.toLowerCase())}</div><div class="mut" style="font-size:15px;margin-top:4px">${s.done}/30 trades · median <span class="red">${pct(s.med60 ?? 0)}</span></div></div>${cells(s)}<div style="text-align:right">${track(s)}</div></div>`).join("")}
+      </div>
+    </div>
+    ${foot(`${t.refuted} refuted so far · new rules keep going on trial`)}`);
+}
+document.fonts.ready.then(() => document.body.dataset.ready = 1);
+</script></body></html>
