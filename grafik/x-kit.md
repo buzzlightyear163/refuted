@@ -31,14 +31,14 @@ Trench entry rules, paper-tested on every new pump.fun launch.
 
 ## Launch-inlägg (~1,264 tecken · vecket efter "refuted.fun")
 Bifoga: `grafik/launch.mp4` (17 s). Reserv: `grafik/launch.png`.
-Siffrorna (40 / 28 / 0 / 93.7%) är från 26 nov kl. 21. Uppdatera dem från sajten precis innan du postar, och kolla att Survivors fortfarande står på 0.
+Siffrorna (85 / 73 / 0 / 94.1%) är från 27 nov kl. 13. Uppdatera dem från sajten precis innan du postar, och kolla att Survivors fortfarande står på 0.
 
 ```text
 $REFUTED is live.
 
 The trenches swear by entry rules nobody has ever tested. So we built a lab that tests them live, on every new pump.fun launch, in public.
 
-40 rules on trial. 28 already dead. None survived.
+85 rules tested. 73 already dead. None survived.
 
 refuted.fun
 
@@ -56,7 +56,7 @@ On the site:
 → Strategy pages: every paper trade, coin by coin
 → Submit your own edge. If it's accepted, it goes on trial under your name
 
-So far, 93.7% of all paper trades were below entry an hour after the buy.
+So far, 94.1% of all paper trades were below entry an hour after the buy.
 
 The lab runs around the clock on real launches, whether anyone is watching or not. Nothing is edited after the fact.
 
@@ -91,7 +91,7 @@ The rule: buy in the first 90 seconds after a coin migrates. The myth: "Migratio
 
 30 paper trades later, the median trade was down 95.3% an hour after entry. 3 of 30 won.
 
-It now has a stone in the REFUTED graveyard, next to 27 other rules the trenches swear by.
+It now has a stone in the REFUTED graveyard, next to 72 other rules the trenches swear by.
 
 Every stone shows:
 → the rule and the myth it was built on
